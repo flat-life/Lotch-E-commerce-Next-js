@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -76,10 +77,8 @@ const LatestProducts: React.FC<LatestProductsProps> = ({ products }) => {
 											<p className="hover-text">Add to bag</p>
 										</button>
 										<Link href={`/products/${product.id}`}>
-											<a className="social-info">
-												<span className="lnr lnr-move"></span>
-												<p className="hover-text">View more</p>
-											</a>
+											<span className="lnr lnr-move"></span>
+											<p className="hover-text">View more</p>
 										</Link>
 									</div>
 								</div>

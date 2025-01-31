@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link'
 import Script from 'next/script';
 
@@ -21,7 +21,24 @@ export default function ClientLayout({
 		setLanguage(lang);
 		// Consider adding language persistence here
 	};
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
 
+	const handleSearch = (e: React.FormEvent) => {
+		e.preventDefault();
+		const formData = new FormData(e.currentTarget as HTMLFormElement);
+		const searchQuery = formData.get('search_input') as string;
+
+		const params = new URLSearchParams(searchParams.toString());
+
+		if (searchQuery) {
+			params.set('search', searchQuery);
+		} else {
+			params.delete('search');
+		}
+
+		router.push(`/products?${params.toString()}`);
+	};
 	return (
 
 
@@ -68,8 +85,15 @@ export default function ClientLayout({
 				</div>
 				<div className="search_input" id="search_input_box">
 					<div className="container">
-						<form className="d-flex justify-content-between">
-							<input type="text" className="form-control" id="search_input" placeholder="Search Here" />
+						<form className="d-flex justify-content-between" onSubmit={handleSearch}>
+							<input
+								type="text"
+								className="form-control"
+								id="search_input"
+								name="search_input"
+								placeholder="Search Here"
+								defaultValue={searchParams.get('search') || ''}
+							/>
 							<button type="submit" className="btn"></button>
 							<span className="lnr lnr-cross" id="close_search" title="Close Search"></span>
 						</form>
@@ -132,15 +156,5 @@ export default function ClientLayout({
 		</div>
 	);
 };
-
-
-
-
-
-
-
-
-
-
 
 

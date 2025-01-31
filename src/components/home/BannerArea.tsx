@@ -28,10 +28,10 @@ const BannerArea: React.FC<BannerAreaProps> = ({ banners }) => {
 											<h1>{banner.product[0].title}</h1>
 											<p>{banner.product[0].description}</p>
 											<Link href="/products">
-												<a className="add-btn">
+												<p className="add-btn">
 													<span className="lnr lnr-cross"></span>
 													<span className="add-text text-uppercase">Shop Now</span>
-												</a>
+												</p>
 											</Link>
 										</div>
 									</div>
