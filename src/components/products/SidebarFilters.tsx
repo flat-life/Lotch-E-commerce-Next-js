@@ -1,62 +1,60 @@
 'use client';
-
-import { useState, useEffect } from 'react';
-import { Collection, Feature, FeatureValueResponse } from '@/lib/products';
+import { useEffect, useState } from 'react';
+import { Collection, Feature } from '@/lib/products';
 import { useTranslation } from 'react-i18next';
 
 interface SidebarFiltersProps {
 	collections: Collection[];
 	features: Feature[];
-	onFilterChange: (filters: {
-		collectionsId?: number | null;
-		featureKey?: number | null;
-		featureValue?: number | null;
-		priceRange?: [number, number];
-	}) => void;
-	appliedFilters: string[]
+	onFilterChange: (filters: Record<string, any>) => void;
+	appliedFilters: Record<string, any>;
 }
 
 export default function SidebarFilters({
 	collections,
 	features,
-	onFilterChange, appliedFilters
+	onFilterChange,
+	appliedFilters
 }: SidebarFiltersProps) {
 	const { t } = useTranslation();
-	const [priceRange, setPriceRange] = useState([0, 1000]);
-	const [selectedCollection, setSelectedCollection] = useState<number | null>(null);
-	const [selectedFeature, setSelectedFeature] = useState<{
-		key: number | null;
-		value: number | null;
-	}>({ key: null, value: null });
-	console.log({ features, collections })
+	const [priceRange, setPriceRange] = useState<[number, number]>([
+		appliedFilters.unitPriceGt || 0,
+		appliedFilters.unitPriceLt || 1000
+	]);
+
+	useEffect(() => {
+		setPriceRange([
+			appliedFilters.unitPriceGt || 0,
+			appliedFilters.unitPriceLt || 1000
+		]);
+	}, [appliedFilters.unitPriceGt, appliedFilters.unitPriceLt]);
 
 	// Handle price range changes
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			onFilterChange({ priceRange });
-		}, 500); // Debounce to avoid too many requests
-		return () => clearTimeout(timer);
-	}, [priceRange]);
+	const handlePriceChange = (newRange: [number, number]) => {
+		setPriceRange(newRange);
+		onFilterChange({
+			unitPriceGt: newRange[0],
+			unitPriceLt: newRange[1]
+		});
+	};
 
-	// Handle collection selection
 	const handleCollectionClick = (collectionId: number) => {
-		const newCollection = collectionId === selectedCollection ? null : collectionId;
-		setSelectedCollection(newCollection);
+		const newCollection = appliedFilters.collectionsId === collectionId ? null : collectionId;
 		onFilterChange({ collectionsId: newCollection });
 	};
 
-	// Handle feature selection
 	const handleFeatureClick = (featureId: number, valueId?: number) => {
-		const newFeature = {
-			key: featureId === selectedFeature.key ? null : featureId,
-			value: valueId || null
-		};
+		const newFilters: Record<string, any> = {};
 
-		setSelectedFeature(newFeature);
-		onFilterChange({
-			featureKey: newFeature.key,
-			featureValue: newFeature.value
-		});
+		if (valueId) {
+			newFilters.featureKey = featureId;
+			newFilters.featureValue = valueId;
+		} else {
+			newFilters.featureKey = appliedFilters.featureKey === featureId ? null : featureId;
+			newFilters.featureValue = null;
+		}
+
+		onFilterChange(newFilters);
 	};
 
 	return (
@@ -67,7 +65,7 @@ export default function SidebarFilters({
 					<CollectionItem
 						key={collection.id}
 						collection={collection}
-						isSelected={collection.id === selectedCollection}
+						isSelected={collection.id === appliedFilters.collectionsId}
 						onClick={handleCollectionClick}
 					/>
 				))}
@@ -83,14 +81,14 @@ export default function SidebarFilters({
 							min="0"
 							max="1000"
 							value={priceRange[0]}
-							onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+							onChange={(e) => handlePriceChange([Number(e.target.value), priceRange[1]])}
 						/>
 						<input
 							type="range"
 							min="0"
 							max="1000"
 							value={priceRange[1]}
-							onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+							onChange={(e) => handlePriceChange([priceRange[0], Number(e.target.value)])}
 						/>
 						<div className="value-wrapper d-flex">
 							<h5 className="price">{t('Price:')}</h5>
@@ -107,8 +105,8 @@ export default function SidebarFilters({
 					<FeatureFilter
 						key={feature.id}
 						feature={feature}
-						isSelected={feature.id === selectedFeature.key}
-						selectedValue={selectedFeature.value}
+						isSelected={feature.id === appliedFilters.featureKey}
+						selectedValue={appliedFilters.featureValue}
 						onClick={handleFeatureClick}
 					/>
 				))}
@@ -117,13 +115,8 @@ export default function SidebarFilters({
 	);
 }
 
-interface CollectionItemProps {
-	collection: Collection;
-	isSelected: boolean;
-	onClick: (collectionId: number) => void;
-}
-
-function CollectionItem({ collection, isSelected, onClick }: CollectionItemProps) {
+// Updated CollectionItem component
+function CollectionItem({ collection, isSelected, onClick }) {
 	return (
 		<li className="main-nav-list">
 			<button
@@ -131,7 +124,7 @@ function CollectionItem({ collection, isSelected, onClick }: CollectionItemProps
 				onClick={() => onClick(collection.id)}
 			>
 				<span className="lnr lnr-arrow-right"></span>
-				{collection.title}
+				{collection.translations.en?.title || collection.title}
 				<span className="number">({collection.products_count})</span>
 			</button>
 			{collection.children?.map(child => (
@@ -146,33 +139,34 @@ function CollectionItem({ collection, isSelected, onClick }: CollectionItemProps
 	);
 }
 
-interface FeatureFilterProps {
-	feature: Feature;
-	isSelected: boolean;
-	selectedValue: number | null;
-	onClick: (featureId: number, valueId?: number) => void;
-}
+// Updated FeatureFilter component
+function FeatureFilter({ feature, isSelected, selectedValue, onClick }) {
+	const { t } = useTranslation();
+	const featureKey = feature.translations.en?.key || feature.key;
 
-function FeatureFilter({ feature, isSelected, selectedValue, onClick }: FeatureFilterProps) {
 	return (
 		<div className="common-filter">
 			<div
 				className={`feature-header ${isSelected ? 'selected' : ''}`}
 				onClick={() => onClick(feature.id)}
 			>
+				{featureKey}
 				{feature.id}
 			</div>
 			{isSelected && (
 				<ul className="filter-list">
-					{feature.values.map(value => (
-						<li
-							key={value.id}
-							className={`feature-value ${value.id === selectedValue ? 'selected' : ''}`}
-							onClick={() => onClick(feature.id, value.id)}
-						>
-							{value.value} <span className="number">({value.product_count})</span>
-						</li>
-					))}
+					{feature.values.map(value => {
+						const valueText = value.translations.en?.value || value.value;
+						return (
+							<li
+								key={value.id}
+								className={`feature-value ${value.id === selectedValue ? 'selected' : ''}`}
+								onClick={() => onClick(feature.id, value.id)}
+							>
+								{valueText} <span className="number">({value.product_count})</span>
+							</li>
+						);
+					})}
 				</ul>
 			)}
 		</div>

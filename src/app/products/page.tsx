@@ -1,5 +1,4 @@
 import ProductList from '@/components/products/ProductList';
-import SidebarFilters from '@/components/products/SidebarFilters';
 import Banner from '@/components/base/Banner';
 import { fetchInitialData } from '@/lib/products';
 
