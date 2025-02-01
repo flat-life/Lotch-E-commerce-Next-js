@@ -90,6 +90,21 @@ interface FeatureValueResponse {
 	product_count: number;
 }
 
+export interface ProductReview {
+	id: number;
+	created_at: string;
+	title: string;
+	description: string;
+	rating: number;
+	parent_review: number | null;
+	customer: {
+		id: number;
+		first_name: string;
+		last_name: string;
+	};
+	replies: ProductReview[];
+}
+
 export interface ApiResponse {
 	count: number;
 	results: Product[];
@@ -148,4 +163,8 @@ export async function fetchInitialData() {
 			features: []
 		};
 	}
+}
+export async function getProduct(id: string): Promise<Product> {
+	const response = await apiClient.get(`/products/${id}`);
+	return response.data();
 }
