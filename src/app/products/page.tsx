@@ -7,7 +7,11 @@ export default async function ProductsPage() {
 
   return (
     <div className="container">
-      <Banner />
+      <Banner title="ProductPage"
+        navigation={[
+          { title: 'Home', url: '/' },
+          { title: 'Products', url: '/products' },
+        ]} />
       <div className="row">
         <div className="col-xl-3 col-lg-4 col-md-5">
         </div>

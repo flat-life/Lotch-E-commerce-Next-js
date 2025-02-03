@@ -20,8 +20,6 @@ export default function ProductList({ initialProducts, collections, features }: 
 	const pathname = usePathname();
 	const router = useRouter();
 	const { t } = useTranslation();
-
-	// Initialize state with search params
 	const [products, setProducts] = useState(initialProducts.results);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalCount, setTotalCount] = useState(initialProducts.count);
@@ -30,11 +28,11 @@ export default function ProductList({ initialProducts, collections, features }: 
 		const params = new URLSearchParams(searchParams.toString());
 		const filters: Record<string, any> = {};
 		if (params.get('search')) filters.search = params.get('search');
-		return filters;
+		return filters
 	});
+
 	const [isLoading, setIsLoading] = useState(false);
 
-	// Sync filters with URL changes
 	useEffect(() => {
 		const params = new URLSearchParams(searchParams.toString());
 		const newFilters: Record<string, any> = {};
@@ -50,33 +48,26 @@ export default function ProductList({ initialProducts, collections, features }: 
 	}, [searchParams]);
 
 	const updateFilters = (newFilters: Record<string, any>) => {
-		const params = new URLSearchParams(searchParams.toString());
-
-		// Update URL with new filters
-		Object.entries(newFilters).forEach(([key, value]) => {
-			if (value) {
-				params.set(key, value);
-			} else {
-				params.delete(key);
-			}
-		});
-
-		router.replace(`${pathname}?${params.toString()}`);
+		setAppliedFilters(prev => ({ ...prev, ...newFilters }));
 		setCurrentPage(1);
 	};
 
+
 	const removeFilter = (filterKey: string) => {
 		const params = new URLSearchParams(searchParams.toString());
-		params.delete(filterKey);
 
-		// Special case for feature filters
-		if (filterKey === 'featureKey') {
-			params.delete('featureValue');
+		if (filterKey === 'search') {
+			params.delete('search');
+			router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+			return;
 		}
 
-		router.replace(`${pathname}?${params.toString()}`);
+		setAppliedFilters(prev => {
+			const newFilters = { ...prev };
+			delete newFilters[filterKey];
+			return newFilters;
+		});
 	};
-
 	useEffect(() => {
 		const abortController = new AbortController();
 
