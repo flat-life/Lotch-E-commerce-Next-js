@@ -2,7 +2,6 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link'
-import Script from 'next/script';
 
 export default function ClientLayout({
 	siteSettings,
