@@ -5,11 +5,22 @@ const getToken = () => {
 };
 
 const authClient = axios.create({
-	baseURL: 'http://localhost:8002/',
+	baseURL: 'http://localhost:8002/api-v1',
 	headers: {
 		'Content-Type': 'application/json',
 	},
 });
+authClient.interceptors.request.use(
+	(config) => {
+		const token = getToken()
+		if (token) {
+			config.headers = {
+				...config.headers, authorization: `JWT ${token}`
+			}
+		}
+		return config
+	}
+)
 
 authClient.interceptors.response.use(
 	(response) => response,

@@ -46,7 +46,7 @@ export default function ClientLayout({
 
 		<div dir={language === 'fa' ? 'rtl' : 'ltr'}>
 
-			<header className="header_area sticky-header">
+			<header className="">
 				<div className="main_menu">
 					<nav className="navbar navbar-expand-lg navbar-light main_box">
 						<form className="m-4" id="language-form">
@@ -82,7 +82,7 @@ export default function ClientLayout({
 						</div>
 					</nav>
 				</div>
-				<div className="search_input" id="search_input_box">
+				<div className="" id="search_input_box">
 					<div className="container">
 						<form className="d-flex justify-content-between" onSubmit={handleSearch}>
 							<input
