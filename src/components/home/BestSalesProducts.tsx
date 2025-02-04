@@ -57,7 +57,7 @@ const BestSalesProducts: React.FC<BestSalesProductsProps> = ({ products }) => {
 					<div className="row" id="bestProductContainer">
 						{products.map((product) => (
 							<div key={product.id} className="col-lg-4 col-md-6 single-product">
-								<Image
+								<img
 									src={product.images[0]?.image || '/img/default-product.jpg'}
 									alt={product.title}
 									width={300}

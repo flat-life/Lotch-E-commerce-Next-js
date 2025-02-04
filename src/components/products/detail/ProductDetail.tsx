@@ -60,7 +60,7 @@ export const ProductDetails = ({ product, initialReviews, lang = 'en' }: Product
 			<div className="image-gallery">
 				{product.images.map((image) => (
 					<div key={image.id} className="image-item">
-						<Image
+						<img
 							src={image.image}
 							alt={product.translations[lang]?.title}
 							width={600}
