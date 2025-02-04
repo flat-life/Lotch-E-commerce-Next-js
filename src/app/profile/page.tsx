@@ -16,6 +16,7 @@ export default function ProfilePage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [customerData, setCustomerData] = useState<CustomerData | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -26,11 +27,14 @@ export default function ProfilePage() {
       }
 
       try {
+        setLoading(true)
         await authClient.post('/auth/jwt/verify/', { token });
         fetchCustomerData();
         fetchUserData();
         fetchAddresses();
-        fetchOrders();
+        await fetchOrders();
+
+        setLoading(false)
       } catch (err) {
         localStorage.removeItem('JWT');
         router.push('/login');
@@ -152,18 +156,20 @@ export default function ProfilePage() {
                   </ul>
 
                   <div className="tab-content p-3">
-                    {activeTab === 'addresses' && (
-                      <AddressesTab addresses={addresses} onUpdate={fetchAddresses} />
-                    )}
-                    {activeTab === 'orders' && <OrdersTab orders={orders} />}
-                    {activeTab === 'edit' && (
-                      <ProfileTab
-                        customerData={customerData}
-                        userData={userData}
-                        onUpdateCustomer={fetchCustomerData}
-                        onUpdateUser={fetchUserData}
-                      />
-                    )}
+                    {loading ? <div> Loading... </div> : <div>
+                      {activeTab === 'addresses' && (
+                        <AddressesTab addresses={addresses} onUpdate={fetchAddresses} />
+                      )}
+                      {activeTab === 'orders' && <OrdersTab orders={orders} />}
+                      {activeTab === 'edit' && (
+                        <ProfileTab
+                          customerData={customerData}
+                          userData={userData}
+                          onUpdateCustomer={fetchCustomerData}
+                          onUpdateUser={fetchUserData}
+                        />
+                      )}
+                    </div>}
                   </div>
                 </div>
               </div>

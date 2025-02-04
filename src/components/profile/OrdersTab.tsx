@@ -1,7 +1,7 @@
 import { Order } from "@/lib/profile";
 import { useRouter } from "next/navigation";
 
-const OrdersTab = ({ orders }: { orders: Order[] }) => {
+export const OrdersTab = ({ orders }: { orders: Order[] }) => {
 	const router = useRouter();
 
 	const getStatusLabel = (status: string) => {

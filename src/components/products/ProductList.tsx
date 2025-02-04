@@ -54,6 +54,7 @@ export default function ProductList({ initialProducts, collections, features }: 
 
 
 	const removeFilter = (filterKey: string) => {
+		console.log(filterKey)
 		const params = new URLSearchParams(searchParams.toString());
 
 		if (filterKey === 'search') {
@@ -62,9 +63,13 @@ export default function ProductList({ initialProducts, collections, features }: 
 			return;
 		}
 
+
 		setAppliedFilters(prev => {
 			const newFilters = { ...prev };
 			delete newFilters[filterKey];
+			if (filterKey === 'featureKey') {
+				delete newFilters['featureValue']
+			}
 			return newFilters;
 		});
 	};

@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface ReviewFormProps {
-	productId: number;
 	parentReviewId?: number | null;
+	setParentReviewId: Dispatch<SetStateAction<number>>
 	onSubmit: (review: {
 		rating: number;
 		title: string;
@@ -14,7 +14,7 @@ interface ReviewFormProps {
 	}) => Promise<void>;
 }
 
-export const ReviewForm = ({ productId, parentReviewId, onSubmit, setParentReviewId }: ReviewFormProps) => {
+export const ReviewForm = ({ parentReviewId, onSubmit, setParentReviewId }: ReviewFormProps) => {
 	const { t } = useTranslation();
 	const [rating, setRating] = useState(3);
 	const [title, setTitle] = useState('');
