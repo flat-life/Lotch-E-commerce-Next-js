@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Image from 'next/image';
 import { Product, ProductReview } from '@/lib/products';
 import { ReviewItem } from './ReviewItem';
 import { ReviewForm } from './ReviewForm';
 import { addToCart } from '@/lib/cart';
+import authClient from '@/services/authClient';
 
 interface ProductDetailsProps {
 	product: Product;
@@ -37,17 +37,13 @@ export const ProductDetails = ({ product, initialReviews, lang = 'en' }: Product
 		parent_review?: number;
 	}) => {
 		try {
-			const response = await fetch(`/api-v1/products/${product.id}/reviews/`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': `JWT ${localStorage.getItem('JWT')}`
-				},
-				body: JSON.stringify(reviewData)
+			const response = await authClient.post(`/products/${product.id}/reviews/`, {
+				...reviewData
+
 			});
 
-			if (response.ok) {
-				const newReview = await response.json();
+			if (response.status == 201) {
+				const newReview = response.data;
 				setReviews(prev => [...prev, newReview]);
 			}
 		} catch (error) {
@@ -60,7 +56,7 @@ export const ProductDetails = ({ product, initialReviews, lang = 'en' }: Product
 			<div className="image-gallery">
 				{product.images.map((image) => (
 					<div key={image.id} className="image-item">
-						<Image
+						<img
 							src={image.image}
 							alt={product.translations[lang]?.title}
 							width={600}
@@ -114,7 +110,6 @@ export const ProductDetails = ({ product, initialReviews, lang = 'en' }: Product
 					))}
 				</div>
 				<ReviewForm
-					productId={product.id}
 					parentReviewId={parentReviewId}
 					setParentReviewId={setParentReviewId}
 					onSubmit={handleReviewSubmit}
