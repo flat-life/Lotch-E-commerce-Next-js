@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 interface ReviewFormProps {
 	parentReviewId?: number | null;
-	setParentReviewId: Dispatch<SetStateAction<number>>
+	setParentReviewId: Dispatch<SetStateAction<number | null>>
 	onSubmit: (review: {
 		rating: number;
 		title: string;

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Image from 'next/image';
 import { Product, ProductReview } from '@/lib/products';
 import { ReviewItem } from './ReviewItem';
 import { ReviewForm } from './ReviewForm';
@@ -111,7 +110,6 @@ export const ProductDetails = ({ product, initialReviews, lang = 'en' }: Product
 					))}
 				</div>
 				<ReviewForm
-					productId={product.id}
 					parentReviewId={parentReviewId}
 					setParentReviewId={setParentReviewId}
 					onSubmit={handleReviewSubmit}

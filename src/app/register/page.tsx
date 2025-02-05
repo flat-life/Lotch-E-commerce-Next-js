@@ -24,7 +24,6 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm<FormData>();
 
-  // Verify token on mount
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem('JWT');
