@@ -7,6 +7,7 @@ import { ProfileTab } from '@/components/profile/ProfileTab';
 import { AddressesTab } from '@/components/profile/AddressesTab';
 import { OrdersTab } from '@/components/profile/OrdersTab';
 import { Address, Order, UserData, CustomerData } from '@/lib/profile'
+import Link from 'next/link';
 
 
 export default function ProfilePage() {
@@ -91,15 +92,15 @@ export default function ProfilePage() {
       <header className="topbar-nav">
         <nav className="navbar navbar-expand fixed-top bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand text-white" href="/">
+            <Link className="navbar-brand text-white" href="/">
               <i className="bi bi-house-door"></i>
-            </a>
+            </Link>
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle text-white" href="#">
+                  <Link className="nav-link dropdown-toggle text-white" href="#">
                     <i className="bi bi-person-circle"></i>
-                  </a>
+                  </Link>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li className="dropdown-item">
                       <div className="d-flex align-items-center">

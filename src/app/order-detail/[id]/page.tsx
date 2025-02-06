@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import apiClient from '@/services/apiClient';
 import authClient from '@/services/authClient';
+import Link from 'next/link';
 
 interface OrderItem {
 	product: {
@@ -101,9 +101,9 @@ export default function OrderDetailPage() {
 					<div className="col-first">
 						<h1 className="text-danger">Order Detail</h1>
 						<nav className="d-flex align-items-center">
-							<a className="text-danger" href="/">
+							<Link className="text-danger" href="/">
 								Home<span className="lnr lnr-arrow-right"></span>
-							</a>
+							</Link>
 							<span className="text-danger">Order Detail</span>
 						</nav>
 					</div>

@@ -1,8 +1,8 @@
-// app/products/[id]/ProductReviews.tsx
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'react-i18next';
+import { ReviewForm } from './ReviewForm';
+import { ReviewItem } from './ReviewItem';
 
 interface ProductReviewsProps {
 	productId: string;
@@ -10,7 +10,6 @@ interface ProductReviewsProps {
 }
 
 export function ProductReviews({ productId, initialReviews }: ProductReviewsProps) {
-	const t = useTranslations('ProductDetails');
 	const [reviews, setReviews] = useState(initialReviews);
 	const [parentReviewId, setParentReviewId] = useState<string | null>(null);
 
