@@ -21,17 +21,15 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+  params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const fetchBlogDetails = async () => {
-    const response = await apiClient.get(`/blog/blogs/${params.id}/`);
+    const response = await apiClient.get(`/blog/blogs/${id}/`);
     return response.data;
   };
 
   const fetchBlogComments = async () => {
-    const response = await apiClient.get(`/blog/blogs/${params.id}/comments/`);
+    const response = await apiClient.get(`/blog/blogs/${id}/comments/`);
     return response.data;
   };
 
@@ -49,7 +47,7 @@ export default async function BlogDetailPage({
         />
 
         <BlogContent blog={blogDetails} />
-        <CommentsSection blogId={params.id} initialComments={comments} />
+        <CommentsSection blogId={id} initialComments={comments} />
       </>
     );
   } catch (error) {

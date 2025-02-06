@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import apiClient from '@/services/apiClient';
+import Link from 'next/link';
 
 interface ComparisonData {
   [key: string]: {
@@ -80,12 +81,12 @@ export default function ComparePage() {
           <div className="col-first">
             <h1 className="text-danger">Compare Products</h1>
             <nav className="d-flex align-items-center">
-              <a className="text-danger" href="/">
+              <Link className="text-danger" href="/">
                 Home<span className="lnr lnr-arrow-right"></span>
-              </a>
-              <a className="text-danger" href="/products">
+              </Link>
+              <Link className="text-danger" href="/products">
                 Shop
-              </a>
+              </Link>
               <span className="text-danger">Compare</span>
             </nav>
           </div>

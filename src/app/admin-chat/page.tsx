@@ -16,7 +16,7 @@ export default function AdminChat() {
       try {
         const res = await authClient.get('/conversations/');
         setConversations(res.data);
-      } catch (error) {
+      } catch (error: any) {
         if (error.response?.status === 401) {
           router.push('/login');
         }
@@ -24,7 +24,7 @@ export default function AdminChat() {
     };
 
     loadConversations();
-  }, []);
+  }, [router]);
 
   const selectConversation = async (convoId) => {
     try {

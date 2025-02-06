@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link'
+import Image from 'next/image';
 
 export default function ClientLayout({
 	siteSettings,
@@ -18,7 +19,6 @@ export default function ClientLayout({
 
 	const changeLanguage = (lang: string) => {
 		setLanguage(lang);
-		// Consider adding language persistence here
 	};
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -47,6 +47,15 @@ export default function ClientLayout({
 		<div dir={language === 'fa' ? 'rtl' : 'ltr'}>
 
 			<header className="">
+				<div>
+					<Link href="/">
+						<div className="text-gray-900 font-lighter flex items-center gap-4">
+							<Image src='edifice.svg' alt="edifice" width='100' height='14' className="h-[14px]" />
+							|
+							<img src='casio-logo.svg' className='w-10' />
+						</div>
+					</Link>
+				</div>
 				<div className="main_menu">
 					<nav className="navbar navbar-expand-lg navbar-light main_box">
 						<form className="m-4" id="language-form">
@@ -54,9 +63,9 @@ export default function ClientLayout({
 							<input type="button" onClick={() => changeLanguage('en')} value="en" />
 						</form>
 						<div className="container">
-							<a id="logo_top" className="navbar-brand logo_h" href="/">
+							<Link id="logo_top" className="navbar-brand logo_h" href="/">
 								<img id="logoImage" className="img-fluid" style={{ width: '110px' }} src={siteSettings?.logo} alt="" />
-							</a>
+							</Link>
 							<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 								<span className="icon-bar"></span>
 								<span className="icon-bar"></span>
@@ -139,19 +148,7 @@ export default function ClientLayout({
 				</div>
 			</footer>
 
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-				integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-				crossOrigin="anonymous"></script>
-			<script src="/js/vendor/jquery-2.2.4.min.js"></script>
-			<script src="/js/vendor/bootstrap.min.js"></script>
-			<script src="/js/jquery.ajaxchimp.min.js"></script>
-			<script src="/js/jquery.nice-select.min.js"></script>
-			<script src="/js/jquery.sticky.js"></script>
-			<script src="/js/nouislider.min.js"></script>
-			<script src="/js/main.js"></script>
-			<script src="/js/jquery.magnific-popup.min.js"></script>
-			<script src="/js/owl.carousel.min.js"></script>
-			<script src="/js/gmaps.min.js"></script>
+
 		</div>
 	);
 };

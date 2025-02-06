@@ -2,19 +2,15 @@ import Banner from '@/components/base/Banner';
 import { ProductDetails } from '@/components/products/detail/ProductDetail';
 import apiClient from '@/services/apiClient';
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  // Fetch product data
-  const productResponse = await apiClient.get(`/products/${params.id}/`);
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+
+  const productResponse = await apiClient.get(`/products/${id}/`);
   const product = productResponse.data;
 
   // Fetch reviews data
-  const reviewsResponse = await apiClient.get(`/products/${params.id}/reviews/`);
+  const reviewsResponse = await apiClient.get(`/products/${id}/reviews/`);
   const initialReviews = reviewsResponse.data;
 
   return (

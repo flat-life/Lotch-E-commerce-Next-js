@@ -77,6 +77,7 @@ export default function ProductList({ initialProducts, collections, features }: 
 		const abortController = new AbortController();
 
 		const fetchProducts = async () => {
+
 			setIsLoading(true);
 			try {
 				const url = buildApiUrl(currentPage, appliedFilters);
@@ -85,6 +86,7 @@ export default function ProductList({ initialProducts, collections, features }: 
 				});
 
 				setProducts(response.data.results);
+				console.log(response.data.results)
 				setTotalCount(response.data.count);
 			} catch (error) {
 				if (!abortController.signal.aborted) {

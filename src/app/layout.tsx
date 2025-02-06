@@ -15,7 +15,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>TB_TG Shop</title>
+        <title>Casio | Lotch</title>
         <meta name="description" content="Y.A.A" />
         <meta name="author" content="FLATLIFE" />
         <link rel="stylesheet" href="/css/linearicons.css" />
@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link rel="stylesheet" href="/css/main.css" />
       </head>
 
-      <body>
+      <body className=''>
         <MainLayout siteSettings={siteSettings[0]}>
 
           {children}
