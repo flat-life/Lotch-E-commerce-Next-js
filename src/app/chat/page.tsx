@@ -48,6 +48,7 @@ export default function UserChat() {
     initChat();
   }, []);
 
+  console.log(messages)
   const loadMessages = async (convoId) => {
     try {
       const res = await authClient.get(`/conversations/${convoId}/`);
@@ -81,7 +82,6 @@ export default function UserChat() {
     <div className="container py-5 px-4">
       <header className="text-center">
         <h1 className="display-4 text-white">Chat With Support</h1>
-        {/* ... Header content ... */}
       </header>
 
       <div className="row rounded-lg overflow-hidden shadow">

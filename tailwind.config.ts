@@ -8,11 +8,21 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
+      fontSize: {
+        xxs: ".65rem",
+        xxxs: ".55rem",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["emerald"],
+  },
 } satisfies Config;

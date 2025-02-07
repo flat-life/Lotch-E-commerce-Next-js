@@ -74,24 +74,27 @@ export default function ProductList({ initialProducts, collections, features }: 
 		});
 	};
 	useEffect(() => {
-		const abortController = new AbortController();
+		//const abortController = new AbortController();
 
 		const fetchProducts = async () => {
 
 			setIsLoading(true);
 			try {
 				const url = buildApiUrl(currentPage, appliedFilters);
-				const response = await apiClient.get(url, {
-					signal: abortController.signal
-				});
+				//				const response = await apiClient.get(url, {
+				//					signal: abortController.signal
+				//				});
+				const response = await apiClient.get(url,);
+
+
 
 				setProducts(response.data.results);
 				console.log(response.data.results)
 				setTotalCount(response.data.count);
 			} catch (error) {
-				if (!abortController.signal.aborted) {
-					console.error('Error fetching products:', error);
-				}
+				//if (!abortController.signal.aborted) {
+				console.error('Error fetching products:', error);
+				//}
 			} finally {
 				setIsLoading(false);
 			}
@@ -99,7 +102,7 @@ export default function ProductList({ initialProducts, collections, features }: 
 
 		fetchProducts();
 
-		return () => abortController.abort();
+		//return () => abortController.abort();
 	}, [currentPage, appliedFilters]);
 
 	const handleCompare = () => {
