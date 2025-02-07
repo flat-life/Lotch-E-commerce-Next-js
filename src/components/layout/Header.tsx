@@ -28,7 +28,7 @@ const Header = () => {
     router.push(`/products?${params.toString()}`);
   };
   return (
-    <header className="">
+    <header className="w-full">
       <div
         className="bg-[#F4F5F8] flex gap-10 py-1 text-xxs px-5 text-black font-extralight"
         dir="rtl"
@@ -70,7 +70,7 @@ const Header = () => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow text-xxs"
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-2 shadow text-xxs"
           >
             <li>
               <p className="hover:underline">Souvenirs and Premium Products</p>
@@ -83,14 +83,14 @@ const Header = () => {
       </div>
 
       <div className="bg-white flex items-center pb-4 sticky top-0 w-full">
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 w-full">
           <div className="dropdown lg:hidden  flex items-center">
             <div tabIndex={0} role="button" className="btn btn-ghost mt-3">
               <BiMenu />
 
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-full p-2 shadow"
               >
                 <li>
                   <Link href="/products">Watches</Link>
@@ -104,7 +104,7 @@ const Header = () => {
               </ul>
             </div>
           </div>
-          <div className="flex-none">
+          <div className="flex-1">
             <Link href="/">
               <div className="text-gray-900 font-lighter flex items-center gap-4">
                 <Image
@@ -120,7 +120,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="navbar-center hidden lg:flex text-gray-700">
+          <div className="navbar-center flex-1 hidden lg:flex text-gray-700">
             <ul className="menu menu-horizontal px-1 flex items-center text-gray-700">
               <li className="text-gray-700">
                 <Link className="text-gray-700" href="/products">
@@ -180,7 +180,7 @@ const Header = () => {
               </label>
             </form>
           </div>
-          <div className="flex-none">
+          <div className="flex-none px-5">
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -208,7 +208,7 @@ const Header = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-full p-2 shadow"
               >
                 <li>
                   <a className="justify-between">

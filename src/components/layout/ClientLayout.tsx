@@ -35,7 +35,7 @@ export default function ClientLayout({
     <div dir={language === "fa" ? "rtl" : "ltr"}>
       <Header />
       <main>{children}</main>
-      <Footer />
+      <Footer siteSettings={siteSettings} />
     </div>
   );
 }
