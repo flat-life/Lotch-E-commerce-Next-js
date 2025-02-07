@@ -1,23 +1,45 @@
 import { Product } from "@/lib/products";
+import Link from "next/link";
+import { RiHeartAddLine } from "react-icons/ri";
+import { TbShoppingBagPlus, TbShoppingCartPlus } from "react-icons/tb";
 
 const ProductCardTiny = ({ product }: { product: Product }) => {
   return (
-    <div className="card bg-base-100 w-96 shadow-xl">
-      <figure>
-        <img src={`${product.images[0]?.image}`} alt="Edifice" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">
-          {product.title}
+    <div className="card bg-base-100 w-64 shadow-xl">
+      <Link href={`/products/${product.id}`}>
+        <div className=" bg-[#F7F8FA]">
+          <div className="relative flex items-center justify-between gap-8 py-1 mx-2 ">
+            <span className="text-xxxs absolute font-normal text-gray-800 bg-white left-1 top-3  rounded-md shadow-md px-2">
+              Honda Racing Samenwerkingsmodel
+            </span>
+            <RiHeartAddLine className="absolute text-gray-500 size-5 right-1 top-3 hover:cursor-pointer" />
+          </div>
+
+          {/* Image */}
+          <figure>
+            <img
+              src={product.images[0]?.image}
+              alt="Edifice"
+              className="w-full p-7"
+            />
+          </figure>
+        </div>
+      </Link>
+      <div className="mx-5 flex-col space-y-8 py-3">
+        <h2 className="flex-col">
+          <p className="text-black text-xs">EDIFICE</p>
+          <p className="text-black text-sm font-semibold">{product.title}</p>
           {product.secondhand && (
             <div className="badge badge-secondary">Seccend Hand</div>
           )}
         </h2>
-        <p className="truncate">{product.description}</p>
-        <div className="card-actions justify-end">
-          <div className="badge badge-outline">{product.price}</div>
-          <div className="badge badge-outline">Products</div>
+        <div className="card-actions justify-start">
+          <div className="text-black text-xs">€{product.price},00*</div>
         </div>
+      </div>
+      <div className="bg-black mx-5 text-white flex justify-center gap-4 items-center py-2">
+        <p className="text-xxs font-light">Add to cart</p>
+        <TbShoppingBagPlus className="" />
       </div>
     </div>
   );

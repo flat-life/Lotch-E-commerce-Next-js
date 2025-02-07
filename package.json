@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.1.1",
     "@hookform/resolvers": "^3.10.0",
     "axios": "^1.7.9",
     "i18next": "^24.2.2",
