@@ -8,6 +8,7 @@ import { addToCart } from "@/lib/cart";
 import authClient from "@/services/authClient";
 import { ProductSpecifications } from "./ProductSpecifications";
 import RightSection from "./RightSection";
+import FeaturesImage from "./FeaturesImage";
 
 interface ProductDetailsProps {
   product: Product;
@@ -51,9 +52,9 @@ export const ProductDetails = ({
 
   return (
     <>
-      <div className="flex flex-row gap-8 p-6 text-balck">
+      <div className="flex flex-row gap-20 p-6 text-balck">
         <div className="flex-1 space-y-8">
-          <div className="carousel w-full">
+          <div className="carousel w-full flex flex-wrap">
             {product.images.map((image, index) => (
               <div key={image.id} className=" w-1/2">
                 <img
@@ -63,6 +64,8 @@ export const ProductDetails = ({
                 />
               </div>
             ))}
+            <br />
+            <FeaturesImage product={product} />
           </div>
 
           <ProductSpecifications features={product.value_feature} />

@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/cart/AddToCartButton";
 import { Product } from "@/lib/products";
 import { Dispatch, SetStateAction } from "react";
 
@@ -15,21 +16,34 @@ const RightSection = ({
   handleAddToCart,
 }: RightSectionProps) => {
   return (
-    <div className="w-96 sticky top-0 h-screen overflow-y-auto">
+    <div className="w-[29rem] sticky top-0 h-screen overflow-y-auto">
       <div className="card bg-base-100 shadow-xl p-6 space-y-6 sticky">
-        <h1 className="text-black text-4xl font-extrabold">{product.title}</h1>
+        <div>
+          <h1 className="text-white bg-[#7F7F7F] text-xxs font-light inline w-fit px-2 py-0.5">
+            {product.badge}
+          </h1>
+          <h1 className="text-black text-md font-extralight m-0">
+            {"EDIFICE SOSPENSIONE"}
+          </h1>
+          <h1 className="text-black text-4xl font-extrabold">
+            {product.title}
+          </h1>
+        </div>
 
-        <div className="badge badge-lg badge-primary">
-          €{product.price.toFixed(2)}
+        <div>
+          <p className="font-extralight text-xxxs  text-end">
+            Incl. BTW en excl. verzendkosten
+          </p>
+          <p className="text-light  text-end">€{product.price.toFixed(2)}</p>
         </div>
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text">{"product.quantity"}</span>
+            <span className="label-text">{"Quantity"}</span>
           </label>
           <div className="join">
             <button
-              className="join-item btn btn-outline"
+              className="join-item btn btn-outline hover:bg-black"
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
             >
               -
@@ -37,11 +51,11 @@ const RightSection = ({
             <input
               type="text"
               value={quantity}
-              className="join-item input input-bordered w-16 text-center"
+              className="join-item input input-bordered w-16 text-center border-black"
               readOnly
             />
             <button
-              className="join-item btn btn-outline"
+              className="join-item btn btn-outline hover:bg-black"
               onClick={() => setQuantity(quantity + 1)}
             >
               +
@@ -49,27 +63,12 @@ const RightSection = ({
           </div>
         </div>
 
-        <button
-          onClick={handleAddToCart}
-          className="btn btn-primary w-full"
-          disabled={product.inventory === 0}
-        >
-          {"product.add_to_cart"}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
-        </button>
+        <AddToCartButton
+          product={product}
+          style={
+            "bg-black hover:bg-[#666666] text-white flex justify-center gap-4 items-center py-3 bottom-0"
+          }
+        />
 
         <div className="divider"></div>
 

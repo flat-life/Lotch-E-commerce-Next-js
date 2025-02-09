@@ -7,6 +7,7 @@ import {
   TbShoppingCartPlus,
 } from "react-icons/tb";
 import { addToCart } from "@/lib/cart";
+import AddToCartButton from "../cart/AddToCartButton";
 
 const ProductCardTiny = ({
   product,
@@ -21,7 +22,7 @@ const ProductCardTiny = ({
         <div className=" bg-[#F7F8FA]">
           <div className="relative flex items-center justify-between gap-8 py-1 mx-2 ">
             <span className="text-xxxs absolute font-normal text-gray-800 bg-white left-1 top-3  rounded-md shadow-md px-2">
-              Honda Racing Samenwerkingsmodel
+              {product.badge}
             </span>
             <RiHeartAddLine className="absolute text-gray-500 size-5 right-1 top-3 hover:cursor-pointer" />
           </div>
@@ -63,17 +64,16 @@ const ProductCardTiny = ({
           </div>
         </div>
 
-        <div
-          onClick={() => addToCart(product.id)}
-          className="bg-black hover:bg-[#666666] mx-5 text-white flex justify-center gap-4 items-center py-2 bottom-0"
-        >
-          <p className="text-xxs font-light ">Add to cart</p>
-          <TbShoppingBagPlus className="" />
-        </div>
+        <AddToCartButton
+          product={product}
+          style={
+            "bg-black hover:bg-[#666666] mx-5 text-white flex justify-center gap-4 items-center py-2 bottom-0"
+          }
+        />
         {onCompare && (
           <div
             onClick={() => onCompare(String(product.id))}
-            className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black flex justify-center gap-4 items-center py-2 mt-4"
+            className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black py-2 mt-4"
           >
             <p className="text-xxs font-light ">Compare</p>
             <TbRefreshAlert />
