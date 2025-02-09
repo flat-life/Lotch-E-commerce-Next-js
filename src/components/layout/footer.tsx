@@ -16,21 +16,29 @@ const Footer = ({ siteSettings }: { siteSettings: any }) => {
         <p className="font-bold">
           {siteSettings?.footer_text}
           <br />
-          <span id="text-gray-500 font-light">{siteSettings?.address}</span>
+          <span className="text-gray-500 font-light">
+            {siteSettings?.address}
+          </span>
         </p>
-        <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
-        <p className="flex gap-1">
-          Made with{" "}
-          <span className=" w-fit h-fit">
+        <p className="text-gray-500">
+          Copyright © {new Date().getFullYear()} - All right reserved
+        </p>
+        <p className="flex items-center gap-1 text-gray-500">
+          <span className="text-amber-600 font-semibold">Made </span> with{" "}
+          <span className="text-rose-600 w-fit h-fit">
             <FaHeart />
           </span>{" "}
           by{" "}
-          <Link href="https://github.com/flat-life" target="_blank">
+          <Link
+            className="text-blue-800 font-semibold"
+            href="https://github.com/flat-life"
+            target="_blank"
+          >
             Flatlife
           </Link>
         </p>
       </aside>
-      <nav>
+      <nav className="text-gray-800">
         <div className="grid grid-flow-col gap-4">
           <Link href={`${siteSettings?.telegram_link}`}>
             <svg

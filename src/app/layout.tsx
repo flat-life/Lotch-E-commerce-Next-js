@@ -28,7 +28,7 @@ export default async function RootLayout({
         <meta name="author" content="FLATLIFE" />
       </head>
 
-      <body className="font-roboto">
+      <body className="font-roboto w-full">
         <MainLayout siteSettings={siteSettings[0]}>{children}</MainLayout>
       </body>
     </html>

@@ -1,11 +1,22 @@
 import { Product } from "@/lib/products";
 import Link from "next/link";
 import { RiHeartAddLine } from "react-icons/ri";
-import { TbShoppingBagPlus, TbShoppingCartPlus } from "react-icons/tb";
+import {
+  TbRefreshAlert,
+  TbShoppingBagPlus,
+  TbShoppingCartPlus,
+} from "react-icons/tb";
+import { addToCart } from "@/lib/cart";
 
-const ProductCardTiny = ({ product }: { product: Product }) => {
+const ProductCardTiny = ({
+  product,
+  onCompare,
+}: {
+  product: Product;
+  onCompare: ((productId: string) => void) | null;
+}) => {
   return (
-    <div className="card bg-base-100 w-64 shadow-xl">
+    <div className=" bg-base-100 w-64 shadow-xl">
       <Link href={`/products/${product.id}`}>
         <div className=" bg-[#F7F8FA]">
           <div className="relative flex items-center justify-between gap-8 py-1 mx-2 ">
@@ -37,10 +48,22 @@ const ProductCardTiny = ({ product }: { product: Product }) => {
           <div className="text-black text-xs">€{product.price},00*</div>
         </div>
       </div>
-      <div className="bg-black mx-5 text-white flex justify-center gap-4 items-center py-2">
-        <p className="text-xxs font-light">Add to cart</p>
+      <div
+        onClick={() => addToCart(product.id)}
+        className="bg-black hover:bg-[#666666] mx-5 text-white flex justify-center gap-4 items-center py-2"
+      >
+        <p className="text-xxs font-light ">Add to cart</p>
         <TbShoppingBagPlus className="" />
       </div>
+      {onCompare && (
+        <div
+          onClick={() => onCompare(String(product.id))}
+          className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black flex justify-center gap-4 items-center py-2 mt-4"
+        >
+          <p className="text-xxs font-light ">Compare</p>
+          <TbRefreshAlert />
+        </div>
+      )}
     </div>
   );
 };

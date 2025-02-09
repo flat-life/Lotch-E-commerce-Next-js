@@ -1,94 +1,92 @@
-'use client'
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import authClient from '@/services/authClient';
-
-interface Product {
-	id: number;
-	title: string;
-	price: number;
-	org_price: number;
-	images: { image: string }[];
-}
+"use client";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import authClient from "@/services/authClient";
+import ProductCardTiny from "../products/ProductCardTiny";
+import { Product } from "@/lib/products";
 
 interface BestSalesProductsProps {
-	products: Product[];
+  products: Product[];
 }
 
 const BestSalesProducts: React.FC<BestSalesProductsProps> = ({ products }) => {
-	const addToCart = async (productId: number) => {
-		const cartId = localStorage.getItem('cartId');
+  const addToCart = async (productId: number) => {
+    const cartId = localStorage.getItem("cartId");
 
-		try {
-			if (!cartId) {
-				const cartResponse = await authClient.post('/cart/');
-				localStorage.setItem('cartId', cartResponse.data.id);
-				await addToCart(productId);
-			} else {
-				await authClient.post(`/cart/${cartId}/items/`, {
-					product_id: productId,
-					quantity: 1,
-				});
-				alert('Item added to cart successfully');
-			}
-		} catch (error) {
-			console.error('Error adding item to cart:', error);
-			if (error.response?.status === 401) {
-				localStorage.removeItem('JWT');
-				alert('Session expired. Please log in again.');
-			} else {
-				alert('Failed to add item to cart');
-			}
-		}
-	};
+    try {
+      if (!cartId) {
+        const cartResponse = await authClient.post("/cart/");
+        localStorage.setItem("cartId", cartResponse.data.id);
+        await addToCart(productId);
+      } else {
+        await authClient.post(`/cart/${cartId}/items/`, {
+          product_id: productId,
+          quantity: 1,
+        });
+        alert("Item added to cart successfully");
+      }
+    } catch (error: any) {
+      console.error("Error adding item to cart:", error);
+      if (error.response?.status === 401) {
+        localStorage.removeItem("JWT");
+        alert("Session expired. Please log in again.");
+      } else {
+        alert("Failed to add item to cart");
+      }
+    }
+  };
 
-	return (
-		<section className="lattest-product-area pb-40 category-list">
-			<div className="single-product-slider">
-				<div className="container">
-					<div className="row justify-content-center">
-						<div className="col-lg-6 text-center">
-							<div className="section-title">
-								<h1>Best Sales Products</h1>
-							</div>
-						</div>
-					</div>
-					<div className="row" id="bestProductContainer">
-						{products.map((product) => (
-							<div key={product.id} className="col-lg-4 col-md-6 single-product">
-								<img
-									src={product.images[0]?.image || '/img/default-product.jpg'}
-									alt={product.title}
-									width={300}
-									height={200}
-								/>
-								<div className="product-details">
-									<h6>{product.title}</h6>
-									<div className="price">
-										<h6>${product.price.toFixed(2)}</h6>
-										{product.org_price !== product.price && (
-											<h6 className="l-through">${product.org_price.toFixed(2)}</h6>
-										)}
-									</div>
-									<div className="prd-bottom">
-										<button className="social-info" onClick={() => addToCart(product.id)}>
-											<span className="ti-bag"></span>
-											<p className="hover-text">Add to bag</p>
-										</button>
-										<Link href={`/products/${product.id}`}>
-											<span className="lnr lnr-move"></span>
-											<p className="hover-text">View more</p>
-										</Link>
-									</div>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section className="lattest-product-area pb-40 category-list">
+      <div className="single-product-slider">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-6 text-center">
+              <div className="section-title">
+                <h1>Best Sales Products</h1>
+              </div>
+            </div>
+          </div>
+          <div className="row" id="bestProductContainer">
+            {products.map((product: Product) => (
+              <ProductCardTiny
+                product={product}
+                key={product.id}
+                onCompare={null}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default BestSalesProducts;
+
+export const BestSalesProductsSkeleton = () => (
+  <section className="lattest-product-area pb-40 category-list">
+    <div className="single-product-slider">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-6 text-center">
+            <div className="section-title">
+              <h1>Best Sales Products</h1>
+            </div>
+          </div>
+        </div>
+        <div className="row" id="productContainer">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="flex w-52 flex-col gap-4">
+              <div className="skeleton h-32 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);

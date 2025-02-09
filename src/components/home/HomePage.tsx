@@ -1,45 +1,35 @@
 import React from "react";
 import BannerArea from "@/components/home/BannerArea";
-import LatestProducts from "@/components/home/LatestProducts";
-import BestSalesProducts from "@/components/home/BestSalesProducts";
+import LatestProducts, {
+  LatestProductsSkeleton,
+} from "@/components/home/LatestProducts";
+import BestSalesProducts, {
+  BestSalesProductsSkeleton,
+} from "@/components/home/BestSalesProducts";
+import { Product } from "@/lib/products";
+import apiClient from "@/services/apiClient";
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  org_price: number;
-  images: { image: string }[];
-}
+const fetchLatestProducts = async (): Promise<Product[]> => {
+  const response = await apiClient.get("/products/?ordering=-updated_at");
+  return response.data.results;
+};
 
-const API_BASE = "http://localhost:8002/api-v1";
+const fetchBestSalesProducts = async (): Promise<Product[]> => {
+  const response = await apiClient.get("/products/?ordering=best_sales");
+  return response.data.results;
+};
 
 const HomePage = async () => {
-  try {
-    const [bannersRes, latestRes, bestSalesRes] = await Promise.all([
-      fetch(`${API_BASE}/home-banners/`),
-      fetch(`${API_BASE}/products/?ordering=-updated_at`),
-      fetch(`${API_BASE}/products/?ordering=best_sales`),
-    ]);
+  const latestProducts = await fetchLatestProducts();
+  const bestSalesProducts = await fetchBestSalesProducts();
 
-    const latestProducts = await latestRes.json();
-    const bestSalesProducts = await bestSalesRes.json();
-
-    return (
-      <div>
-        <BannerArea />
-        {/* <FeaturesArea /> */}
-        <LatestProducts products={latestProducts.results} />
-        <BestSalesProducts products={bestSalesProducts.results} />
-      </div>
-    );
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return (
-      <div>
-        <p>Failed to load data. Please try again later.</p>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <BannerArea />
+      <LatestProducts products={latestProducts} />
+      <BestSalesProducts products={bestSalesProducts} />
+    </div>
+  );
 };
 
 export default HomePage;
