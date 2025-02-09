@@ -17,11 +17,11 @@ export function ProductSpecifications({
             name="spec-accordion"
             defaultChecked={index === 0}
           />
-          <div className="collapse-title text-xl font-medium">
-            {feature.key.key}
+          <div className="collapse-title text-xs font-bold items-center flex">
+            <p>{feature.key.key}</p>
           </div>
           <div className="collapse-content">
-            <p>{feature.value.value}</p>
+            <p className="text-xxs font-normal">{feature.value.value}</p>
           </div>
         </div>
       ))}
