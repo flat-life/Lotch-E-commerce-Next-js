@@ -83,7 +83,7 @@ const Header = () => {
       </div>
 
       <div className="bg-white flex items-center pb-4 sticky top-0 w-full">
-        <div className="navbar bg-base-100 w-full">
+        <div className="navbar   bg-base-100 w-full sticky">
           <div className="dropdown lg:hidden  flex items-center">
             <div tabIndex={0} role="button" className="btn btn-ghost mt-3">
               <BiMenu />

@@ -1,6 +1,7 @@
 import AddToCartButton from "@/components/cart/AddToCartButton";
 import { Product } from "@/lib/products";
 import { Dispatch, SetStateAction } from "react";
+import { FaMinus, FaPlus } from "react-icons/fa6";
 
 interface RightSectionProps {
   product: Product;
@@ -17,7 +18,7 @@ const RightSection = ({
 }: RightSectionProps) => {
   return (
     <div className="w-[29rem] sticky top-0 h-screen overflow-y-auto">
-      <div className="card bg-base-100 shadow-xl p-6 space-y-6 sticky">
+      <div className="card bg-base-100 p-6 space-y-6 sticky">
         <div>
           <h1 className="text-white bg-[#7F7F7F] text-xxs font-light inline w-fit px-2 py-0.5">
             {product.badge}
@@ -34,7 +35,7 @@ const RightSection = ({
           <p className="font-extralight text-xxxs  text-end">
             Incl. BTW en excl. verzendkosten
           </p>
-          <p className="text-light  text-end">€{product.price.toFixed(2)}</p>
+          <p className="font-[600] text-end">€{product.price.toFixed(2)}</p>
         </div>
 
         <div className="form-control">
@@ -46,7 +47,7 @@ const RightSection = ({
               className="join-item btn btn-outline hover:bg-black"
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
             >
-              -
+              <FaMinus className="size-2" />
             </button>
             <input
               type="text"
@@ -58,7 +59,7 @@ const RightSection = ({
               className="join-item btn btn-outline hover:bg-black"
               onClick={() => setQuantity(quantity + 1)}
             >
-              +
+              <FaPlus className="size-2" />
             </button>
           </div>
         </div>
@@ -73,8 +74,10 @@ const RightSection = ({
         <div className="divider"></div>
 
         <div className="prose">
-          <h3 className="text-lg font-semibold">{"product.description"}</h3>
-          <p className="text-base-content/80">{product.description}</p>
+          <h3 className="text-md font-normal">{"Description"}</h3>
+          <p className="text-base-content/80 font-light text-sm">
+            {product.description}
+          </p>
         </div>
       </div>
     </div>
