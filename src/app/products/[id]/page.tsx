@@ -1,26 +1,23 @@
-import Banner from '@/components/base/Banner';
-import { ProductDetails } from '@/components/products/detail/ProductDetail';
-import apiClient from '@/services/apiClient';
+import Banner from "@/components/base/Banner";
+import { ProductDetails } from "@/components/products/detail/ProductDetail";
+import apiClient from "@/services/apiClient";
 
-
-export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
   const productResponse = await apiClient.get(`/products/${id}/`);
   const product = productResponse.data;
 
-  // Fetch reviews data
   const reviewsResponse = await apiClient.get(`/products/${id}/reviews/`);
   const initialReviews = reviewsResponse.data;
 
   return (
     <>
-      <Banner />
-      <ProductDetails
-        product={product}
-        initialReviews={initialReviews}
-        lang="en"
-      />
+      <ProductDetails product={product} initialReviews={initialReviews} />
     </>
   );
 }

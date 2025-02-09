@@ -1,40 +1,30 @@
-import { useTranslation } from 'react-i18next';
+import { ValueFeature } from "@/lib/products";
 
 interface ProductSpecificationsProps {
-	features: ProductFeature[];
+  features: ValueFeature[];
 }
 
-export function ProductSpecifications({ features }: ProductSpecificationsProps) {
-	const t = useTranslation('ProductDetails');
-
-	return (
-		<section className="product_description_area">
-			<div className="container">
-				<ul className="nav nav-tabs" id="myTab" role="tablist">
-					<li className="nav-item">
-						<a className="nav-link active" id="specs-tab" data-toggle="tab" href="#specs" role="tab">
-							{t('specifications')}
-						</a>
-					</li>
-				</ul>
-
-				<div className="tab-content" id="myTabContent">
-					<div className="tab-pane fade show active" id="specs" role="tabpanel">
-						<div className="table-responsive">
-							<table className="table">
-								<tbody>
-									{features.map((feature) => (
-										<tr key={feature.id}>
-											<td><h5>{feature.key}</h5></td>
-											<td><h5>{feature.value}</h5></td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+export function ProductSpecifications({
+  features,
+}: ProductSpecificationsProps) {
+  return (
+    <div className="space-y-4 text-black">
+      <h2 className="text-md font-normal">{"Specifications"}</h2>
+      {features.map((feature, index) => (
+        <div key={feature.id} className="collapse collapse-plus bg-base-200">
+          <input
+            type="radio"
+            name="spec-accordion"
+            defaultChecked={index === 0}
+          />
+          <div className="collapse-title text-xl font-medium">
+            {feature.key.key}
+          </div>
+          <div className="collapse-content">
+            <p>{feature.value.value}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }

@@ -27,43 +27,59 @@ const ProductCardTiny = ({
           </div>
 
           {/* Image */}
-          <figure>
-            <img
-              src={product.images[0]?.image}
-              alt="Edifice"
-              className="w-full p-7"
-            />
-          </figure>
+          <div className="group">
+            <figure>
+              <img
+                src={product.images[0]?.image}
+                alt="Edifice"
+                className="w-full group-hover:hidden"
+              />
+            </figure>
+            <figure>
+              <img
+                src={product.images[1]?.image}
+                alt="Edifice"
+                className="w-full hidden group-hover:inline"
+              />
+            </figure>
+          </div>
         </div>
       </Link>
-      <div className="mx-5 flex-col space-y-8 py-3">
-        <h2 className="flex-col">
-          <p className="text-black text-xs">EDIFICE</p>
-          <p className="text-black text-sm font-semibold">{product.title}</p>
-          {product.secondhand && (
-            <div className="badge badge-secondary">Seccend Hand</div>
-          )}
-        </h2>
-        <div className="card-actions justify-start">
-          <div className="text-black text-xs">€{product.price},00*</div>
+      <div className="flex-col ">
+        <div className="mx-5 flex-col space-y-8 py-3">
+          <h2 className="flex-col">
+            <p className="text-black text-xs">EDIFICE</p>
+            <p className="text-black text-sm font-semibold">{product.title}</p>
+            {product.secondhand ? (
+              <div className="badge badge-neutral text-xxs">Seccend Hand</div>
+            ) : (
+              <div className="badge badge-neutral invisible text-xxs">
+                Seccend Hand
+              </div>
+            )}
+          </h2>
+          <div className="card-actions justify-start">
+            <div className="text-black text-xs">€{product.price},00*</div>
+          </div>
         </div>
-      </div>
-      <div
-        onClick={() => addToCart(product.id)}
-        className="bg-black hover:bg-[#666666] mx-5 text-white flex justify-center gap-4 items-center py-2"
-      >
-        <p className="text-xxs font-light ">Add to cart</p>
-        <TbShoppingBagPlus className="" />
-      </div>
-      {onCompare && (
+
         <div
-          onClick={() => onCompare(String(product.id))}
-          className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black flex justify-center gap-4 items-center py-2 mt-4"
+          onClick={() => addToCart(product.id)}
+          className="bg-black hover:bg-[#666666] mx-5 text-white flex justify-center gap-4 items-center py-2 bottom-0"
         >
-          <p className="text-xxs font-light ">Compare</p>
-          <TbRefreshAlert />
+          <p className="text-xxs font-light ">Add to cart</p>
+          <TbShoppingBagPlus className="" />
         </div>
-      )}
+        {onCompare && (
+          <div
+            onClick={() => onCompare(String(product.id))}
+            className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black flex justify-center gap-4 items-center py-2 mt-4"
+          >
+            <p className="text-xxs font-light ">Compare</p>
+            <TbRefreshAlert />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

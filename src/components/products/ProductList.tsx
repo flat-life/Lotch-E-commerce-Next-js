@@ -1,10 +1,7 @@
 "use client";
-
 import { useState, useEffect } from "react";
-import ProductCard from "./ProductCard";
 import FilterBar from "./FilterBar";
 import { buildApiUrl, Product, ApiResponse } from "@/lib/products";
-import { useTranslation } from "react-i18next";
 import Pagination from "../base/Pagination";
 import SidebarFilters from "./SidebarFilters";
 import AppliedFilters from "./AppliedFilters";
@@ -24,7 +21,6 @@ export default function ProductList({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  const { t } = useTranslation();
   const [products, setProducts] = useState(initialProducts.results);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(initialProducts.count);
@@ -134,9 +130,25 @@ export default function ProductList({
 
       <section className="lattest-product-area pb-40 category-list">
         {isLoading ? (
-          <div className="text-center">{t("Loading...")}</div>
+          <div className="text-center">
+            <div
+              className="self-center grid grid-cols-4 w-full justify-center space-y-4"
+              id="productContainer"
+            >
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="flex w-64 flex-wrap gap-4">
+                  <div className="skeleton h-48 w-full"></div>
+                  <div className="skeleton h-4 w-28"></div>
+                  <div className="skeleton h-4 w-28"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton h-4 w-28"></div>
+                </div>
+              ))}
+            </div>
+          </div>
         ) : (
-          <div className="row" id="productContainer">
+          <div className="row" id=" flex gap-8">
             {products.map((product: Product) => (
               <ProductCardTiny
                 key={product.id}

@@ -48,7 +48,7 @@ const BestSalesProducts: React.FC<BestSalesProductsProps> = ({ products }) => {
               </div>
             </div>
           </div>
-          <div className="row" id="bestProductContainer">
+          <div className="flex gap-8" id="productContainer">
             {products.map((product: Product) => (
               <ProductCardTiny
                 product={product}
