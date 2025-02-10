@@ -22,7 +22,7 @@ const TotalSection = ({
     <div className="mt-6 p-4 bg-gray-50 sticky top-0">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">Total</h2>
-        <div className="text-xl font-semibold">
+        <div className="text-xl font-semibold h-[47px] flex items-center">
           {loading ? (
             <span className="loading loading-infinity loading-lg"></span>
           ) : (
@@ -32,7 +32,7 @@ const TotalSection = ({
       </div>
       <div className="flex flex-col my-5">
         <div className="flex justify-between">
-          <p className="text-xs">Subtotal (incl. VAT):</p>
+          <p className="text-xs  h-[20px]">Subtotal (incl. VAT):</p>
           {loading ? (
             <span className="loading text-gray-500 loading-infinity loading-sm"></span>
           ) : cart.org_price !== cart.total_price ? (
@@ -42,7 +42,7 @@ const TotalSection = ({
           )}
         </div>
         <div className="flex justify-between">
-          <p className="text-xs">Postage costs:</p>
+          <p className="text-xs h-[20px]">Postage costs:</p>
           {loading ? (
             <span className="loading text-gray-500 loading-infinity loading-sm"></span>
           ) : (
@@ -50,7 +50,7 @@ const TotalSection = ({
           )}
         </div>
         <div className="flex justify-between">
-          <p className="text-xs font-bold">Order value incl. VAT</p>
+          <p className="text-xs  h-[20px] font-bold">Order value incl. VAT</p>
           {loading ? (
             <span className="loading text-gray-500 loading-infinity loading-sm"></span>
           ) : (
@@ -83,10 +83,10 @@ const TotalSection = ({
         <button
           onClick={handleCheckout}
           disabled={loading || cart.items.length === 0}
-          className="px-6 py-2 btn bg-black text-white rounded-none disabled:btn-disabled hover:bg-gray-600"
+          className="px-6 w-[180px] btn bg-black text-white rounded-none disabled:btn-disabled hover:bg-gray-600"
         >
           {loading ? (
-            <span className="loading text-gray-500 loading-infinity loading-sm"></span>
+            <span className="loading text-gray-500 loading-infinity loading-md"></span>
           ) : (
             "Proceed to Checkout"
           )}
