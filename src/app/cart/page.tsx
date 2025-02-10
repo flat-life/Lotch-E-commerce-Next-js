@@ -129,92 +129,120 @@ export default function CartPage() {
   };
 
   console.log(cart);
-  if (!cart) return <div>Loading cart...</div>;
+  if (!cart)
+    return (
+      <div className="flex items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>;
+      </div>
+    );
 
   return (
     <>
-      <section className="container mx-auto px-10 sm:px-20 lg:px-40 py-8 mt-8 text-black">
-        <div className="flex items-center mb-3">
-          <MdOutlineChevronLeft />
-          <Link href="/products" className="mt-0.5 underline">
-            Continue Shopping
-          </Link>
-        </div>
+      <section className="container  px-5 sm:px-16 lg:px-28 py-8 mt-8 text-black flex ">
+        <div className="grow-2">
+          <div className="flex items-center mb-3">
+            <MdOutlineChevronLeft />
+            <Link href="/products" className="mt-0.5 underline">
+              Continue Shopping
+            </Link>
+          </div>
 
-        <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
 
-        <div className="overflow-x-auto mt-20 md:mt-40">
-          {cart.items.map((item) => (
-            <div>
-              <div>
-                <img
-                  src={`http://localhost:8002${item.product.images[0].image}`}
-                />
-              </div>
-              <div>
-                <h1 className="px-4 py-2">{item.product.title}</h1>
-                <h2 className="px-4 py-2">${item.product.price.toFixed(2)}</h2>
-                <div className="px-4 py-2">
-                  <div className="form-control">
-                    <label className="label"></label>
-                    <div className="flex items-center gap-5">
-                      <div className="join">
+          <div className="overflow-x-auto mt-20 md:mt-40">
+            {cart.items.map((item) => (
+              <div className="grid grid-cols-4">
+                <div>
+                  <img
+                    src={`http://localhost:8002${item.product.images[0].image}`}
+                    className="w-40"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <h1 className=" py-2 font-bold text-xl">
+                    {item.product.title}
+                  </h1>
+                  <p className="text-xs font-light line-clamp-3 overflow-hidden">
+                    {item.product.description}
+                  </p>
+                  <div className=" py-2">
+                    <div className="form-control">
+                      <label className="label"></label>
+                      <div className="flex items-center gap-5">
+                        <div className="join">
+                          <button
+                            className="join-item btn btn-outline hover:bg-black"
+                            onClick={() =>
+                              handleUpdateQuantity(item.id, item.quantity - 1)
+                            }
+                          >
+                            <FaMinus className="size-2" />
+                          </button>
+                          <input
+                            type="text"
+                            value={item.quantity}
+                            className="join-item input input-bordered w-16 text-center border-black"
+                            readOnly
+                          />
+                          <button
+                            className="join-item btn btn-outline hover:bg-black flex items-center"
+                            onClick={() =>
+                              handleUpdateQuantity(item.id, item.quantity + 1)
+                            }
+                          >
+                            <FaPlus className="size-2" />
+                          </button>
+                        </div>
                         <button
-                          className="join-item btn btn-outline hover:bg-black"
-                          onClick={() =>
-                            handleUpdateQuantity(item.id, item.quantity - 1)
-                          }
+                          onClick={() => handleDeleteItem(item.id)}
+                          disabled={loading}
+                          className="text-slate-500 hover:text-black "
                         >
-                          <FaMinus className="size-2" />
-                        </button>
-                        <input
-                          type="text"
-                          value={item.quantity}
-                          className="join-item input input-bordered w-16 text-center border-black"
-                          readOnly
-                        />
-                        <button
-                          className="join-item btn btn-outline hover:bg-black flex items-center"
-                          onClick={() =>
-                            handleUpdateQuantity(item.id, item.quantity + 1)
-                          }
-                        >
-                          <FaPlus className="size-2" />
+                          <IoTrashSharp className="size-6" />
                         </button>
                       </div>
-                      <button
-                        onClick={() => handleDeleteItem(item.id)}
-                        disabled={loading}
-                        className="text-slate-500 hover:text-black "
-                      >
-                        <IoTrashSharp className="size-6" />
-                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div></div>
+                <div>
+                  <p className="px-4 py-2">${item.total_price.toFixed(2)}</p>
+                </div>
 
-              <p className="px-4 py-2">${item.total_price.toFixed(2)}</p>
-              <p className="px-4 py-2"></p>
-            </div>
-          ))}
+                <p className="px-4 py-2"></p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+        <div className="mt-6 p-4 bg-gray-50 sticky top-0">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Total</h2>
             <div className="text-xl font-semibold">
-              {cart.org_price !== cart.total_price ? (
-                <div className="text-red-600">
-                  <span className="line-through">
-                    ${cart.org_price.toFixed(2)}
-                  </span>
-                  <span className="ml-2">${cart.total_price.toFixed(2)}</span>
-                </div>
+              {loading ? (
+                <span className="loading loading-infinity loading-lg"></span>
               ) : (
-                <span>${cart.total_price.toFixed(2)}</span>
+                <span>€{cart.total_price.toFixed(2)}</span>
               )}
+            </div>
+          </div>
+          <div className="flex flex-col my-5">
+            <div className="flex justify-between">
+              <p className="text-xs">Subtotal (incl. VAT):</p>
+              {cart.org_price !== cart.total_price ? (
+                <p className="text-xs line-through">
+                  €{cart.org_price.toFixed(2)}
+                </p>
+              ) : (
+                <p className="text-xs">€{cart.org_price.toFixed(2)}</p>
+              )}
+            </div>
+            <div className="flex justify-between">
+              <p className="text-xs">Postage costs:</p>
+              <p className="text-xs">€{0}</p>
+            </div>
+            <div className="flex justify-between">
+              <p className="text-xs font-bold">Order value incl. VAT</p>
+              <p className="text-xs">€{cart.total_price.toFixed(2)}</p>
             </div>
           </div>
 
@@ -223,13 +251,14 @@ export default function CartPage() {
               type="text"
               value={discountCode}
               onChange={(e) => setDiscountCode(e.target.value)}
+              disabled={loading}
               placeholder="Coupon code"
-              className="flex-1 px-4 py-2 border rounded"
+              className="input flex-1 px-4 py-1  roundend-none disabled:input-disabled"
             />
             <button
               onClick={handleApplyDiscount}
               disabled={loading || !discountCode}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
+              className="px-4 text-black btn  disabled:btn-disabled rounded-none"
             >
               Apply Discount
             </button>
@@ -239,7 +268,7 @@ export default function CartPage() {
             <button
               onClick={handleCheckout}
               disabled={loading || cart.items.length === 0}
-              className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-400"
+              className="px-6 py-2 btn bg-black text-white rounded-none disabled:btn-disabled hover:bg-gray-600"
             >
               {loading ? "Processing..." : "Proceed to Checkout"}
             </button>
