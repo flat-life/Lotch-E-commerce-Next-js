@@ -33,7 +33,9 @@ const TotalSection = ({
       <div className="flex flex-col my-5">
         <div className="flex justify-between">
           <p className="text-xs">Subtotal (incl. VAT):</p>
-          {cart.org_price !== cart.total_price ? (
+          {loading ? (
+            <span className="loading text-gray-500 loading-infinity loading-sm"></span>
+          ) : cart.org_price !== cart.total_price ? (
             <p className="text-xs line-through">€{cart.org_price.toFixed(2)}</p>
           ) : (
             <p className="text-xs">€{cart.org_price.toFixed(2)}</p>
@@ -41,11 +43,19 @@ const TotalSection = ({
         </div>
         <div className="flex justify-between">
           <p className="text-xs">Postage costs:</p>
-          <p className="text-xs">€{0}</p>
+          {loading ? (
+            <span className="loading text-gray-500 loading-infinity loading-sm"></span>
+          ) : (
+            <p className="text-xs">:€0</p>
+          )}
         </div>
         <div className="flex justify-between">
           <p className="text-xs font-bold">Order value incl. VAT</p>
-          <p className="text-xs">€{cart.total_price.toFixed(2)}</p>
+          {loading ? (
+            <span className="loading text-gray-500 loading-infinity loading-sm"></span>
+          ) : (
+            <p className="text-xs">€{cart.total_price.toFixed(2)}</p>
+          )}
         </div>
       </div>
 
@@ -75,7 +85,11 @@ const TotalSection = ({
           disabled={loading || cart.items.length === 0}
           className="px-6 py-2 btn bg-black text-white rounded-none disabled:btn-disabled hover:bg-gray-600"
         >
-          {loading ? "Processing..." : "Proceed to Checkout"}
+          {loading ? (
+            <span className="loading text-gray-500 loading-infinity loading-sm"></span>
+          ) : (
+            "Proceed to Checkout"
+          )}
         </button>
       </div>
     </div>

@@ -34,6 +34,7 @@ const CartItem = ({
             <div className="flex items-center gap-5">
               <div className="join">
                 <button
+                  disabled={loading}
                   className="join-item btn btn-outline hover:bg-black"
                   onClick={() =>
                     handleUpdateQuantity(item.id, item.quantity - 1)
@@ -42,12 +43,14 @@ const CartItem = ({
                   <FaMinus className="size-2" />
                 </button>
                 <input
+                  disabled={loading}
                   type="text"
                   value={item.quantity}
                   className="join-item input input-bordered w-16 text-center border-black"
                   readOnly
                 />
                 <button
+                  disabled={loading}
                   className="join-item btn btn-outline hover:bg-black flex items-center"
                   onClick={() =>
                     handleUpdateQuantity(item.id, item.quantity + 1)
@@ -59,7 +62,7 @@ const CartItem = ({
               <button
                 onClick={() => handleDeleteItem(item.id)}
                 disabled={loading}
-                className="text-slate-500 hover:text-black "
+                className="text-slate-500 hover:text-black disabled:text-gray-300 "
               >
                 <IoTrashSharp className="size-6" />
               </button>
