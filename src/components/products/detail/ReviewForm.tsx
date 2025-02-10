@@ -23,6 +23,7 @@ export const ReviewForm = ({
   const [description, setDescription] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log(parentReviewId);
     e.preventDefault();
     await onSubmit({
       rating,
@@ -35,34 +36,38 @@ export const ReviewForm = ({
   };
 
   const handleRemovereplie = () => {
-    setParentReviewId(0);
+    setParentReviewId(null);
   };
   return (
-    <div className="review-form">
-      <h4>{"product.post_comment"}</h4>
+    <div className="review-form mb-10 ">
+      <h4 className="text-md font-normal my-4">{"Submit Review"}</h4>
       {parentReviewId && (
-        <button onClick={handleRemovereplie}>
-          <div className="reply-notice">{"product.replying_to_review"}</div>
+        <button className="my-3" onClick={handleRemovereplie}>
+          <div className="btn text-white hover:bg-slate-700 bg-black">
+            {"Replying"}
+          </div>
         </button>
       )}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>{"product.rating"}</label>
-          <select
-            value={rating}
-            onChange={(e) => setRating(Number(e.target.value))}
-          >
+      <form onSubmit={handleSubmit} className="form-control flex-col space-y-4">
+        <div className="">
+          <div className="rating">
             {[1, 2, 3, 4, 5].map((num) => (
-              <option key={num} value={num}>
-                {num} {"product.stars"}
-              </option>
+              <input
+                key={num}
+                type="radio"
+                name="rating"
+                className="mask mask-star-2 bg-black"
+                checked={rating === num}
+                onChange={() => setRating(num)}
+              />
             ))}
-          </select>
+          </div>
         </div>
-        <div className="form-group">
+        <div className="">
           <input
+            className="border-black input w-full"
             type="text"
-            placeholder={"product.title"}
+            placeholder={"Title"}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -70,15 +75,19 @@ export const ReviewForm = ({
         </div>
         <div className="form-group">
           <textarea
-            placeholder={"product.message"}
+            className="border-black input w-full pt-2"
+            placeholder={"Message"}
+            rows={4}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>
-        <button type="submit" className="">
-          {"product.post"}
-          submit
+        <button
+          type="submit"
+          className="btn bg-black text-white hover:bg-gray-700"
+        >
+          {"Post"}
         </button>
       </form>
     </div>
