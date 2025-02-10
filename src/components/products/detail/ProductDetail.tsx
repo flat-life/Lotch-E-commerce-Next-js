@@ -2,13 +2,11 @@
 
 import { SetStateAction, useState } from "react";
 import { Product, ProductReview } from "@/lib/products";
-import { ReviewItem } from "./ReviewItem";
-import { ReviewForm } from "./ReviewForm";
+
 import { addToCart } from "@/lib/cart";
 import authClient from "@/services/authClient";
-import { ProductSpecifications } from "./ProductSpecifications";
 import RightSection from "./RightSection";
-import FeaturesImage from "./FeaturesImage";
+import LeftSection from "./LeftSection";
 
 interface ProductDetailsProps {
   product: Product;
@@ -19,6 +17,7 @@ export const ProductDetails = ({
   product,
   initialReviews,
 }: ProductDetailsProps) => {
+  console.log({ initialReviews });
   const [quantity, setQuantity] = useState(1);
   const [parentReviewId, setParentReviewId] = useState<number | null>(null);
   const [reviews, setReviews] = useState<ProductReview[]>(initialReviews);
@@ -49,45 +48,18 @@ export const ProductDetails = ({
       console.error("Review submission failed:", error);
     }
   };
-
+  console.log({ initialReviews });
+  console.log({ reviews });
   return (
     <>
       <div className="flex flex-row gap-20 p-6 text-balck">
-        <div className="flex-1 space-y-8">
-          <div className="carousel w-full flex flex-wrap">
-            {product.images.map((image, index) => (
-              <div key={image.id} className=" w-1/2">
-                <img
-                  src={image.image}
-                  alt={product.title}
-                  className="w-full object-cover h-96 "
-                />
-              </div>
-            ))}
-            <br />
-            <FeaturesImage product={product} />
-          </div>
-
-          <ProductSpecifications features={product.value_feature} />
-
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold">{"product.reviews"}</h2>
-            <div className="space-y-4">
-              {reviews.map((review) => (
-                <ReviewItem
-                  key={review.id}
-                  review={review}
-                  onReply={setParentReviewId}
-                />
-              ))}
-            </div>
-            <ReviewForm
-              parentReviewId={parentReviewId}
-              setParentReviewId={setParentReviewId}
-              onSubmit={handleReviewSubmit}
-            />
-          </div>
-        </div>
+        <LeftSection
+          product={product}
+          reviews={reviews}
+          setParentReviewId={setParentReviewId}
+          parentReviewId={parentReviewId}
+          handleReviewSubmit={handleReviewSubmit}
+        />
         <RightSection
           product={product}
           quantity={quantity}

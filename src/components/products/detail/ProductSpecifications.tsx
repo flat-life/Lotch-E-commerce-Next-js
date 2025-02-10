@@ -10,6 +10,7 @@ export function ProductSpecifications({
   return (
     <div className="space-y-4 text-black">
       <h2 className="text-md font-normal">{"Specifications"}</h2>
+      <hr />
       {features.map((feature, index) => (
         <div key={feature.id} className="collapse collapse-plus bg-base-200">
           <input
