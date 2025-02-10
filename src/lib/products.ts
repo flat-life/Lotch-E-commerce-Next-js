@@ -39,7 +39,7 @@ export interface ValueFeature {
   value: FeatureValue;
 }
 
-interface ProductImage {
+export interface ProductImage {
   id: number;
   image: string;
 }

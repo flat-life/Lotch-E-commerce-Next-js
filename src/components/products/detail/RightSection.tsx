@@ -38,32 +38,6 @@ const RightSection = ({
           <p className="font-[600] text-end">€{product.price.toFixed(2)}</p>
         </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">{"Quantity"}</span>
-          </label>
-          <div className="join">
-            <button
-              className="join-item btn btn-outline hover:bg-black"
-              onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            >
-              <FaMinus className="size-2" />
-            </button>
-            <input
-              type="text"
-              value={quantity}
-              className="join-item input input-bordered w-16 text-center border-black"
-              readOnly
-            />
-            <button
-              className="join-item btn btn-outline hover:bg-black"
-              onClick={() => setQuantity(quantity + 1)}
-            >
-              <FaPlus className="size-2" />
-            </button>
-          </div>
-        </div>
-
         <AddToCartButton
           product={product}
           style={
