@@ -85,7 +85,7 @@ export const ReviewForm = ({
         </div>
         <button
           type="submit"
-          className="btn bg-black text-white hover:bg-gray-700"
+          className="btn bg-black text-white hover:bg-gray-700 rounded-none"
         >
           {"Post"}
         </button>

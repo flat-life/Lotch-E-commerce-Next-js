@@ -1,108 +1,78 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import apiClient from '@/services/apiClient';
+import { SetStateAction, useState } from "react";
+import apiClient from "@/services/apiClient";
+import { Comment } from "@/lib/blog";
+import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 export default function CommentsSection({
-	blogId,
-	initialComments,
+  blogId,
+  initialComments,
 }: {
-	blogId: string;
-	initialComments: any[];
+  blogId: string;
+  initialComments: Comment[];
 }) {
-	const [comments, setComments] = useState(initialComments);
-	const [formData, setFormData] = useState({ subject: '', message: '' });
+  const [comments, setComments] = useState(initialComments);
+  const [formData, setFormData] = useState({ subject: "", message: "" });
 
-	const getToken = () => {
-		if (typeof window !== 'undefined') {
-			return localStorage.getItem('JWT');
-		}
-		return null;
-	};
+  const getToken = () => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("JWT");
+    }
+    return null;
+  };
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-		try {
-			const response = await apiClient.post(
-				`/blog/blogs/${blogId}/comments/`,
-				formData,
-				{
-					headers: {
-						Authorization: `JWT ${getToken()}`,
-					},
-				}
-			);
+    try {
+      const response = await apiClient.post(
+        `/blog/blogs/${blogId}/comments/`,
+        formData,
+        {
+          headers: {
+            Authorization: `JWT ${getToken()}`,
+          },
+        }
+      );
 
-			if (response.status === 201) {
-				setComments([...comments, response.data]);
-				setFormData({ subject: '', message: '' });
-				alert('Your comment has been received! It will be shown after checking');
-			}
-		} catch (error) {
-			console.error('Error submitting comment:', error);
-			alert('Error submitting comment. Please try again.');
-		}
-	};
+      if (response.status === 201) {
+        setComments([...comments, response.data]);
+        setFormData({ subject: "", message: "" });
+        alert(
+          "Your comment has been received! It will be shown after checking"
+        );
+      }
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+      alert("Error submitting comment. Please try again.");
+    }
+  };
 
-	const formatDate = (dateString: string) => {
-		const options: Intl.DateTimeFormatOptions = {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		};
-		return new Date(dateString).toLocaleDateString(undefined, options);
-	};
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
-	return (
-		<section className="comments-area">
-			<div className="container">
-				<div className="comment-list">
-					{comments.map((comment) => (
-						<div key={comment.id} className="single-comment justify-content-between d-flex">
-							<div className="user justify-content-between d-flex">
-								<div className="desc">
-									<p className="text-capitalize m-0">
-										{`${comment.customer.first_name} ${comment.customer.last_name}`}
-									</p>
-									<p className="date">{formatDate(comment.created_at)}</p>
-									<h6>{comment.subject}</h6>
-									<p className="comment">{comment.message}</p>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-
-				<div className="comment-form">
-					<h4>Leave a Comment</h4>
-					<form onSubmit={handleSubmit}>
-						<div className="form-group">
-							<input
-								type="text"
-								className="form-control"
-								placeholder="Subject"
-								value={formData.subject}
-								onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-								required
-							/>
-						</div>
-						<div className="form-group">
-							<textarea
-								className="form-control mb-10"
-								rows={5}
-								placeholder="Message"
-								value={formData.message}
-								onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-								required
-							/>
-						</div>
-						<button type="submit" className="primary-btn submit_btn">
-							Post Comment
-						</button>
-					</form>
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section className="flex justify-center lg:px-64 md:px-40 sm:px-20 px-10 text-black">
+      <div className="w-full">
+        <div className="flex-col space-y-5 my-10">
+          {comments.map((comment) => (
+            <Comments comment={comment} />
+          ))}
+        </div>
+        <CommentForm
+          setFormData={setFormData}
+          formData={formData}
+          handleSubmit={handleSubmit}
+        />
+      </div>
+    </section>
+  );
 }
