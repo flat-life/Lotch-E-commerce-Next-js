@@ -1,9 +1,10 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
 import authClient from "@/services/authClient";
 import { ConversationResponse, Message } from "@/lib/chat";
 import Messages from "@/components/chat/Messages";
+import MessageForm from "@/components/chat/MessageForm";
 
 export default function UserChat() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -26,7 +27,7 @@ export default function UserChat() {
 
         setConversationId(userId);
         loadMessages(userId);
-
+        console.log("setconvo and loading...");
         ws.current = new WebSocket(`ws://localhost:8002/ws/chat/${userId}/`);
 
         ws.current.onmessage = (e) => {
@@ -58,6 +59,7 @@ export default function UserChat() {
       const res = await authClient.get<ConversationResponse>(
         `/conversations/${convoId}/`
       );
+      console.log("here");
       // setSender_conversation(res.data.sender_conversation.id);
       // setReceiver_conversation(res.data.receiver_conversation);
       setMessages(res.data.message_set);
@@ -77,8 +79,10 @@ export default function UserChat() {
         },
         message: inputMessage,
       };
+      console.log("here1");
 
       if (ws.current) {
+        console.log("here2");
         ws.current.send(JSON.stringify(message));
         setInputMessage("");
       }
@@ -101,20 +105,11 @@ export default function UserChat() {
             ))}
           </div>
 
-          <form onSubmit={sendMessage} className="bg-light">
-            <div className="input-group">
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                className="form-control rounded-0 border-0 py-4 bg-light"
-                placeholder="Type a message"
-              />
-              <button type="submit" className="btn btn-success">
-                Send
-              </button>
-            </div>
-          </form>
+          <MessageForm
+            sendMessage={sendMessage}
+            inputMessage={inputMessage}
+            setInputMessage={setInputMessage}
+          />
         </div>
       </div>
     </div>
