@@ -1,17 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import {
+  RegisterOptions,
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+  UseFormRegisterReturn,
+} from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import apiClient from "@/services/apiClient";
 import authClient from "@/services/authClient";
-
-type FormData = {
-  phone_number: string;
-  password: string;
-};
+import LoginForm, { FormData } from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,11 +22,9 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-
     formState: { errors, isValid },
   } = useForm<FormData>({ mode: "onChange" });
 
-  // Verify token on mount
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem("JWT");
@@ -83,69 +83,14 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div>
-              <input
-                {...register("phone_number", {
-                  required: "Username is required",
-                  pattern: {
-                    value: /^\d{11}$/,
-                    message: "Invalid phone number format (11 digits)",
-                  },
-                })}
-                placeholder="Phone Number"
-                className="input w-full bg-gray-200 rounded-none"
-              />
-              {errors.phone_number && (
-                <p className="text-red-500">{errors.phone_number.message}</p>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="password"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 8,
-                    message: "Password must be at least 8 characters",
-                  },
-                })}
-                placeholder="Password"
-                className="input w-full bg-gray-200 rounded-none"
-              />
-              {errors.password && (
-                <p className="text-red-500">{errors.password.message}</p>
-              )}
-            </div>
-
-            <div className="flex flex-col space-y-4 items-center justify-between">
-              <button
-                type="submit"
-                disabled={isLoading || !isValid}
-                className="btn px-4 py-2
-                 disabled:btn-disable w-full rounded-none bg-black hover:bg-gray-600 text-white"
-              >
-                {isLoading ? (
-                  <span className="loading loading-infinity loading-md"></span>
-                ) : (
-                  "Log In"
-                )}
-              </button>
-              <Link
-                href="/verify-otp"
-                className="text-gray-600 hover:text-black"
-              >
-                Login With Code
-              </Link>
-              <Link
-                className="btn w-full rounded-none bg-gray-300 mt-4"
-                href="/register"
-              >
-                Create an Account
-              </Link>
-            </div>
-          </form>
+          <LoginForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+            isLoading={isLoading}
+            isValid={isValid}
+          />
         </div>
       </div>
     </section>
