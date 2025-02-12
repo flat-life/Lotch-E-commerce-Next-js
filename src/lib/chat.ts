@@ -17,3 +17,10 @@ export interface ConversationResponse {
   receiver_conversation: ConversationParticipant;
   message_set: Message[];
 }
+
+export interface ConversationListResponse {
+  id: number;
+  sender_conversation: ConversationParticipant;
+  receiver_conversation: ConversationParticipant;
+  last_message: Message;
+}
