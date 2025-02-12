@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, SetStateAction } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import authClient from "@/services/authClient";
 import { ConversationResponse, Message } from "@/lib/chat";
@@ -8,16 +8,17 @@ import MessageForm from "@/components/chat/MessageForm";
 
 export default function UserChat() {
   const [messages, setMessages] = useState<Message[]>([]);
-  // const [sender_conversation, setSender_conversation] = useState<string>("");
-  // const [receiver_conversation, setReceiver_conversation] = useState<string>();
   const [inputMessage, setInputMessage] = useState("");
   const [conversationId, setConversationId] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSending, setIsSending] = useState(false);
   const ws = useRef<WebSocket | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const initChat = async () => {
       try {
+        setIsLoading(true);
         const userRes = await authClient.get<{ id: number }>("/auth/users/me/");
         const userId = userRes.data.id;
 
@@ -26,8 +27,8 @@ export default function UserChat() {
         });
 
         setConversationId(userId);
-        loadMessages(userId);
-        console.log("setconvo and loading...");
+        await loadMessages(userId);
+
         ws.current = new WebSocket(`ws://localhost:8002/ws/chat/${userId}/`);
 
         ws.current.onmessage = (e) => {
@@ -38,8 +39,6 @@ export default function UserChat() {
         ws.current.onerror = (error) => {
           console.error("WebSocket error:", error);
         };
-
-        return () => ws.current?.close();
       } catch (error) {
         if (
           error instanceof Error &&
@@ -48,6 +47,8 @@ export default function UserChat() {
         ) {
           router.push("/login");
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -59,9 +60,6 @@ export default function UserChat() {
       const res = await authClient.get<ConversationResponse>(
         `/conversations/${convoId}/`
       );
-      console.log("here");
-      // setSender_conversation(res.data.sender_conversation.id);
-      // setReceiver_conversation(res.data.receiver_conversation);
       setMessages(res.data.message_set);
     } catch (error) {
       console.error("Error loading messages:", error);
@@ -70,38 +68,52 @@ export default function UserChat() {
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputMessage.trim()) return;
-
+    if (!inputMessage.trim() || isSending) return;
+    console.log("sendMessage");
     try {
+      await setIsSending(true);
+      console.log("setisseding ture");
       const message = {
         headers: {
           Authorization: `JWT ${localStorage.getItem("JWT")}`,
         },
         message: inputMessage,
       };
-      console.log("here1");
 
-      if (ws.current) {
-        console.log("here2");
+      if (ws.current && ws.current.readyState === WebSocket.OPEN) {
         ws.current.send(JSON.stringify(message));
         setInputMessage("");
       }
     } catch (error) {
       console.error("Error sending message:", error);
+    } finally {
+      setIsSending(false);
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-infinity loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex-col justify-center lg:px-64 md:px-40 sm:px-20 px-10 text-black">
+    <div className="flex-col justify-center lg:px-64 md:px-40 sm:px-20 px-10 text-black h-screen">
       <aside className="my-6">
         <h1 className="text-3xl font-bold">Chat With Support</h1>
       </aside>
 
-      <div className="row rounded-lg overflow-hidden shadow">
-        <div className="col-7 px-0">
-          <div className="px-4 py-5 chat-box bg-white">
+      <div className="rounded-lg overflow-hidden shadow my-10">
+        <div className="">
+          <div className="px-4 py-5 chat-box bg-white h-[600px] overflow-y-auto scroll-smooth">
             {messages.map((msg) => (
-              <Messages conversationId={conversationId} msg={msg} />
+              <Messages
+                key={msg.id}
+                conversationId={conversationId}
+                msg={msg}
+              />
             ))}
           </div>
 
@@ -109,6 +121,7 @@ export default function UserChat() {
             sendMessage={sendMessage}
             inputMessage={inputMessage}
             setInputMessage={setInputMessage}
+            isSending={isSending}
           />
         </div>
       </div>

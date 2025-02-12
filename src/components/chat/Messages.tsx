@@ -9,7 +9,7 @@ const Messages = ({ conversationId, msg }: MessagesProps) => {
   return (
     <div>
       {conversationId && msg.sender === conversationId ? (
-        <div className="chat chat-end ">
+        <div className="chat chat-end snap-end">
           <div className="chat-header">
             <div className="flex gap-3 items-center">
               <p>You</p>
@@ -24,7 +24,7 @@ const Messages = ({ conversationId, msg }: MessagesProps) => {
           <div className="chat-footer opacity-50">Delivered</div>
         </div>
       ) : (
-        <div className="chat chat-start">
+        <div className="chat chat-start snap-end">
           <div className="chat-header">
             <div className="flex gap-3">
               <p>Admin</p>
@@ -34,7 +34,7 @@ const Messages = ({ conversationId, msg }: MessagesProps) => {
             </div>
           </div>
           <div className="chat-bubble bg-black rounded-none">{msg.text}</div>
-          <div className="chat-footer opacity-50">Delivered</div>
+          <div className="chat-footer opacity-50"></div>
         </div>
       )}
     </div>
