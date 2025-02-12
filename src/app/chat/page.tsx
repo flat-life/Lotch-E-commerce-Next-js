@@ -2,7 +2,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import authClient from "@/services/authClient";
-import { ConversationResponse, Message } from "@/lib/chat";
+import {
+  ConversationParticipant,
+  ConversationResponse,
+  Message,
+} from "@/lib/chat";
 import Messages from "@/components/chat/Messages";
 import MessageForm from "@/components/chat/MessageForm";
 
@@ -11,6 +15,9 @@ export default function UserChat() {
   const [inputMessage, setInputMessage] = useState("");
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [sender_conversation, setSender_conversation] =
+    useState<ConversationParticipant | null>(null);
+
   const [isSending, setIsSending] = useState(false);
   const ws = useRef<WebSocket | null>(null);
   const router = useRouter();
@@ -61,6 +68,7 @@ export default function UserChat() {
         `/conversations/${convoId}/`
       );
       setMessages(res.data.message_set);
+      setSender_conversation(res.data.sender_conversation);
     } catch (error) {
       console.error("Error loading messages:", error);
     }
@@ -91,14 +99,6 @@ export default function UserChat() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <span className="loading loading-infinity loading-lg"></span>
-      </div>
-    );
-  }
-
   return (
     <div className="flex-col justify-center lg:px-64 md:px-40 sm:px-20 px-10 text-black h-screen">
       <aside className="my-6">
@@ -108,13 +108,15 @@ export default function UserChat() {
       <div className="rounded-lg overflow-hidden shadow my-10">
         <div className="">
           <div className="px-4 py-5 chat-box bg-white h-[600px] overflow-y-auto scroll-smooth">
-            {messages.map((msg) => (
-              <Messages
-                key={msg.id}
-                conversationId={conversationId}
-                msg={msg}
-              />
-            ))}
+            {sender_conversation &&
+              messages.map((msg) => (
+                <Messages
+                  conversationId={conversationId}
+                  msg={msg}
+                  isAdmin={false}
+                  sender_conversation={sender_conversation}
+                />
+              ))}
           </div>
 
           <MessageForm

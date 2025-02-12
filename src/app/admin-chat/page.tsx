@@ -3,8 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import authClient from "@/services/authClient";
 import { useRouter } from "next/navigation";
 import Messages from "@/components/chat/Messages";
-import { ConversationListResponse, Message } from "@/lib/chat";
+import {
+  ConversationListResponse,
+  ConversationParticipant,
+  Message,
+} from "@/lib/chat";
 import MessageForm from "@/components/chat/MessageForm";
+import Conversations from "@/components/chat/Conversations";
 
 export default function AdminChat() {
   const [conversations, setConversations] = useState<
@@ -14,6 +19,8 @@ export default function AdminChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
+  const [sender_conversation, setSender_conversation] =
+    useState<ConversationParticipant | null>(null);
   const [inputMessage, setInputMessage] = useState("");
   const ws = useRef<WebSocket | null>(null);
   const router = useRouter();
@@ -31,14 +38,17 @@ export default function AdminChat() {
     };
 
     loadConversations();
+    setIsLoading(false);
   }, [router]);
 
   const selectConversation = async (convoId: string) => {
     try {
+      setIsLoading(true);
       if (ws.current) ws.current.close();
 
       const res = await authClient.get(`/conversations/${convoId}/`);
       setMessages(res.data.message_set);
+      setSender_conversation(res.data.sender_conversation);
       setActiveConvo(String(convoId));
 
       ws.current = new WebSocket(`ws://localhost:8002/ws/chat/${convoId}/`);
@@ -49,6 +59,8 @@ export default function AdminChat() {
       };
     } catch (error) {
       console.error("Error selecting conversation:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -76,48 +88,47 @@ export default function AdminChat() {
       setIsSending(false);
     }
   };
-
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-infinity loading-lg"></span>
+      </div>
+    );
+  }
   return (
-    <div className="flex-col justify-center lg:px-64 md:px-40 sm:px-20 px-10 text-black h-screen">
+    <div className="flex-col flex w-full justify-center lg:px-52 md:px-32 sm:px-16 px-10 text-black">
       <aside className="my-6">
-        <h1 className="text-3xl font-bold">Chat With Support</h1>
+        <h1 className="text-3xl font-bold">Admin Support</h1>
       </aside>
 
-      <div className="row rounded-lg overflow-hidden shadow">
-        <div className="col-5 px-0">
-          <div className="bg-white">
-            <div className="bg-gray px-4 py-2 bg-light">
-              <h5 className="mb-0 py-1">Recent</h5>
-            </div>
-            <div className="messages-box">
-              {conversations.map((convo) => (
-                <button
-                  key={convo.id}
-                  onClick={() => selectConversation(String(convo.id))}
-                  className={`list-group-item list-group-item-action ${
-                    activeConvo === String(convo.id) ? "active" : ""
-                  }`}
-                >
-                  <div className="media">
-                    <div className="media-body ml-4">
-                      <h6>{convo.sender_conversation.phone_number}</h6>
-                      <p className="text-muted mb-0">
-                        {convo.last_message?.text || "No messages yet"}
-                      </p>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
+      <div className="flex rounded-lg justify-start">
+        <div className="flex flex-col space-y-3">
+          <div className="">
+            <h5 className="">Recent</h5>
+          </div>
+          <div className="flex flex-col text-start items space-y-3  pr-10">
+            {conversations.map((convo) => (
+              <Conversations
+                activeConvo={activeConvo}
+                convo={convo}
+                selectConversation={selectConversation}
+              />
+            ))}
           </div>
         </div>
 
-        <div className="rounded-lg overflow-hidden shadow my-10">
+        <div className="flex-1 rounded-lg overflow-hidden  shadow p-5 my-10">
           <div className="">
-            <div className="px-4 py-5 chat-box bg-white h-[600px] overflow-y-auto scroll-smooth">
-              {messages.map((msg) => (
-                <Messages msg={msg} conversationId={Number(activeConvo)} />
-              ))}
+            <div className="px-4 py-5 chat-box bg-white h-[500px] overflow-y-auto scroll-smooth">
+              {sender_conversation &&
+                messages.map((msg) => (
+                  <Messages
+                    msg={msg}
+                    conversationId={Number(activeConvo)}
+                    isAdmin={true}
+                    sender_conversation={sender_conversation}
+                  />
+                ))}
             </div>
 
             <MessageForm

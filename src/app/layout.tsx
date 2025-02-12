@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import MainLayout from "@/components/layout/MainLayout";
 import "@fontsource/roboto";
+import "@/app/globals.css";
 
 async function getSiteSettings() {
   const res = await fetch(`http://localhost:8002/api-v1/site-settings/`);
