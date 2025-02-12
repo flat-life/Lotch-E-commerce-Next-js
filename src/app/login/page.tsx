@@ -23,7 +23,8 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<FormData>({ mode: "onChange" });
+  } = useForm<FormData>();
+  // { mode: "onChange" }
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -71,14 +72,14 @@ export default function LoginPage() {
       <img
         src="/banner/aem-banner-top-g-1920-816.avif"
         alt="Login"
-        className="absolute"
+        className="absolute h-full object-cover w-full"
       />
 
       <div className="card bg-gray-50 w-full max-w-sm shadow-2xl">
         <div className="p-10">
           <h3 className=" text-2xl font-bold mb-5">Log in to Enter</h3>
           {error && (
-            <div className="text-light mb-4 rounded bg-red-100 p-2 text-red-600">
+            <div className="text-light mb-4 rounded text-sm bg-red-100 p-2 text-red-600">
               {error}
             </div>
           )}
