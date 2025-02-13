@@ -15,6 +15,7 @@ const SendOTPCodeForm = ({
   handleSendCode,
   isLoading,
 }: SendOTPCodeFormProps) => {
+  //   console.log(emailForm.formState.errors);
   return (
     <form
       onSubmit={emailForm.handleSubmit(handleSendCode)}

@@ -31,10 +31,9 @@ import SendOTPCodeForm, {
   EmailFormData,
 } from "@/components/auth/SendOTPCodeForm";
 import { MdVpnKey } from "react-icons/md";
-
-type OtpFormData = {
-  otp: string;
-};
+import SubmitOTPCodeForm, {
+  OtpFormData,
+} from "@/components/auth/SubmitOTPCodeForm";
 
 export default function VerifyOtpPage() {
   const router = useRouter();
@@ -79,7 +78,8 @@ export default function VerifyOtpPage() {
         alert("Verification code sent to your email");
       }
     } catch (err: any) {
-      setError(err.response?.data?.error || "Failed to send verification code");
+      console.log(err.response.data.message);
+      setError(err.response.data.message || "Failed to send verification code");
     } finally {
       setIsLoading(false);
     }
@@ -101,12 +101,13 @@ export default function VerifyOtpPage() {
         router.push("/");
       }
     } catch (err: any) {
-      setError(err.response?.data?.detail || "Invalid verification code");
+      console.log(err.response.data);
+      setError(err.response?.data?.message || "Invalid verification code");
     } finally {
       setIsLoading(false);
     }
   };
-
+  console.log(error);
   return (
     <section className="hero  min-h-screen relative">
       <img
@@ -131,55 +132,12 @@ export default function VerifyOtpPage() {
               isLoading={isLoading}
             />
           ) : (
-            <>
-              <form
-                onSubmit={otpForm.handleSubmit(handleVerifyOtp)}
-                className="space-y-4"
-              >
-                <div className="flex flex-col">
-                  <div className="input input-bordered flex items-center gap-2 bg-gray-200 rounded-none">
-                    <MdVpnKey />
-                    <input
-                      type="text"
-                      {...otpForm.register("otp", {
-                        required: "Verification code is required",
-                        minLength: {
-                          value: 6,
-                          message: "Verification must be 6 characters",
-                        },
-                        maxLength: {
-                          value: 6,
-                          message: "Verification must be 6 characters",
-                        },
-                      })}
-                      placeholder="Verification Code"
-                      className=""
-                    />
-                  </div>
-                  <p>
-                    {otpForm.formState.errors.otp && (
-                      <p className="text-red-500">
-                        {otpForm.formState.errors.otp.message}
-                      </p>
-                    )}
-                  </p>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isLoading || !otpForm.formState.isValid}
-                  className="btn px-4 py-2
-       disabled:btn-disable w-full rounded-none bg-black hover:bg-gray-600 text-white"
-                >
-                  {isLoading ? (
-                    <span className="loading loading-infinity loading-md"></span>
-                  ) : (
-                    "Verify"
-                  )}
-                </button>
-              </form>
-              <p className="mt-4 text-center">Code sent to: {storedEmail}</p>
-            </>
+            <SubmitOTPCodeForm
+              otpForm={otpForm}
+              isLoading={isLoading}
+              handleVerifyOtp={handleVerifyOtp}
+              storedEmail={storedEmail}
+            />
           )}
         </div>
       </div>
