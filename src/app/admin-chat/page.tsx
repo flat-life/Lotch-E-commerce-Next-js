@@ -10,6 +10,7 @@ import {
 } from "@/lib/chat";
 import MessageForm from "@/components/chat/MessageForm";
 import Conversations from "@/components/chat/Conversations";
+import Loading from "@/components/base/Loading";
 
 export default function AdminChat() {
   const [conversations, setConversations] = useState<
@@ -89,11 +90,7 @@ export default function AdminChat() {
     }
   };
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <span className="loading loading-infinity loading-lg"></span>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <div className="flex-col flex w-full justify-center lg:px-52 md:px-32 sm:px-16 px-10 text-black">

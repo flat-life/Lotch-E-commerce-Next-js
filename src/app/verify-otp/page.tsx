@@ -3,10 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 import apiClient from "@/services/apiClient";
-import authClient from "@/services/authClient";
 import SendOTPCodeForm, {
   EmailFormData,
 } from "@/components/auth/SendOTPCodeForm";

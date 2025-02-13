@@ -1,3 +1,6 @@
+import authClient from "@/services/authClient";
+import router from "next/router";
+
 export function getCSRFToken(): string {
   const cookieValue = document.cookie
     .split("; ")
