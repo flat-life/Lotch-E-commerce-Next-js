@@ -1,39 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  ErrorOption,
-  Field,
-  FieldArray,
-  FieldArrayPath,
-  FieldError,
-  FieldErrors,
-  FieldName,
-  FieldRefs,
-  FieldValues,
-  FormState,
-  InternalFieldName,
-  Path,
-  PathValue,
-  RegisterOptions,
-  SubmitErrorHandler,
-  SubmitHandler,
-  useForm,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import apiClient from "@/services/apiClient";
 import authClient from "@/services/authClient";
-import { IoMdMail } from "react-icons/io";
 import SendOTPCodeForm, {
   EmailFormData,
 } from "@/components/auth/SendOTPCodeForm";
-import { MdVpnKey } from "react-icons/md";
 import SubmitOTPCodeForm, {
   OtpFormData,
 } from "@/components/auth/SubmitOTPCodeForm";
+import { verifyToken } from "@/lib/base";
 
 export default function VerifyOtpPage() {
   const router = useRouter();
@@ -46,18 +26,6 @@ export default function VerifyOtpPage() {
   const otpForm = useForm<OtpFormData>();
 
   useEffect(() => {
-    const verifyToken = async () => {
-      const token = localStorage.getItem("JWT");
-      if (!token) return;
-
-      try {
-        await authClient.post("/auth/jwt/verify/", { token });
-        router.push("/");
-      } catch (err) {
-        localStorage.removeItem("JWT");
-      }
-    };
-
     verifyToken();
     setStoredEmail(localStorage.getItem("email"));
   }, [router]);

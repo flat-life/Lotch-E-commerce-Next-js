@@ -3,14 +3,11 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 import authClient from "@/services/authClient";
 import apiClient from "@/services/apiClient";
-import { BiSolidUserCircle } from "react-icons/bi";
-import { MdVpnKey } from "react-icons/md";
-import { IoMdMail } from "react-icons/io";
+
 import RegisterForm, { FormData } from "@/components/auth/RegisterForm";
+import { verifyToken } from "@/lib/base";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -24,18 +21,6 @@ export default function RegisterPage() {
   } = useForm<FormData>();
 
   useEffect(() => {
-    const verifyToken = async () => {
-      const token = localStorage.getItem("JWT");
-      if (!token) return;
-
-      try {
-        await authClient.post("/auth/jwt/verify/", { token });
-        router.push("/");
-      } catch (err) {
-        localStorage.removeItem("JWT");
-      }
-    };
-
     verifyToken();
   }, [router]);
 
