@@ -18,14 +18,14 @@ export function getCSRFToken(): string {
 
 export const verifyToken = async () => {
   const token = localStorage.getItem("JWT");
-  if (!token) return;
+  if (!token) return "";
 
   try {
     await authClient.post("/auth/jwt/verify/", { token });
-    alert("user loged in already");
-    router.push("/");
   } catch (err) {
     console.log(err);
     localStorage.removeItem("JWT");
+    return "";
   }
+  return token;
 };

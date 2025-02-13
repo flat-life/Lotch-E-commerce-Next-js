@@ -18,6 +18,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { IoTrashSharp } from "react-icons/io5";
 import TotalSection from "@/components/cart/TotalSection";
 import CartItem from "@/components/cart/CartItem";
+import Loading from "@/components/base/Loading";
 
 export default function CartPage() {
   const router = useRouter();
@@ -25,17 +26,18 @@ export default function CartPage() {
   const [discountCode, setDiscountCode] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const fetchCart = async () => {
+    try {
+      const cartData = await getOrCreateCart();
+      setCart(cartData);
+      console.log({ cartData });
+    } catch (error) {
+      console.error("Error loading cart:", error);
+      alert("Failed to load cart");
+    }
+  };
+
   useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const cartData = await getOrCreateCart();
-        setCart(cartData);
-        console.log({ cartData });
-      } catch (error) {
-        console.error("Error loading cart:", error);
-        alert("Failed to load cart");
-      }
-    };
     fetchCart();
   }, []);
 
@@ -129,12 +131,7 @@ export default function CartPage() {
   };
 
   console.log(cart);
-  if (!cart)
-    return (
-      <div className="flex items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>;
-      </div>
-    );
+  if (!cart) return <Loading />;
 
   return (
     <>

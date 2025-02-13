@@ -8,6 +8,8 @@ import { AddressesTab } from "@/components/profile/AddressesTab";
 import { OrdersTab } from "@/components/profile/OrdersTab";
 import { Address, Order, UserData, CustomerData } from "@/lib/profile";
 import Link from "next/link";
+import Loading from "@/components/base/Loading";
+import { verifyToken } from "@/lib/base";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -18,31 +20,25 @@ export default function ProfilePage() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const fetchProfileData = async () => {
+    const token = await verifyToken();
+    try {
+      await authClient.post("/auth/jwt/verify/", { token });
+      fetchCustomerData();
+      fetchUserData();
+      fetchAddresses();
+      await fetchOrders();
+
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      localStorage.removeItem("JWT");
+      router.push("/login");
+    }
+  };
   useEffect(() => {
-    const verifyToken = async () => {
-      const token = localStorage.getItem("JWT");
-      if (!token) {
-        router.push("/login");
-        return;
-      }
-
-      try {
-        setLoading(true);
-        await authClient.post("/auth/jwt/verify/", { token });
-        fetchCustomerData();
-        fetchUserData();
-        fetchAddresses();
-        await fetchOrders();
-
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        localStorage.removeItem("JWT");
-        router.push("/login");
-      }
-    };
-
     verifyToken();
+    fetchProfileData();
   }, [router]);
 
   const fetchCustomerData = async () => {
@@ -88,125 +84,73 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="bg-theme bg-theme1 min-h-screen">
-      <header className="topbar-nav">
-        <nav className="navbar navbar-expand fixed-top bg-dark">
-          <div className="container-fluid">
-            <Link className="navbar-brand text-white" href="/">
-              <i className="bi bi-house-door"></i>
-            </Link>
-            <div className="collapse navbar-collapse">
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle text-white"
-                    href="#"
-                  >
-                    <i className="bi bi-person-circle"></i>
-                  </Link>
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li className="dropdown-item">
-                      <div className="d-flex align-items-center">
-                        <div className="ms-3">
-                          <h6 className="mb-0">{userData?.email}</h6>
-                          <small>
-                            {customerData?.first_name} {customerData?.last_name}
-                          </small>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <button className="dropdown-item" onClick={handleLogout}>
-                        <i className="bi bi-box-arrow-right me-2"></i>Logout
-                      </button>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-1 p-4 sm:p-8">
+        <div className="max-w-6xl mx-auto">
+          <div role="tablist" className="tabs tabs-lifted">
+            <input
+              type="radio"
+              name="profile-tabs"
+              role="tab"
+              className="tab text-lg font-medium"
+              aria-label="Addresses"
+              checked={activeTab === "addresses"}
+              onChange={() => setActiveTab("addresses")}
+            />
+            <div
+              role="tabpanel"
+              className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+            >
+              {loading ? (
+                <Loading />
+              ) : (
+                <AddressesTab addresses={addresses} onUpdate={fetchAddresses} />
+              )}
             </div>
-          </div>
-        </nav>
-      </header>
 
-      <div className="content-wrapper pt-5">
-        <div className="container-fluid pt-4">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="card">
-                <div className="card-body">
-                  <ul className="nav nav-tabs nav-tabs-primary nav-justified">
-                    <li className="nav-item">
-                      <button
-                        className={`nav-link ${
-                          activeTab === "addresses" ? "active" : ""
-                        }`}
-                        onClick={() => setActiveTab("addresses")}
-                      >
-                        Addresses
-                      </button>
-                    </li>
-                    <li className="nav-item">
-                      <button
-                        className={`nav-link ${
-                          activeTab === "orders" ? "active" : ""
-                        }`}
-                        onClick={() => setActiveTab("orders")}
-                      >
-                        Orders
-                      </button>
-                    </li>
-                    <li className="nav-item">
-                      <button
-                        className={`nav-link ${
-                          activeTab === "edit" ? "active" : ""
-                        }`}
-                        onClick={() => setActiveTab("edit")}
-                      >
-                        Profile
-                      </button>
-                    </li>
-                  </ul>
+            <input
+              type="radio"
+              name="profile-tabs"
+              role="tab"
+              className="tab text-lg font-medium"
+              aria-label="Orders"
+              checked={activeTab === "orders"}
+              onChange={() => setActiveTab("orders")}
+            />
+            <div
+              role="tabpanel"
+              className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+            >
+              {loading ? <Loading /> : <OrdersTab orders={orders} />}
+            </div>
 
-                  <div className="tab-content p-3">
-                    {loading ? (
-                      <div> Loading... </div>
-                    ) : (
-                      <div>
-                        {activeTab === "addresses" && (
-                          <AddressesTab
-                            addresses={addresses}
-                            onUpdate={fetchAddresses}
-                          />
-                        )}
-                        {activeTab === "orders" && (
-                          <OrdersTab orders={orders} />
-                        )}
-                        {activeTab === "edit" && (
-                          <ProfileTab
-                            customerData={customerData}
-                            userData={userData}
-                            onUpdateCustomer={fetchCustomerData}
-                            onUpdateUser={fetchUserData}
-                          />
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
+            <input
+              type="radio"
+              name="profile-tabs"
+              role="tab"
+              className="tab text-lg font-medium"
+              aria-label="Profile"
+              checked={activeTab === "edit"}
+              onChange={() => setActiveTab("edit")}
+            />
+            <div
+              role="tabpanel"
+              className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+            >
+              {loading ? (
+                <Loading />
+              ) : (
+                <ProfileTab
+                  customerData={customerData}
+                  userData={userData}
+                  onUpdateCustomer={fetchCustomerData}
+                  onUpdateUser={fetchUserData}
+                />
+              )}
             </div>
           </div>
         </div>
-      </div>
-
-      <footer className="footer bg-dark text-white mt-4">
-        <div className="container text-center py-3">
-          Copyright © 2025 By{" "}
-          <a href="https://github.com/flat-life" className="text-warning">
-            Flatlife
-          </a>
-        </div>
-      </footer>
+      </main>
     </div>
   );
 }
