@@ -8,12 +8,14 @@ import {
   UseFormRegister,
   FieldErrors,
   UseFormHandleSubmit,
+  UseFormGetValues,
 } from "react-hook-form";
 
 export type FormData = {
   phone_number: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
 interface RegisterFormProps {
@@ -23,6 +25,7 @@ interface RegisterFormProps {
   errors: FieldErrors<FormData>;
   isLoading: boolean;
   isValid: boolean;
+  getValues: UseFormGetValues<FormData>;
 }
 const RegisterForm = ({
   handleSubmit,
@@ -31,6 +34,7 @@ const RegisterForm = ({
   errors,
   isLoading,
   isValid,
+  getValues,
 }: RegisterFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -99,6 +103,28 @@ const RegisterForm = ({
         <p>
           {errors.password && (
             <p className="text-red-500">{errors.password.message}</p>
+          )}
+        </p>
+      </div>
+
+      {/* Confirm Password Input */}
+      <div className="flex flex-col">
+        <div className="input input-bordered flex items-center gap-2 bg-gray-200 rounded-none">
+          <MdVpnKey />
+          <input
+            type="password"
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+              validate: (value) =>
+                value === getValues("password") || "Passwords do not match",
+            })}
+            placeholder="Confirm Password"
+            className=""
+          />
+        </div>
+        <p>
+          {errors.confirmPassword && (
+            <p className="text-red-500">{errors.confirmPassword.message}</p>
           )}
         </p>
       </div>

@@ -19,6 +19,7 @@ export default function RegisterPage() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isValid },
   } = useForm<FormData>();
 
@@ -93,6 +94,7 @@ export default function RegisterPage() {
             errors={errors}
             isLoading={isLoading}
             isValid={isValid}
+            getValues={getValues}
           />
         </div>
       </div>

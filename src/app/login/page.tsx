@@ -1,19 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  RegisterOptions,
-  SubmitErrorHandler,
-  SubmitHandler,
-  useForm,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
+
 import apiClient from "@/services/apiClient";
 import authClient from "@/services/authClient";
 import LoginForm, { FormData } from "@/components/auth/LoginForm";
+import { verifyToken } from "@/lib/base";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -27,20 +21,6 @@ export default function LoginPage() {
   // { mode: "onChange" }
 
   useEffect(() => {
-    const verifyToken = async () => {
-      const token = localStorage.getItem("JWT");
-      if (!token) return;
-
-      try {
-        await authClient.post("/auth/jwt/verify/", { token });
-        alert("user loged in already");
-        router.push("/");
-      } catch (err) {
-        console.log(err);
-        localStorage.removeItem("JWT");
-      }
-    };
-
     verifyToken();
   }, [router]);
 
