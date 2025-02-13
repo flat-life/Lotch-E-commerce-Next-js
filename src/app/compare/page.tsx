@@ -1,13 +1,7 @@
-import Loading from "@/components/base/Loading";
-import apiClient from "@/services/apiClient";
-import Link from "next/link";
-import { Suspense } from "react";
-
-interface ComparisonData {
-  [key: string]: {
-    [productTitle: string]: string | number;
-  };
-}
+import ComparisonTable, {
+  fetchComparisonData,
+  getProductIdsFromSearchParams,
+} from "@/components/products/Compare";
 
 export default async function ComparePage({
   searchParams,
