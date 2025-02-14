@@ -53,11 +53,11 @@ const ProductCardTiny = ({
             <p className="text-black text-xs">EDIFICE</p>
             <p className="text-black text-sm font-semibold">{product.title}</p>
             {product.secondhand ? (
-              <div className="badge badge-neutral text-xxs">Seccend Hand</div>
-            ) : (
-              <div className="badge badge-neutral invisible text-xxs">
-                Seccend Hand
+              <div className="badge badge-neutral text-xxs rounded-none">
+                Used
               </div>
+            ) : (
+              <div className="badge badge-neutral invisible text-xxs">Used</div>
             )}
           </h2>
           <div className="card-actions justify-start">
@@ -74,7 +74,8 @@ const ProductCardTiny = ({
         {onCompare && (
           <div
             onClick={() => onCompare(String(product.id))}
-            className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black py-2 mt-4 flex justify-center items-center gap-4"
+            className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black 
+            py-2 mt-4 flex justify-center items-center gap-4 mb-5"
           >
             <p className="text-xxs font-light ">Compare</p>
             <HiOutlineMenuAlt3 className="size-4" />
