@@ -68,14 +68,14 @@ const ProductCardTiny = ({
         <AddToCartButton
           product={product}
           style={
-            "bg-black hover:bg-[#666666] mx-5 text-white flex justify-center gap-4 items-center py-2 bottom-0"
+            "bg-black hover:bg-[#666666] mx-5 text-white flex justify-center gap-4 items-center py-2 bottom-0 cursor-pointer"
           }
         />
         {onCompare && (
           <div
             onClick={() => onCompare(String(product.id))}
             className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black 
-            py-2 mt-4 flex justify-center items-center gap-4 mb-5"
+            py-2 mt-4 flex justify-center items-center gap-4 mb-5 cursor-pointer"
           >
             <p className="text-xxs font-light ">Compare</p>
             <HiOutlineMenuAlt3 className="size-4" />

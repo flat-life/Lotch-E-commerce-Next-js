@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { Collection, Feature } from "@/lib/products";
 import { useTranslation } from "react-i18next";
+import CollectionItem from "./CollectionItem";
+import FeatureFilter from "./FeatureFilter";
 
 interface SidebarFiltersProps {
   collections: Collection[];
@@ -131,63 +133,6 @@ export default function SidebarFilters({
             ))}
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function CollectionItem({ collection, isSelected, onClick }) {
-  return (
-    <li>
-      <button
-        className={`${isSelected ? "active" : ""} justify-between`}
-        onClick={() => onClick(collection.id)}
-      >
-        {collection.translations.en?.title || collection.title}
-        <span className="badge">{collection.products_count}</span>
-      </button>
-      {collection.children?.map((child) => (
-        <CollectionItem
-          key={child.id}
-          collection={child}
-          isSelected={isSelected}
-          onClick={onClick}
-        />
-      ))}
-    </li>
-  );
-}
-
-function FeatureFilter({ feature, isSelected, selectedValue, onClick }) {
-  const featureKey = feature.translations.en?.key || feature.key;
-
-  return (
-    <div className="collapse collapse-arrow border border-base-300 rounded-box">
-      <input
-        type="checkbox"
-        checked={isSelected}
-        onChange={() => onClick(feature.id)}
-      />
-      <div className="collapse-title font-medium">{featureKey}</div>
-      <div className="collapse-content">
-        <ul className="menu menu-compact">
-          {feature.values.map((value) => {
-            const valueText = value.translations.en?.value || value.value;
-            return (
-              <li key={value.id}>
-                <button
-                  className={`${
-                    value.id === selectedValue ? "active" : ""
-                  } justify-between`}
-                  onClick={() => onClick(feature.id, value.id)}
-                >
-                  {valueText}
-                  <span className="badge">{value.product_count}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
       </div>
     </div>
   );

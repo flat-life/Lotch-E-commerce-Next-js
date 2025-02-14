@@ -77,6 +77,7 @@ export interface Collection {
 
 export interface Feature {
   id: number;
+  key: string;
   translations: Record<
     string,
     {
@@ -88,6 +89,7 @@ export interface Feature {
 
 interface FeatureValueResponse {
   id: number;
+  value: string;
   translations: Record<
     string,
     {
