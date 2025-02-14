@@ -1,4 +1,16 @@
-export default function CollectionItem({ collection, isSelected, onClick }) {
+import { Collection } from "@/lib/products";
+
+interface CollectionItemProps {
+  collection: Collection;
+  isSelected: boolean;
+  onClick: (collectionId: number) => void;
+}
+
+export default function CollectionItem({
+  collection,
+  isSelected,
+  onClick,
+}: CollectionItemProps) {
   return (
     <li>
       <button
