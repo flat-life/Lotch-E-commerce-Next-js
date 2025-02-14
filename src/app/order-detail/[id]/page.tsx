@@ -11,6 +11,7 @@ import { IoCheckmarkSharp } from "react-icons/io5";
 import { OrderData } from "@/lib/order";
 import OrderItemTable from "@/components/orderDetail/OrderItemTable";
 import OrderDetailCards from "@/components/orderDetail/OrderDetailCards";
+import OrderDetailHeader from "@/components/orderDetail/OrderDetailHeader";
 
 export default function OrderDetailPage() {
   const router = useRouter();
@@ -49,17 +50,9 @@ export default function OrderDetailPage() {
 
   return (
     <div className="container mx-auto p-4 lg:p-8">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-2">Order Confirmation</h1>
-        <p className="text-lg text-success flex justify-center items-center gap-2">
-          <IoCheckmarkSharp />
-          Your order has been successfully received!
-        </p>
-      </div>
+      <OrderDetailHeader />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <OrderDetailCards orderData={orderData} />
-      </div>
+      <OrderDetailCards orderData={orderData} />
 
       <OrderItemTable orderData={orderData} />
 

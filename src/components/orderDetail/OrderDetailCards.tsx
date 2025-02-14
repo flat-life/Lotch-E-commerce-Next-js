@@ -23,7 +23,7 @@ const OrderDetailCards = ({ orderData }: OrderDetailCardsProps) => {
     }
   };
   return (
-    <>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       <div className="card bg-base-100 shadow-md rounded-none">
         <div className="card-body">
           <h2 className="card-title text-lg">Order Information</h2>
@@ -87,7 +87,7 @@ const OrderDetailCards = ({ orderData }: OrderDetailCardsProps) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
