@@ -111,67 +111,73 @@ export default function ProductList({
   };
 
   return (
-    <div className="col-xl-9 col-lg-8 col-md-7">
-      <SidebarFilters
-        collections={collections}
-        features={features}
-        onFilterChange={updateFilters}
-        appliedFilters={appliedFilters}
-      />
+    <div className="flex flex-wrap md:flex-nowrap gap-8 p-4">
+      {/* Sidebar Filters - Left Column */}
+      <div className="w-full md:w-64 shrink-0">
+        <SidebarFilters
+          collections={collections}
+          features={features}
+          onFilterChange={updateFilters}
+          appliedFilters={appliedFilters}
+        />
+      </div>
 
-      <FilterBar
-        onFilterChange={updateFilters}
-        selectedProducts={selectedProducts}
-        onCompare={handleCompare}
-        appliedFilters={appliedFilters}
-      />
+      {/* Main Content - Right Column */}
+      <div className="flex-1">
+        <FilterBar
+          onFilterChange={updateFilters}
+          selectedProducts={selectedProducts}
+          onCompare={handleCompare}
+          appliedFilters={appliedFilters}
+        />
 
-      <AppliedFilters filters={appliedFilters} onRemove={removeFilter} />
+        <AppliedFilters filters={appliedFilters} onRemove={removeFilter} />
 
-      <section className="lattest-product-area pb-40 category-list">
-        {isLoading ? (
-          <div className="text-center">
-            <div
-              className="self-center grid grid-cols-4 w-full justify-center space-y-4"
-              id="productContainer"
-            >
-              {Array.from({ length: 8 }).map((_, index) => (
-                <div key={index} className="flex w-64 flex-wrap gap-4">
-                  <div className="skeleton h-48 w-full"></div>
-                  <div className="skeleton h-4 w-28"></div>
-                  <div className="skeleton h-4 w-28"></div>
-                  <div className="skeleton h-4 w-full"></div>
-                  <div className="skeleton h-4 w-full"></div>
-                  <div className="skeleton h-4 w-28"></div>
+        <section className="mt-4">
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="card bg-base-200 h-96 skeleton rounded-none "
+                >
+                  <div className="card-body rounded-none">
+                    <div className="h-48 skeleton bg-base-300 rounded-none mb-4"></div>
+                    <div className="h-4 bg-base-300 rounded-none w-3/4"></div>
+                    <div className="h-4 bg-base-300 rounded-none w-1/2 mt-2"></div>
+                    <div className="h-4 skeleton bg-base-300 rounded-none w-full mt-2"></div>
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
-        ) : (
-          <div className="row" id=" flex gap-8">
-            {products.map((product: Product) => (
-              <ProductCardTiny
-                key={product.id}
-                product={product}
-                onCompare={(productId) =>
-                  setSelectedProducts((prev) =>
-                    prev.includes(productId)
-                      ? prev.filter((id) => id !== productId)
-                      : [...prev, productId]
-                  )
-                }
-              />
-            ))}
-          </div>
-        )}
-      </section>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.map((product: Product) => (
+                <ProductCardTiny
+                  key={product.id}
+                  product={product}
+                  onCompare={(productId) =>
+                    setSelectedProducts((prev) =>
+                      prev.includes(productId)
+                        ? prev.filter((id) => id !== productId)
+                        : [...prev, productId]
+                    )
+                  }
+                />
+              ))}
+            </div>
+          )}
+        </section>
 
-      <Pagination
-        currentPage={currentPage}
-        totalItems={totalCount}
-        itemsPerPage={9}
-        onPageChange={setCurrentPage}
-      />
+        <div className="mt-8 flex justify-center">
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalCount}
+            itemsPerPage={9}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+      </div>
     </div>
   );
 }
