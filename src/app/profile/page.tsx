@@ -17,78 +17,96 @@ export default function ProfilePage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [customerData, setCustomerData] = useState<CustomerData | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchProfileData = async () => {
-    const token = await verifyToken();
-    if (!token) {
-      router.push("login");
-    }
-    try {
-      fetchCustomerData();
-      fetchUserData();
-      fetchAddresses();
-      await fetchOrders();
+  const [addressesLoading, setAddressesLoading] = useState(true);
+  const [ordersLoading, setOrdersLoading] = useState(true);
+  const [customerLoading, setCustomerLoading] = useState(true);
+  const [userLoading, setUserLoading] = useState(true);
 
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      localStorage.removeItem("JWT");
-      router.push("/login");
-    }
+  const handleAuthError = () => {
+    localStorage.removeItem("JWT");
+    router.push("/login");
   };
-  useEffect(() => {
-    verifyToken();
-    fetchProfileData();
-  }, [router]);
 
   const fetchCustomerData = async () => {
+    setCustomerLoading(true);
     try {
       const response = await authClient.get("/customers/me/");
       setCustomerData(response.data);
     } catch (error) {
       console.error("Failed to fetch customer data:", error);
+      if (error.response?.status === 401) handleAuthError();
+    } finally {
+      setCustomerLoading(false);
     }
   };
 
   const fetchUserData = async () => {
+    setUserLoading(true);
     try {
       const response = await authClient.get("/auth/users/me/");
       setUserData(response.data);
     } catch (error) {
       console.error("Failed to fetch user data:", error);
+      if (error.response?.status === 401) handleAuthError();
+    } finally {
+      setUserLoading(false);
     }
   };
 
   const fetchAddresses = async () => {
+    setAddressesLoading(true);
     try {
       const response = await authClient.get("/addresses/");
       setAddresses(response.data);
     } catch (error) {
       console.error("Failed to fetch addresses:", error);
+      if (error.response?.status === 401) handleAuthError();
+    } finally {
+      setAddressesLoading(false);
     }
   };
 
   const fetchOrders = async () => {
+    setOrdersLoading(true);
     try {
       const response = await authClient.get("/orders/");
-      console.log(response.data);
       setOrders(response.data);
     } catch (error) {
       console.error("Failed to fetch orders:", error);
+      if (error.response?.status === 401) handleAuthError();
+    } finally {
+      setOrdersLoading(false);
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("JWT");
-    router.push("/");
-  };
+  useEffect(() => {
+    const initialize = async () => {
+      const token = await verifyToken();
+      if (!token) {
+        router.push("/login");
+        return;
+      }
+      try {
+        await Promise.all([
+          fetchCustomerData(),
+          fetchUserData(),
+          fetchAddresses(),
+          fetchOrders(),
+        ]);
+      } catch (error) {
+        console.error("Initialization error:", error);
+      }
+    };
+    initialize();
+  }, [router]);
 
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 p-4 sm:p-8">
         <div className="max-w-6xl mx-auto">
           <div role="tablist" className="tabs tabs-lifted">
+            {/* Addresses Tab */}
             <input
               type="radio"
               name="profile-tabs"
@@ -102,13 +120,20 @@ export default function ProfilePage() {
               role="tabpanel"
               className="tab-content bg-base-100 border-base-300 rounded-box p-6"
             >
-              {loading ? (
+              {addressesLoading ? (
                 <Loading />
               ) : (
-                <AddressesTab addresses={addresses} onUpdate={fetchAddresses} />
+                <AddressesTab
+                  addresses={addresses}
+                  onUpdate={() => {
+                    setAddressesLoading(true);
+                    fetchAddresses().finally(() => setAddressesLoading(false));
+                  }}
+                />
               )}
             </div>
 
+            {/* Orders Tab */}
             <input
               type="radio"
               name="profile-tabs"
@@ -122,9 +147,10 @@ export default function ProfilePage() {
               role="tabpanel"
               className="tab-content bg-base-100 border-base-300 rounded-box p-6"
             >
-              {loading ? <Loading /> : <OrdersTab orders={orders} />}
+              {ordersLoading ? <Loading /> : <OrdersTab orders={orders} />}
             </div>
 
+            {/* Profile Tab */}
             <input
               type="radio"
               name="profile-tabs"
@@ -138,14 +164,22 @@ export default function ProfilePage() {
               role="tabpanel"
               className="tab-content bg-base-100 border-base-300 rounded-box p-6"
             >
-              {loading ? (
+              {customerLoading || userLoading ? (
                 <Loading />
               ) : (
                 <ProfileTab
                   customerData={customerData}
                   userData={userData}
-                  onUpdateCustomer={fetchCustomerData}
-                  onUpdateUser={fetchUserData}
+                  onUpdateCustomer={() => {
+                    setCustomerLoading(true);
+                    fetchCustomerData().finally(() =>
+                      setCustomerLoading(false)
+                    );
+                  }}
+                  onUpdateUser={() => {
+                    setUserLoading(true);
+                    fetchUserData().finally(() => setUserLoading(false));
+                  }}
                 />
               )}
             </div>
