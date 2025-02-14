@@ -37,7 +37,7 @@ export default function AppliedFilters({
           return (
             <div
               key={key}
-              className="badge badge-lg text-white hover:bg-gray-700 gap-2 cursor-pointer bg-black flex items-center"
+              className="badge badge-lg text-white hover:bg-gray-700 gap-2 cursor-pointer bg-black flex items-center rounded-none"
               onClick={() => onRemove(key)}
             >
               <p className="text-sm">
