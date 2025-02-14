@@ -112,7 +112,6 @@ export default function ProductList({
 
   return (
     <div className="flex flex-wrap md:flex-nowrap gap-8 p-4">
-      {/* Sidebar Filters - Left Column */}
       <div className="w-full md:w-64 shrink-0">
         <SidebarFilters
           collections={collections}
@@ -122,7 +121,6 @@ export default function ProductList({
         />
       </div>
 
-      {/* Main Content - Right Column */}
       <div className="flex-1">
         <FilterBar
           onFilterChange={updateFilters}

@@ -65,7 +65,7 @@ export default function SidebarFilters({
       <div className="space-y-6">
         <div>
           <h3 className="font-bold text-lg mb-2">{t("Collections")}</h3>
-          <ul className="menu menu-compact bg-base-200 rounded-box">
+          <ul className="menu menu-compact bg-base-200 rounded-none">
             {collections.map((collection) => (
               <CollectionItem
                 key={collection.id}
@@ -92,7 +92,7 @@ export default function SidebarFilters({
                 {priceRange[1]}
               </span>
             </label>
-            <div className="range range-primary">
+            <div className="range">
               <input
                 type="range"
                 min="0"
@@ -101,7 +101,7 @@ export default function SidebarFilters({
                 onChange={(e) =>
                   handlePriceChange([Number(e.target.value), priceRange[1]])
                 }
-                className="range range-primary"
+                className="range"
               />
               <input
                 type="range"
@@ -111,7 +111,7 @@ export default function SidebarFilters({
                 onChange={(e) =>
                   handlePriceChange([priceRange[0], Number(e.target.value)])
                 }
-                className="range range-primary"
+                className="range"
               />
             </div>
           </div>

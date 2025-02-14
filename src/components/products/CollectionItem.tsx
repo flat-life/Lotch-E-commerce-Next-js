@@ -14,7 +14,9 @@ export default function CollectionItem({
   return (
     <li>
       <button
-        className={`${isSelected ? "active" : ""} justify-between`}
+        className={`${
+          isSelected ? "active rounded-none " : ""
+        } justify-between`}
         onClick={() => onClick(collection.id)}
       >
         {collection.translations.en?.title || collection.title}

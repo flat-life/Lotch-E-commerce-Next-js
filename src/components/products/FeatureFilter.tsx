@@ -16,7 +16,7 @@ export default function FeatureFilter({
   const featureKey = feature.key;
 
   return (
-    <div className="collapse collapse-arrow border border-base-300 rounded-box">
+    <div className="collapse collapse-arrow border border-base-300 rounded-none">
       <input
         type="checkbox"
         checked={isSelected}
@@ -30,13 +30,15 @@ export default function FeatureFilter({
             return (
               <li key={value.id}>
                 <button
-                  className={`${
+                  className={` rounded-none ${
                     value.id === selectedValue ? "active" : ""
                   } justify-between`}
                   onClick={() => onClick(feature.id, value.id)}
                 >
                   {valueText}
-                  <span className="badge">{value.product_count}</span>
+                  <span className="badge rounded-full">
+                    {value.product_count}
+                  </span>
                 </button>
               </li>
             );
