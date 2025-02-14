@@ -5,6 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import authClient from "@/services/authClient";
 import Link from "next/link";
 import { verifyToken } from "@/lib/base";
+import Loading from "@/components/base/Loading";
+import { FaCheck } from "react-icons/fa";
+import { IoCheckmarkSharp } from "react-icons/io5";
 
 interface OrderItem {
   product: {
@@ -52,28 +55,29 @@ export default function OrderDetailPage() {
     }
   };
   useEffect(() => {
-    verifyToken();
+    fetchOrderData();
   }, [id, router]);
 
-  const getOrderStatusLabel = (status: string) => {
+  const getOrderStatusBadge = (status: string) => {
+    const baseClasses = "badge badge-sm";
     switch (status) {
       case "N":
-        return "Not Paid";
+        return <div className={`${baseClasses} badge-error`}>Not Paid</div>;
       case "P":
-        return "Pending";
+        return <div className={`${baseClasses} badge-warning`}>Pending</div>;
       case "S":
-        return "Shipping";
+        return <div className={`${baseClasses} badge-info`}>Shipping</div>;
       case "D":
-        return "Delivered";
+        return <div className={`${baseClasses} badge-success`}>Delivered</div>;
       case "F":
-        return "Failed";
+        return <div className={`${baseClasses} badge-error`}>Failed</div>;
       default:
-        return "Unknown";
+        return <div className={`${baseClasses} badge-neutral`}>Unknown</div>;
     }
   };
 
   if (loading) {
-    return <div className="container text-center py-5">Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
@@ -87,140 +91,130 @@ export default function OrderDetailPage() {
   }
 
   return (
-    <section className="banner-area organic-breadcrumb">
-      <div className="container">
-        <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-          <div className="col-first">
-            <h1 className="text-danger">Order Detail</h1>
-            <nav className="d-flex align-items-center">
-              <Link className="text-danger" href="/">
-                Home<span className="lnr lnr-arrow-right"></span>
-              </Link>
-              <span className="text-danger">Order Detail</span>
-            </nav>
+    <div className="container mx-auto p-4 lg:p-8">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold mb-2">Order Confirmation</h1>
+        <p className="text-lg text-success flex justify-center items-center gap-2">
+          <IoCheckmarkSharp />
+          Your order has been successfully received!
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="card bg-base-100 shadow-md rounded-none">
+          <div className="card-body">
+            <h2 className="card-title text-lg">Order Information</h2>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Order Number:</span>
+                <span className="font-semibold">#{orderData.id}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Date:</span>
+                <span>
+                  {new Date(orderData.updated_at).toLocaleDateString()}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Total:</span>
+                <span className="font-semibold">
+                  ${orderData.total_price.toFixed(2)}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Status:</span>
+                {getOrderStatusBadge(orderData.order_status)}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Customer Information Card */}
+        <div className="card bg-base-100 shadow-md rounded-none">
+          <div className="card-body">
+            <h2 className="card-title text-lg">Customer Details</h2>
+            <div className="space-y-2">
+              <p>
+                <span className="font-medium">
+                  {orderData.first_name} {orderData.last_name}
+                </span>
+              </p>
+              <p>
+                <a
+                  href={`tel:${orderData.phone_number}`}
+                  className="link link-hover"
+                >
+                  {orderData.phone_number}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={`mailto:${orderData.email}`}
+                  className="link link-hover"
+                >
+                  {orderData.email}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Shipping Address Card */}
+        <div className="card bg-base-100 shadow-md rounded-none">
+          <div className="card-body">
+            <h2 className="card-title text-lg">Shipping Address</h2>
+            <div className="space-y-2">
+              <p>{orderData.province}</p>
+              <p>{orderData.city}</p>
+              <p>{orderData.path}</p>
+              <p>Zip Code: {orderData.zip_code}</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <section className="order_details section_gap">
-        <div className="container">
-          <h3 className="title_confirmation">Your order has been received.</h3>
-          <div className="row order_d_inner">
-            <div className="col-lg-4">
-              <div className="details_item">
-                <h4>Order Info</h4>
-                <ul className="list">
-                  <li>
-                    <span>Order number</span>
-                    <h6>{orderData.id}</h6>
-                  </li>
-                  <li>
-                    <span>Date</span>
-                    <h6>
-                      {new Date(orderData.updated_at).toLocaleDateString()}
-                    </h6>
-                  </li>
-                  <li>
-                    <span>Total</span>
-                    <h6>${orderData.total_price.toFixed(2)}</h6>
-                  </li>
-                  <li>
-                    <span>Payment Status</span>
-                    <h6>{getOrderStatusLabel(orderData.order_status)}</h6>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-4">
-              <div className="details_item">
-                <h4>Customer Information</h4>
-                <ul className="list">
-                  <li>
-                    <span>First Name</span>
-                    <h6>{orderData.first_name}</h6>
-                  </li>
-                  <li>
-                    <span>Last Name</span>
-                    <h6>{orderData.last_name}</h6>
-                  </li>
-                  <li>
-                    <span>Phone Number</span>
-                    <h6>{orderData.phone_number}</h6>
-                  </li>
-                  <li>
-                    <span>Email</span>
-                    <h6>{orderData.email}</h6>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-4">
-              <div className="details_item">
-                <h4>Shipping Address</h4>
-                <ul className="list">
-                  <li>
-                    <span>Province</span>
-                    <h6>{orderData.province}</h6>
-                  </li>
-                  <li>
-                    <span>City</span>
-                    <h6>{orderData.city}</h6>
-                  </li>
-                  <li>
-                    <span>Path</span>
-                    <h6>{orderData.path}</h6>
-                  </li>
-                  <li>
-                    <span>Zip Code</span>
-                    <h6>{orderData.zip_code}</h6>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="order_details_table">
-            <h2>Order Details</h2>
-            <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
+      {/* Order Items Table */}
+      <div className="card bg-base-100 shadow-md rounded-none">
+        <div className="card-body">
+          <h2 className="card-title text-lg mb-4">Order Items</h2>
+          <div className="overflow-x-auto">
+            <table className="table table-zebra">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th className="text-center">Quantity</th>
+                  <th className="text-right">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orderData.orders.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.product.translations.en?.title}</td>
+                    <td className="text-center">x{item.quantity}</td>
+                    <td className="text-right">${item.price.toFixed(2)}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {orderData.orders.map((item, index) => (
-                    <tr key={index}>
-                      <td>
-                        <p>{item.product.translations.en?.title}</p>
-                      </td>
-                      <td>
-                        <h5>x {item.quantity}</h5>
-                      </td>
-                      <td>
-                        <p>${item.price.toFixed(2)}</p>
-                      </td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <td>
-                      <h4>Total</h4>
-                    </td>
-                    <td></td>
-                    <td>
-                      <p>${orderData.total_price.toFixed(2)}</p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                ))}
+
+                <tr>
+                  <td colSpan={2} className="text-left">
+                    Total
+                  </td>
+
+                  <td className="text-right">
+                    ${orderData.total_price.toFixed(2)}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
-    </section>
+      </div>
+
+      <div className="mt-6 text-center">
+        <Link href="/profile" className="btn rounded-none bg-black text-white">
+          Back to Orders
+        </Link>
+      </div>
+    </div>
   );
 }
