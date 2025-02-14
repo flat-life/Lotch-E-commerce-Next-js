@@ -1,5 +1,5 @@
 import authClient from "@/services/authClient";
-import router from "next/router";
+import router from "next/navigation";
 
 export function getCSRFToken(): string {
   const cookieValue = document.cookie

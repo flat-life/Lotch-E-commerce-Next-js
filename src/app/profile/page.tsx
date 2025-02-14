@@ -7,7 +7,6 @@ import { ProfileTab } from "@/components/profile/ProfileTab";
 import { AddressesTab } from "@/components/profile/AddressesTab";
 import { OrdersTab } from "@/components/profile/OrdersTab";
 import { Address, Order, UserData, CustomerData } from "@/lib/profile";
-import Link from "next/link";
 import Loading from "@/components/base/Loading";
 import { verifyToken } from "@/lib/base";
 
@@ -18,12 +17,14 @@ export default function ProfilePage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [customerData, setCustomerData] = useState<CustomerData | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchProfileData = async () => {
     const token = await verifyToken();
+    if (!token) {
+      router.push("login");
+    }
     try {
-      await authClient.post("/auth/jwt/verify/", { token });
       fetchCustomerData();
       fetchUserData();
       fetchAddresses();
@@ -80,7 +81,7 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     localStorage.removeItem("JWT");
-    router.push("/login");
+    router.push("/");
   };
 
   return (
