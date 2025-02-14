@@ -6,8 +6,6 @@ import authClient from "@/services/authClient";
 import Link from "next/link";
 import { verifyToken } from "@/lib/base";
 import Loading from "@/components/base/Loading";
-import { FaCheck } from "react-icons/fa";
-import { IoCheckmarkSharp } from "react-icons/io5";
 import { OrderData } from "@/lib/order";
 import OrderItemTable from "@/components/orderDetail/OrderItemTable";
 import OrderDetailCards from "@/components/orderDetail/OrderDetailCards";

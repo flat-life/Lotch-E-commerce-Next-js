@@ -113,7 +113,7 @@ export const AddressesTab = ({
               <input
                 type="checkbox"
                 {...register("default")}
-                className="checkbox"
+                className="checkbox rounded-none [--chkbg:theme(colors.black)]"
               />
               <span className="label-text mx-5 font-bold">Default</span>
             </label>
