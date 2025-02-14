@@ -8,6 +8,7 @@ import {
 } from "react-icons/tb";
 import { addToCart } from "@/lib/cart";
 import AddToCartButton from "../cart/AddToCartButton";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 const ProductCardTiny = ({
   product,
@@ -73,10 +74,10 @@ const ProductCardTiny = ({
         {onCompare && (
           <div
             onClick={() => onCompare(String(product.id))}
-            className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black py-2 mt-4"
+            className="bg-white border-[#666666] border hover:border-black hover:border mx-5 text-black py-2 mt-4 flex justify-center items-center gap-4"
           >
             <p className="text-xxs font-light ">Compare</p>
-            <TbRefreshAlert />
+            <HiOutlineMenuAlt3 className="size-4" />
           </div>
         )}
       </div>
