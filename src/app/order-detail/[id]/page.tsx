@@ -8,34 +8,7 @@ import { verifyToken } from "@/lib/base";
 import Loading from "@/components/base/Loading";
 import { FaCheck } from "react-icons/fa";
 import { IoCheckmarkSharp } from "react-icons/io5";
-
-interface OrderItem {
-  product: {
-    translations: {
-      [key: string]: {
-        title: string;
-      };
-    };
-  };
-  quantity: number;
-  price: number;
-}
-
-interface OrderData {
-  id: number;
-  updated_at: string;
-  total_price: number;
-  order_status: string;
-  first_name: string;
-  last_name: string;
-  phone_number: string;
-  email: string;
-  province: string;
-  city: string;
-  path: string;
-  zip_code: string;
-  orders: OrderItem[];
-}
+import { OrderData } from "@/lib/order";
 
 export default function OrderDetailPage() {
   const router = useRouter();
@@ -189,7 +162,7 @@ export default function OrderDetailPage() {
               <tbody>
                 {orderData.orders.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.product.translations.en?.title}</td>
+                    <td>{item.product.title}</td>
                     <td className="text-center">x{item.quantity}</td>
                     <td className="text-right">${item.price.toFixed(2)}</td>
                   </tr>
