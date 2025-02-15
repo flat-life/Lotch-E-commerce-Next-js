@@ -27,7 +27,6 @@ export const ProductDetails = ({
   const pathname = usePathname();
   const router = useRouter();
   const currentProductId = product.id;
-  const suggestions = useProductSuggestions(currentProductId);
 
   useEffect(() => {
     trackProductView(product.id);

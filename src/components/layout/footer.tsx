@@ -6,7 +6,7 @@ const Footer = ({ siteSettings }: { siteSettings: any }) => {
     <footer className="footer footer-center bg-[#F7F8FA] text-primary-content pt-10">
       <aside className="px-10">
         <Image
-          src="edifice.svg"
+          src="/edifice.svg"
           alt="edifice"
           width="190"
           height="30"

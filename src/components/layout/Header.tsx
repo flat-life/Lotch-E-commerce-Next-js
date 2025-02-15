@@ -104,18 +104,18 @@ const Header = () => {
               </ul>
             </div>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 ml-5">
             <Link href="/">
               <div className="text-gray-900 font-lighter flex items-center gap-4">
                 <Image
-                  src="edifice.svg"
+                  src="/edifice.svg"
                   alt="edifice"
                   width="100"
                   height="14"
                   className="h-[14px]"
                 />
                 |
-                <img src="casio-logo.svg" className="w-10" />
+                <img src="/casio-logo.svg" className="w-10" />
               </div>
             </Link>
           </div>

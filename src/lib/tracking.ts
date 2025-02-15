@@ -27,7 +27,7 @@ interface ProductAnalyticsDB extends DBSchema {
 
 const DB_NAME = "ProductFlow";
 const DB_VERSION = 2; // Incremented version to force schema update
-const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+const SESSION_TIMEOUT = 3000 * 60 * 1000; // 3000 minutes
 
 const initDB = async (): Promise<IDBPDatabase<ProductAnalyticsDB>> => {
   return openDB<ProductAnalyticsDB>(DB_NAME, DB_VERSION, {
