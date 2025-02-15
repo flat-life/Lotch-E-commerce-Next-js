@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import MainLayout from "@/components/layout/MainLayout";
 import "@fontsource/roboto";
+import "@/app/globals.css";
 
 async function getSiteSettings() {
   const res = await fetch(`http://localhost:8002/api-v1/site-settings/`);
@@ -28,7 +29,7 @@ export default async function RootLayout({
         <meta name="author" content="FLATLIFE" />
       </head>
 
-      <body className="font-roboto w-full">
+      <body className="font-roboto w-screen">
         <MainLayout siteSettings={siteSettings[0]}>{children}</MainLayout>
       </body>
     </html>

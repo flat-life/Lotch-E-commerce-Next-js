@@ -9,9 +9,8 @@ interface AddToCartButtonProps {
 
 const AddToCartButton = ({ product, style }: AddToCartButtonProps) => {
   return (
-    <div className={style}>
+    <div className={style} onClick={() => addToCart(product.id)}>
       <button
-        onClick={() => addToCart(product.id)}
         disabled={product.inventory === 0}
         className=" flex justify-center gap-4 items-center"
       >
