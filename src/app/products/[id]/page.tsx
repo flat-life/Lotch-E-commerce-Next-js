@@ -1,6 +1,6 @@
-import Banner from "@/components/base/Banner";
 import { ProductDetails } from "@/components/products/detail/ProductDetail";
 import apiClient from "@/services/apiClient";
+import { useProductSuggestions } from "@/hooks/useSuggestions";
 
 export default async function ProductPage({
   params,
@@ -17,7 +17,11 @@ export default async function ProductPage({
 
   return (
     <>
-      <ProductDetails product={product} initialReviews={initialReviews} />
+      <ProductDetails
+        product={product}
+        initialReviews={initialReviews}
+        useProductSuggestions={useProductSuggestions}
+      />
     </>
   );
 }

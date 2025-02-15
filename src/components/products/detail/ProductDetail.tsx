@@ -7,85 +7,31 @@ import { addToCart } from "@/lib/cart";
 import authClient from "@/services/authClient";
 import RightSection from "./RightSection";
 import LeftSection from "./LeftSection";
-import { initDB, trackProductExit, trackProductView } from "@/lib/tracking";
+import { trackProductView } from "@/lib/tracking";
 import { usePathname, useRouter } from "next/navigation";
+
+import ProductCardTiny from "../ProductCardTiny";
+import ProductSuggestions from "./ProductSuggestions";
 
 interface ProductDetailsProps {
   product: Product;
   initialReviews: ProductReview[];
+  useProductSuggestions: (productId: number) => Product[];
 }
 
 export const ProductDetails = ({
   product,
   initialReviews,
+  useProductSuggestions,
 }: ProductDetailsProps) => {
   const pathname = usePathname();
+  const router = useRouter();
   const currentProductId = product.id;
+  const suggestions = useProductSuggestions(currentProductId);
 
   useEffect(() => {
-    let navigationType: "self" | "external" = "external";
-    let nextProductId: number | null = null;
-
-    // Track initial view
-    trackProductView(currentProductId);
-
-    const originalPushState = window.history.pushState;
-    const originalReplaceState = window.history.replaceState;
-
-    // Patch history methods
-    window.history.pushState = function (...args) {
-      navigationType = "self";
-      originalPushState.apply(window.history, args);
-    };
-
-    window.history.replaceState = function (...args) {
-      navigationType = "self";
-      originalReplaceState.apply(window.history, args);
-    };
-
-    const handlePopState = () => {
-      navigationType = "external";
-    };
-
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      // Restore original methods
-      window.history.pushState = originalPushState;
-      window.history.replaceState = originalReplaceState;
-      window.removeEventListener("popstate", handlePopState);
-
-      // Track exit
-      trackProductExit();
-
-      // Get next product ID
-      const nextPath = window.location.pathname;
-      if (nextPath.startsWith("/products/")) {
-        nextProductId = Number(nextPath.split("/")[2]);
-      }
-
-      if (nextProductId && navigationType === "self") {
-        updateProductRelationships(currentProductId, nextProductId);
-      }
-    };
-  }, [currentProductId]);
-
-  const updateProductRelationships = async (
-    sourceId: number,
-    targetId: number
-  ) => {
-    const db = await initDB();
-    const tx = db.transaction("productRelationships", "readwrite");
-    const store = tx.objectStore("productRelationships");
-
-    const relationship = await store.get([sourceId, targetId]);
-
-    await store.put({
-      sourceProductId: sourceId,
-      targetProductId: targetId,
-      weight: relationship ? relationship.weight + 1 : 1,
-    });
-  };
+    trackProductView(product.id);
+  }, [product.id]);
 
   console.log({ initialReviews });
   const [quantity, setQuantity] = useState(1);
@@ -136,6 +82,12 @@ export const ProductDetails = ({
           setQuantity={setQuantity}
           handleAddToCart={handleAddToCart}
         />
+      </div>
+      <div className="mt-8 p-6">
+        <h3 className="text-2xl font-bold mb-4">Frequently Viewed Together</h3>
+        <div className="flex gap-4 overflow-x-auto pb-4">
+          <ProductSuggestions productId={product.id} />
+        </div>
       </div>
     </>
   );
