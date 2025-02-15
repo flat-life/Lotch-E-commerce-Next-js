@@ -9,6 +9,7 @@ import { OrdersTab } from "@/components/profile/OrdersTab";
 import { Address, Order, UserData, CustomerData } from "@/lib/profile";
 import Loading from "@/components/base/Loading";
 import { verifyToken } from "@/lib/base";
+import { AxiosError } from "axios";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -33,7 +34,8 @@ export default function ProfilePage() {
     try {
       const response = await authClient.get("/customers/me/");
       setCustomerData(response.data);
-    } catch (error) {
+    } catch (err) {
+      const error = err as AxiosError;
       console.error("Failed to fetch customer data:", error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
@@ -46,7 +48,8 @@ export default function ProfilePage() {
     try {
       const response = await authClient.get("/auth/users/me/");
       setUserData(response.data);
-    } catch (error) {
+    } catch (err) {
+      const error = err as AxiosError;
       console.error("Failed to fetch user data:", error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
@@ -59,7 +62,8 @@ export default function ProfilePage() {
     try {
       const response = await authClient.get("/addresses/");
       setAddresses(response.data);
-    } catch (error) {
+    } catch (err) {
+      const error = err as AxiosError;
       console.error("Failed to fetch addresses:", error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
@@ -72,7 +76,8 @@ export default function ProfilePage() {
     try {
       const response = await authClient.get("/orders/");
       setOrders(response.data);
-    } catch (error) {
+    } catch (err) {
+      const error = err as AxiosError;
       console.error("Failed to fetch orders:", error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
@@ -106,7 +111,6 @@ export default function ProfilePage() {
       <main className="flex-1 p-4 sm:p-8">
         <div className="max-w-6xl mx-auto">
           <div role="tablist" className="tabs tabs-lifted">
-            {/* Addresses Tab */}
             <input
               type="radio"
               name="profile-tabs"
@@ -133,7 +137,6 @@ export default function ProfilePage() {
               )}
             </div>
 
-            {/* Orders Tab */}
             <input
               type="radio"
               name="profile-tabs"
@@ -150,7 +153,6 @@ export default function ProfilePage() {
               {ordersLoading ? <Loading /> : <OrdersTab orders={orders} />}
             </div>
 
-            {/* Profile Tab */}
             <input
               type="radio"
               name="profile-tabs"
