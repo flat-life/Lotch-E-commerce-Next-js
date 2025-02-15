@@ -1,12 +1,14 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Product, ProductReview } from "@/lib/products";
 
 import { addToCart } from "@/lib/cart";
 import authClient from "@/services/authClient";
 import RightSection from "./RightSection";
 import LeftSection from "./LeftSection";
+import { initDB, trackProductExit, trackProductView } from "@/lib/tracking";
+import { usePathname, useRouter } from "next/navigation";
 
 interface ProductDetailsProps {
   product: Product;
@@ -17,6 +19,74 @@ export const ProductDetails = ({
   product,
   initialReviews,
 }: ProductDetailsProps) => {
+  const pathname = usePathname();
+  const currentProductId = product.id;
+
+  useEffect(() => {
+    let navigationType: "self" | "external" = "external";
+    let nextProductId: number | null = null;
+
+    // Track initial view
+    trackProductView(currentProductId);
+
+    const originalPushState = window.history.pushState;
+    const originalReplaceState = window.history.replaceState;
+
+    // Patch history methods
+    window.history.pushState = function (...args) {
+      navigationType = "self";
+      originalPushState.apply(window.history, args);
+    };
+
+    window.history.replaceState = function (...args) {
+      navigationType = "self";
+      originalReplaceState.apply(window.history, args);
+    };
+
+    const handlePopState = () => {
+      navigationType = "external";
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      // Restore original methods
+      window.history.pushState = originalPushState;
+      window.history.replaceState = originalReplaceState;
+      window.removeEventListener("popstate", handlePopState);
+
+      // Track exit
+      trackProductExit();
+
+      // Get next product ID
+      const nextPath = window.location.pathname;
+      if (nextPath.startsWith("/products/")) {
+        nextProductId = Number(nextPath.split("/")[2]);
+      }
+
+      if (nextProductId && navigationType === "self") {
+        updateProductRelationships(currentProductId, nextProductId);
+      }
+    };
+  }, [currentProductId]);
+
+  const updateProductRelationships = async (
+    sourceId: number,
+    targetId: number
+  ) => {
+    const db = await initDB();
+    const tx = db.transaction("productRelationships", "readwrite");
+    const store = tx.objectStore("productRelationships");
+
+    const relationship = await store.get([sourceId, targetId]);
+
+    await store.put({
+      sourceProductId: sourceId,
+      targetProductId: targetId,
+      weight: relationship ? relationship.weight + 1 : 1,
+    });
+  };
+
   console.log({ initialReviews });
   const [quantity, setQuantity] = useState(1);
   const [parentReviewId, setParentReviewId] = useState<number | null>(null);
