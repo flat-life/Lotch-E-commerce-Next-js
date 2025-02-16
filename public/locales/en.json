@@ -2,5 +2,23 @@
   "Index": {
     "title": "Welcome to My App",
     "description": "Internationalization example"
+  },
+
+  "Header": {
+    "information": "Information",
+    "corporate": "Corporate",
+    "corporateTop": "Corporate TOP",
+    "aboutCasio": "About CASIO",
+    "news": "News",
+    "investorRelations": "Investor Relations",
+    "sustainability": "Sustainability",
+    "support": "Support",
+    "service": "Service",
+    "souvenirsAndPremiumProducts": "Souvenirs and Premium Products",
+    "apps": "Apps",
+    "watches": "Watches",
+    "blogs": "Blogs",
+    "aboutMe": "About me",
+    "searchPlaceholder": "Search Here"
   }
 }

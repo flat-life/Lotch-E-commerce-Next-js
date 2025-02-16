@@ -2,5 +2,22 @@
   "Index": {
     "title": "به اپلیکیشن من خوش آمدید",
     "description": "نمونه بین المللی سازی"
+  },
+  "Header": {
+    "information": "اطلاعات",
+    "corporate": "شرکتی",
+    "corporateTop": "بالای شرکت",
+    "aboutCasio": "درباره کاسیو",
+    "news": "اخبار",
+    "investorRelations": "روابط سهامداران",
+    "sustainability": "پایداری",
+    "support": "پشتیبانی",
+    "service": "سرویس",
+    "souvenirsAndPremiumProducts": "سوئنیرها و محصولات اولین",
+    "apps": "برنامه‌ها",
+    "watches": "ساعت‌ها",
+    "blogs": "بلاگ‌ها",
+    "aboutMe": "درباره من",
+    "searchPlaceholder": "جستجو کنید"
   }
 }
