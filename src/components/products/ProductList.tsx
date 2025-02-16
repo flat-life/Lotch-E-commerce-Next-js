@@ -171,7 +171,7 @@ export default function ProductList({
           <Pagination
             currentPage={currentPage}
             totalItems={totalCount}
-            itemsPerPage={9}
+            itemsPerPage={1}
             onPageChange={setCurrentPage}
           />
         </div>

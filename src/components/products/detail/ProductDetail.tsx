@@ -1,22 +1,37 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Product, ProductReview } from "@/lib/products";
 
 import { addToCart } from "@/lib/cart";
 import authClient from "@/services/authClient";
 import RightSection from "./RightSection";
 import LeftSection from "./LeftSection";
+import { trackProductView } from "@/lib/tracking";
+import { usePathname, useRouter } from "next/navigation";
+
+import ProductCardTiny from "../ProductCardTiny";
+import ProductSuggestions from "./ProductSuggestions";
 
 interface ProductDetailsProps {
   product: Product;
   initialReviews: ProductReview[];
+  useProductSuggestions: (productId: number) => Product[];
 }
 
 export const ProductDetails = ({
   product,
   initialReviews,
+  useProductSuggestions,
 }: ProductDetailsProps) => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const currentProductId = product.id;
+
+  useEffect(() => {
+    trackProductView(product.id);
+  }, [product.id]);
+
   console.log({ initialReviews });
   const [quantity, setQuantity] = useState(1);
   const [parentReviewId, setParentReviewId] = useState<number | null>(null);
@@ -66,6 +81,12 @@ export const ProductDetails = ({
           setQuantity={setQuantity}
           handleAddToCart={handleAddToCart}
         />
+      </div>
+      <div className="mt-8 p-6">
+        <h3 className="text-2xl font-bold mb-4">Frequently Viewed Together</h3>
+        <div className="flex gap-4 overflow-x-auto pb-4">
+          <ProductSuggestions productId={product.id} />
+        </div>
       </div>
     </>
   );

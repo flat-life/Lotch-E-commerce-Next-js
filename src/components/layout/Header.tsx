@@ -1,4 +1,3 @@
-import { changeLanguage } from "i18next";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import router from "next/router";
@@ -8,6 +7,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
 import { TbShoppingCart } from "react-icons/tb";
 import Image from "next/image";
+import LanguageSwitcher from "../base/LanguageSwitcher";
 
 const Header = () => {
   const searchParams = useSearchParams();
@@ -81,7 +81,7 @@ const Header = () => {
           </ul>
         </div>
       </div>
-
+      <LanguageSwitcher />
       <div className="bg-white flex items-center pb-4 sticky top-0 w-full">
         <div className="navbar   bg-base-100 w-full sticky">
           <div className="dropdown lg:hidden  flex items-center">
@@ -104,18 +104,18 @@ const Header = () => {
               </ul>
             </div>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 ml-5">
             <Link href="/">
               <div className="text-gray-900 font-lighter flex items-center gap-4">
                 <Image
-                  src="edifice.svg"
+                  src="/edifice.svg"
                   alt="edifice"
                   width="100"
                   height="14"
                   className="h-[14px]"
                 />
                 |
-                <img src="casio-logo.svg" className="w-10" />
+                <img src="/casio-logo.svg" className="w-10" />
               </div>
             </Link>
           </div>
@@ -148,18 +148,6 @@ const Header = () => {
                   About me
                 </Link>
               </li>
-              <form className="m-4" id="language-form">
-                <input
-                  type="button"
-                  onClick={() => changeLanguage("fa")}
-                  value="fa"
-                />
-                <input
-                  type="button"
-                  onClick={() => changeLanguage("en")}
-                  value="en"
-                />
-              </form>
             </ul>
           </div>
 
