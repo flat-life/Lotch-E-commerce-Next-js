@@ -1,30 +1,32 @@
+"use client";
+
 import apiClient from "@/services/apiClient";
-import { useTranslation } from "next-i18next";
+import { usePathname, useRouter } from "next/navigation";
+import { useTransition } from "react";
 
-const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
+export default function LanguageSwitcher() {
+  const [isPending, startTransition] = useTransition();
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const changeLanguage = async (lng: string) => {
-    try {
-      await i18n.changeLanguage(lng);
+  const changeLanguage = (newLocale: string) => {
+    startTransition(async () => {
+      await apiClient.post("/set_language/", { language_code: newLocale });
 
-      await apiClient.post("/set_language/", {
-        language_code: lng,
-      });
-
-      document.documentElement.dir = lng === "fa" ? "rtl" : "ltr";
-      document.documentElement.lang = lng;
-    } catch (error) {
-      console.error("Language change failed:", error);
-    }
+      const segments = pathname.split("/");
+      segments[1] = newLocale;
+      router.push(segments.join("/"));
+    });
   };
 
   return (
     <div>
-      <button onClick={() => changeLanguage("en")}>English</button>
-      <button onClick={() => changeLanguage("fa")}>فارسی</button>
+      <button onClick={() => changeLanguage("en")} disabled={isPending}>
+        English
+      </button>
+      <button onClick={() => changeLanguage("fa")} disabled={isPending}>
+        فارسی
+      </button>
     </div>
   );
-};
-
-export default LanguageSwitcher;
+}

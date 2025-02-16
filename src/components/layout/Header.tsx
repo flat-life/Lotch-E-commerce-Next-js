@@ -1,4 +1,3 @@
-import { changeLanguage } from "i18next";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import router from "next/router";
@@ -149,18 +148,6 @@ const Header = () => {
                   About me
                 </Link>
               </li>
-              <form className="m-4" id="language-form">
-                <input
-                  type="button"
-                  onClick={() => changeLanguage("fa")}
-                  value="fa"
-                />
-                <input
-                  type="button"
-                  onClick={() => changeLanguage("en")}
-                  value="en"
-                />
-              </form>
             </ul>
           </div>
 
