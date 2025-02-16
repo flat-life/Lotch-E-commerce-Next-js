@@ -8,6 +8,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
 import { TbShoppingCart } from "react-icons/tb";
 import Image from "next/image";
+import LanguageSwitcher from "../base/LanguageSwitcher";
 
 const Header = () => {
   const searchParams = useSearchParams();
@@ -81,7 +82,7 @@ const Header = () => {
           </ul>
         </div>
       </div>
-
+      <LanguageSwitcher />
       <div className="bg-white flex items-center pb-4 sticky top-0 w-full">
         <div className="navbar   bg-base-100 w-full sticky">
           <div className="dropdown lg:hidden  flex items-center">

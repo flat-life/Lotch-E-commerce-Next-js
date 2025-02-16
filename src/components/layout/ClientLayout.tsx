@@ -15,24 +15,17 @@ import Footer from "./footer";
 
 export default function ClientLayout({
   siteSettings,
-  language,
-  setLanguage,
   children,
 }: {
   siteSettings: any;
-  language: string;
-  setLanguage: (lang: string) => void;
   children: React.ReactNode;
 }) {
   const router = useRouter();
 
-  const changeLanguage = (lang: string) => {
-    setLanguage(lang);
-  };
   const pathname = usePathname();
 
   return (
-    <div dir={language === "fa" ? "rtl" : "ltr"}>
+    <div>
       <Header />
       <main>{children}</main>
       <Footer siteSettings={siteSettings} />

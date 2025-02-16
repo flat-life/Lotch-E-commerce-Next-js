@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import MainLayout from "@/components/layout/MainLayout";
 import "@fontsource/roboto";
 import "@/app/globals.css";
+import { appWithTranslation } from "next-i18next";
 
 async function getSiteSettings() {
   const res = await fetch(`http://localhost:8002/api-v1/site-settings/`);
@@ -9,11 +10,7 @@ async function getSiteSettings() {
   return res.json();
 }
 
-export default async function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+const RootLayout = async ({ children }: { children: ReactNode }) => {
   const siteSettings = await getSiteSettings();
 
   return (
@@ -34,4 +31,6 @@ export default async function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default appWithTranslation(RootLayout);
