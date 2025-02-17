@@ -20,5 +20,19 @@
     "blogs": "Blogs",
     "aboutMe": "About me",
     "searchPlaceholder": "Search Here"
+  },
+  "Footer": {
+    "copyright": "Copyright © {{year}} - All right reserved",
+    "made": "Made",
+    "information": "Information",
+    "contactUs": "Contact Us",
+    "termsOfUse": "Terms of Use",
+    "cookiePolicy": "Cookie Policy",
+    "privacyPolicy": "Privacy Policy",
+    "companyCopyright": "© 2025 FLATLIFE DEV., LTD."
+  },
+  "Home": {
+    "LatestProducts": "Latest Products",
+    "BestSalesProducts": "Best Sales Products"
   }
 }

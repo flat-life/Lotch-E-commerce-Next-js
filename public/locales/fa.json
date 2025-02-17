@@ -19,5 +19,19 @@
     "blogs": "بلاگ‌ها",
     "aboutMe": "درباره من",
     "searchPlaceholder": "جستجو کنید"
+  },
+  "Footer": {
+    "copyright": "کپی‌رایت © {{year}} - تمام حقوق محفوظ است",
+    "made": "ساخته شده",
+    "information": "اطلاعات",
+    "contactUs": "تماس با ما",
+    "termsOfUse": "شرایط استفاده",
+    "cookiePolicy": "سیاست کوکی",
+    "privacyPolicy": "سیاست حریم خصوصی",
+    "companyCopyright": "© 2025 شرکت فلاتلایف"
+  },
+  "Home": {
+    "LatestProducts": "جدید ترین محصولات",
+    "BestSalesProducts": "پرفروش ترین محصولات"
   }
 }
