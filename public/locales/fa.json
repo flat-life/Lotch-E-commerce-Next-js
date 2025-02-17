@@ -148,5 +148,37 @@
     "fetchAddressesError": "خطا در دریافت آدرس‌ها",
     "fetchOrdersError": "خطا در دریافت سفارشات",
     "initializationError": "خطا در اولیه‌سازی"
+  },
+  "OrderDetailPage": {
+    "fetchError": "خطا در دریافت جزئیات سفارش: {{message}}",
+    "notFound": "سفارش پیدا نشد",
+    "backToOrders": "بازگشت به سفارشات"
+  },
+  "OrderDetailHeader": {
+    "orderConfirmation": "تایید سفارش",
+    "orderReceived": "سفارش شما با موفقیت دریافت شد!"
+  },
+  "OrderDetailCards": {
+    "orderInformation": "اطلاعات سفارش",
+    "orderNumber": "شماره سفارش:",
+    "date": "تاریخ:",
+    "total": "جمع کل:",
+    "status": "وضعیت:",
+    "statusNotPaid": "پرداخت نشده",
+    "statusPending": "در انتظار",
+    "statusShipping": "ارسال شده",
+    "statusDelivered": "تحویل داده شده",
+    "statusFailed": "ناموفق",
+    "statusUnknown": "ناشناس",
+    "customerDetails": "جزئیات مشتری",
+    "shippingAddress": "آدرس ارسال",
+    "zipCode": "کد پستی"
+  },
+  "OrderItemTable": {
+    "orderItems": "جزئیات سفارش",
+    "product": "محصول",
+    "quantity": "تعداد",
+    "price": "قیمت",
+    "total": "جمع کل"
   }
 }

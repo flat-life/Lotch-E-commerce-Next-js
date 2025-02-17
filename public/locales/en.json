@@ -149,5 +149,37 @@
     "fetchAddressesError": "Failed to fetch addresses",
     "fetchOrdersError": "Failed to fetch orders",
     "initializationError": "Initialization error"
+  },
+  "OrderDetailPage": {
+    "fetchError": "Failed to fetch order details: {{message}}",
+    "notFound": "Order not found",
+    "backToOrders": "Back to Orders"
+  },
+  "OrderDetailHeader": {
+    "orderConfirmation": "Order Confirmation",
+    "orderReceived": "Your order has been successfully received!"
+  },
+  "OrderDetailCards": {
+    "orderInformation": "Order Information",
+    "orderNumber": "Order Number:",
+    "date": "Date:",
+    "total": "Total:",
+    "status": "Status:",
+    "statusNotPaid": "Not Paid",
+    "statusPending": "Pending",
+    "statusShipping": "Shipping",
+    "statusDelivered": "Delivered",
+    "statusFailed": "Failed",
+    "statusUnknown": "Unknown",
+    "customerDetails": "Customer Details",
+    "shippingAddress": "Shipping Address",
+    "zipCode": "Zip Code"
+  },
+  "OrderItemTable": {
+    "orderItems": "Order Items",
+    "product": "Product",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total"
   }
 }
