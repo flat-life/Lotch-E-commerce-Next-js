@@ -9,15 +9,17 @@ import {
 } from "@/lib/chat";
 import Messages from "@/components/chat/Messages";
 import MessageForm from "@/components/chat/MessageForm";
+import { useTranslations } from "next-intl";
 
 export default function UserChat() {
+  const t = useTranslations("UserChat");
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [sender_conversation, setSender_conversation] =
     useState<ConversationParticipant | null>(null);
-
   const [isSending, setIsSending] = useState(false);
   const ws = useRef<WebSocket | null>(null);
   const router = useRouter();
@@ -28,21 +30,17 @@ export default function UserChat() {
         setIsLoading(true);
         const userRes = await authClient.get<{ id: number }>("/auth/users/me/");
         const userId = userRes.data.id;
-
         await authClient.post("/conversations/start/", {
           phone_number: "09353220545",
         });
-
         setConversationId(userId);
         await loadMessages(userId);
 
         ws.current = new WebSocket(`ws://localhost:8002/ws/chat/${userId}/`);
-
         ws.current.onmessage = (e) => {
           const newMessage: Message = JSON.parse(e.data);
           setMessages((prev) => [...prev, newMessage]);
         };
-
         ws.current.onerror = (error) => {
           console.error("WebSocket error:", error);
         };
@@ -77,10 +75,9 @@ export default function UserChat() {
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputMessage.trim() || isSending) return;
-    console.log("sendMessage");
+
     try {
-      await setIsSending(true);
-      console.log("setisseding ture");
+      setIsSending(true);
       const message = {
         headers: {
           Authorization: `JWT ${localStorage.getItem("JWT")}`,
@@ -102,15 +99,15 @@ export default function UserChat() {
   return (
     <div className="flex-col justify-center lg:px-64 md:px-40 sm:px-20 px-10 text-black h-screen">
       <aside className="my-6">
-        <h1 className="text-3xl font-bold">Chat With Support</h1>
+        <h1 className="text-3xl font-bold">{t("chatWithSupport")}</h1>
       </aside>
-
       <div className="rounded-lg overflow-hidden shadow my-10">
         <div className="">
           <div className="px-4 py-5 chat-box bg-white h-[600px] overflow-y-auto scroll-smooth">
             {sender_conversation &&
               messages.map((msg) => (
                 <Messages
+                  key={msg.id}
                   conversationId={conversationId}
                   msg={msg}
                   isAdmin={false}
@@ -118,7 +115,6 @@ export default function UserChat() {
                 />
               ))}
           </div>
-
           <MessageForm
             sendMessage={sendMessage}
             inputMessage={inputMessage}

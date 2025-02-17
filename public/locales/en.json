@@ -181,5 +181,25 @@
     "quantity": "Quantity",
     "price": "Price",
     "total": "Total"
+  },
+  "MessageForm": {
+    "placeholder": "Type a message",
+    "send": "Send",
+    "sending": "Sending..."
+  },
+  "Messages": {
+    "you": "You",
+    "admin": "Admin",
+    "delivered": "Delivered"
+  },
+  "Conversations": {
+    "noMessage": "No messages yet"
+  },
+  "UserChat": {
+    "chatWithSupport": "Chat With Support"
+  },
+  "AdminChat": {
+    "adminSupport": "Admin Support",
+    "recentConversations": "Recent Conversations"
   }
 }

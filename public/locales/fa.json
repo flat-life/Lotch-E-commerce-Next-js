@@ -180,5 +180,25 @@
     "quantity": "تعداد",
     "price": "قیمت",
     "total": "جمع کل"
+  },
+  "MessageForm": {
+    "placeholder": "یک پیام تایپ کنید",
+    "send": "ارسال",
+    "sending": "در حال ارسال..."
+  },
+  "Messages": {
+    "you": "شما",
+    "admin": "مدیر",
+    "delivered": "ارسال شد"
+  },
+  "Conversations": {
+    "noMessage": "پیغامی ندارید!"
+  },
+  "UserChat": {
+    "chatWithSupport": "چت با پشتیبانی"
+  },
+  "AdminChat": {
+    "adminSupport": "پشتیبانی مدیریت",
+    "recentConversations": "چت‌های اخیر"
   }
 }

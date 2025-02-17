@@ -1,4 +1,6 @@
+"use client";
 import { SetStateAction } from "react";
+import { useTranslations } from "next-intl";
 
 interface MessageFormProps {
   sendMessage: (e: React.FormEvent) => Promise<void>;
@@ -13,7 +15,8 @@ const MessageForm = ({
   setInputMessage,
   isSending,
 }: MessageFormProps) => {
-  console.log(isSending);
+  const t = useTranslations("MessageForm");
+
   return (
     <form onSubmit={sendMessage} className="p-10">
       <div className="flex flex-col space-y-3">
@@ -22,17 +25,18 @@ const MessageForm = ({
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           className="input ring-1 ring-black rounded-none"
-          placeholder="Type a message"
+          placeholder={t("placeholder")}
         />
         <button
           disabled={isSending || !inputMessage}
           type="submit"
           className="btn bg-black text-white rounded-none hover:bg-gray-600 ring-1 ring-black disabled:btn-disable"
         >
-          Send
+          {isSending ? t("sending") : t("send")}
         </button>
       </div>
     </form>
   );
 };
+
 export default MessageForm;
