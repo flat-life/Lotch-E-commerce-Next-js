@@ -95,5 +95,48 @@
     "brandName": "ادیفیس ساسپنشن",
     "priceIncludesTax": "شامل مالیات بر ارزش افزوده و غیر شامل هزینه ارسال",
     "description": "توضیحات"
+  },
+  "AddressesTab": {
+    "zipCode": "کد پستی",
+    "province": "استان",
+    "city": "شهر",
+    "path": "آدرس دقیق",
+    "default": "پیش‌فرض",
+    "actions": "عملیات",
+    "yes": "بله",
+    "no": "خیر",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "zipCodePlaceholder": "کد پستی",
+    "provincePlaceholder": "استان",
+    "cityPlaceholder": "شهر",
+    "pathPlaceholder": "آدرس دقیق",
+    "defaultLabel": "پیش‌فرض",
+    "updateAddress": "بروزرسانی آدرس",
+    "addAddress": "افزودن آدرس"
+  },
+  "OrdersTab": {
+    "date": "تاریخ",
+    "status": "وضعیت",
+    "total": "جمع کل",
+    "notPaid": "پرداخت نشده",
+    "pending": "در انتظار",
+    "shipping": "ارسال شده",
+    "delivered": "تحویل داده شده",
+    "failed": "ناموفق",
+    "currency": "{{amount}} تومان"
+  },
+  "ProfileTab": {
+    "personalInformation": "اطلاعات شخصی",
+    "firstNamePlaceholder": "نام",
+    "lastNamePlaceholder": "نام خانوادگی",
+    "saveChanges": "ذخیره تغییرات",
+    "accountInformation": "اطلاعات حساب کاربری",
+    "emailPlaceholder": "ایمیل",
+    "updateEmail": "به‌روزرسانی ایمیل",
+    "changePassword": "تغییر رمز عبور",
+    "currentPasswordPlaceholder": "رمز عبور فعلی",
+    "newPasswordPlaceholder": "رمز عبور جدید",
+    "changePasswordButton": "تغییر رمز عبور"
   }
 }

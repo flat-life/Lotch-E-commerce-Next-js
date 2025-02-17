@@ -1,9 +1,9 @@
 "use client";
-
 import { Address } from "@/lib/profile";
 import authClient from "@/services/authClient";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 export const AddressesTab = ({
   addresses,
@@ -12,6 +12,8 @@ export const AddressesTab = ({
   addresses: Address[];
   onUpdate: () => void;
 }) => {
+  const t = useTranslations("AddressesTab");
+
   const { register, handleSubmit, reset, setValue } = useForm<Address>();
   const [editingId, setEditingId] = useState<number | null>(null);
 
@@ -51,12 +53,12 @@ export const AddressesTab = ({
       <table className="table table-hover">
         <thead>
           <tr>
-            <th>Zip Code</th>
-            <th>Province</th>
-            <th>City</th>
-            <th>Path</th>
-            <th>Default</th>
-            <th>Actions</th>
+            <th>{t("zipCode")}</th>
+            <th>{t("province")}</th>
+            <th>{t("city")}</th>
+            <th>{t("path")}</th>
+            <th>{t("default")}</th>
+            <th>{t("actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -66,47 +68,54 @@ export const AddressesTab = ({
               <td>{address.province}</td>
               <td>{address.city}</td>
               <td>{address.path}</td>
-              <td>{address.default ? "Yes" : "No"}</td>
+              <td>{address.default ? t("yes") : t("no")}</td>
               <td className="flex gap-4">
                 <button
                   className="btn bg-black rounded-none text-white"
                   onClick={() => handleEdit(address)}
                 >
-                  Edit
+                  {t("edit")}
                 </button>
                 <button
                   className="btn bg-gray-300 rounded-none text-black"
                   onClick={() => handleDelete(address.id)}
                 >
-                  Delete
+                  {t("delete")}
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 form-control">
         <div className="flex flex-col space-y-2">
           <div className="col-md-6">
             <input
               {...register("zip_code")}
-              placeholder="Zip Code"
+              placeholder={t("zipCodePlaceholder")}
               className="input"
             />
           </div>
           <div className="">
             <input
               {...register("province")}
-              placeholder="Province"
+              placeholder={t("provincePlaceholder")}
               className="input"
             />
           </div>
           <div className="">
-            <input {...register("city")} placeholder="City" className="input" />
+            <input
+              {...register("city")}
+              placeholder={t("cityPlaceholder")}
+              className="input"
+            />
           </div>
           <div className="">
-            <input {...register("path")} placeholder="Path" className="input" />
+            <input
+              {...register("path")}
+              placeholder={t("pathPlaceholder")}
+              className="input"
+            />
           </div>
           <div className="">
             <label className="label cursor-pointer w-fit ">
@@ -115,7 +124,9 @@ export const AddressesTab = ({
                 {...register("default")}
                 className="checkbox rounded-none [--chkbg:theme(colors.black)]"
               />
-              <span className="label-text mx-5 font-bold">Default</span>
+              <span className="label-text mx-5 font-bold">
+                {t("defaultLabel")}
+              </span>
             </label>
           </div>
           <div className="mt-8">
@@ -123,7 +134,7 @@ export const AddressesTab = ({
               type="submit"
               className="btn bg-black rounded-none text-white"
             >
-              {editingId ? "Update Address" : "Add Address"}
+              {editingId ? t("updateAddress") : t("addAddress")}
             </button>
           </div>
         </div>
