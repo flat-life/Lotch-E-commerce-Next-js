@@ -229,5 +229,17 @@
   "Pagination": {
     "P": "قبل",
     "N": "بعد"
+  },
+  "login": {
+    "Login": "وارد شوید"
+  },
+  "register": {
+    "Register": "ثبت نام کنید"
+  },
+  "setPassword": {
+    "setPassword": "ورود با کد یکبار مصرف"
+  },
+  "verify": {
+    "verify": "ایمیل خود را وارد کنید"
   }
 }

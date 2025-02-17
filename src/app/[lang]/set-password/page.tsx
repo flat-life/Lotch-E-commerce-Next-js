@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import authClient from "@/services/authClient";
 import SetPasswordForm, { FormData } from "@/components/auth/SetPasswordForm";
 import { verifyToken } from "@/lib/base";
+import { useTranslations } from "next-intl";
 
 export default function SetPasswordPage() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function SetPasswordPage() {
     formState: { errors, isValid },
     watch,
   } = useForm<FormData>();
+  const t = useTranslations("setPassword");
 
   useEffect(() => {
     verifyToken();
@@ -57,7 +59,7 @@ export default function SetPasswordPage() {
 
       <div className="card bg-gray-50 w-full max-w-sm shadow-2xl">
         <div className="p-10">
-          <h3 className=" text-2xl font-bold mb-5">Log in to Enter</h3>
+          <h3 className=" text-2xl font-bold mb-5">{"setPassword"}</h3>
           {error && (
             <div className="text-light mb-4 rounded text-sm bg-red-100 p-2 text-red-600">
               {error}

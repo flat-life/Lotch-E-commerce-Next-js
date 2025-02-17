@@ -230,5 +230,17 @@
   "Pagination": {
     "P": "Previous",
     "N": "Next"
+  },
+  "login": {
+    "Login": "Login to Enter"
+  },
+  "register": {
+    "Register": "Register"
+  },
+  "setPassword": {
+    "setPassword": "Login with code"
+  },
+  "verify": {
+    "verify": "Login with Email"
   }
 }

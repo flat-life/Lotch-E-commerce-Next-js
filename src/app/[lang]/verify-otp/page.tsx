@@ -11,6 +11,7 @@ import SubmitOTPCodeForm, {
   OtpFormData,
 } from "@/components/auth/SubmitOTPCodeForm";
 import { verifyToken } from "@/lib/base";
+import { useTranslations } from "next-intl";
 
 export default function VerifyOtpPage() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function VerifyOtpPage() {
   const [emailSent, setEmailSent] = useState(false);
   const [storedEmail, setStoredEmail] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  const t = useTranslations("verify");
   const emailForm = useForm<EmailFormData>();
   const otpForm = useForm<OtpFormData>();
 
@@ -83,7 +84,7 @@ export default function VerifyOtpPage() {
 
       <div className="card bg-gray-50 w-full max-w-sm shadow-2xl">
         <div className="p-10">
-          <h3 className=" text-2xl font-bold mb-5">Login with Email</h3>
+          <h3 className=" text-2xl font-bold mb-5">{t("verify")}</h3>
           {error && (
             <div className="text-light mb-4 rounded text-sm bg-red-100 p-2 text-red-600">
               {error}
