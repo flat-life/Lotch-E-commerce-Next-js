@@ -33,5 +33,44 @@
   "Home": {
     "LatestProducts": "جدید ترین محصولات",
     "BestSalesProducts": "پرفروش ترین محصولات"
+  },
+  "AppliedFilters": {
+    "appliedFilters": "فیلترهای اعمال شده",
+    "collection": "مجموعه",
+    "feature": "ویژگی",
+    "value": "مقدار",
+    "minPrice": "کمترین قیمت",
+    "maxPrice": "بیشترین قیمت",
+    "condition": "حالت",
+    "sorting": "مرتب‌سازی",
+    "used": "کاربردی",
+    "new": "جدید"
+  },
+  "ComparisonTable": {
+    "title": "مقایسه",
+    "headerTitle": "عنوان",
+    "imageLabel": "تصویر"
+  },
+  "FilterBar": {
+    "defaultSorting": "مرتب‌سازی پیش‌فرض",
+    "priceLowToHigh": "قیمت: کم به زیاد",
+    "priceHighToLow": "قیمت: زیاد به کم",
+    "bestSales": "پرفروش‌ترین",
+    "used": "کاربردی",
+    "new": "جدید",
+    "compare": "مقایسه"
+  },
+  "ProductCardTiny": {
+    "brand": "ادیفیس",
+    "used": "دست دوم",
+    "currencyNote": "(شامل مالیات)",
+    "compare": "مقایسه"
+  },
+  "SidebarFilters": {
+    "collections": "مجموعه‌ها",
+    "priceRange": "بازه قیمت",
+    "minPrice": "کمترین: {{price}} تومان",
+    "maxPrice": "بیشترین: {{price}} تومان",
+    "features": "ویژگی‌ها"
   }
 }

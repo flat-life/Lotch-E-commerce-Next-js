@@ -7,7 +7,7 @@ export default async function ProductsPage() {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="">
         <ProductList
           initialProducts={initialProducts}
           collections={collections}

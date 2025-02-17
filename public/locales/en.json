@@ -34,5 +34,44 @@
   "Home": {
     "LatestProducts": "Latest Products",
     "BestSalesProducts": "Best Sales Products"
+  },
+  "AppliedFilters": {
+    "appliedFilters": "Applied Filters",
+    "collection": "Collection",
+    "feature": "Feature",
+    "value": "Value",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price",
+    "condition": "Condition",
+    "sorting": "Sorting",
+    "used": "Used",
+    "new": "New"
+  },
+  "ComparisonTable": {
+    "title": "Compare",
+    "headerTitle": "Title",
+    "imageLabel": "Image"
+  },
+  "FilterBar": {
+    "defaultSorting": "Default sorting",
+    "priceLowToHigh": "Price: Low to High",
+    "priceHighToLow": "Price: High to Low",
+    "bestSales": "Best Sales",
+    "used": "Used",
+    "new": "New",
+    "compare": "Compare"
+  },
+  "ProductCardTiny": {
+    "brand": "EDIFICE",
+    "used": "Used",
+    "currencyNote": "(including VAT)",
+    "compare": "Compare"
+  },
+  "SidebarFilters": {
+    "collections": "Collections",
+    "priceRange": "Price Range",
+    "minPrice": "Min: ${{price}}",
+    "maxPrice": "Max: ${{price}}",
+    "features": "Features"
   }
 }
