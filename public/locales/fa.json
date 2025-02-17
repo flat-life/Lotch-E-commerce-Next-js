@@ -72,5 +72,28 @@
     "minPrice": "کمترین: {{price}} تومان",
     "maxPrice": "بیشترین: {{price}} تومان",
     "features": "ویژگی‌ها"
+  },
+  "FeaturesImage": {
+    "waterResistant": "مقاوم به آب تا ۱۰ متر",
+    "collaboration": "مدل همکاری",
+    "lightAndStrong": "سبک و قوی",
+    "extraToughBand": "نوار بسیار محکم",
+    "sportyDesign": "طراحی ورزشی",
+    "limitedModel": "مدل محدود"
+  },
+  "ReviewForm": {
+    "submitReview": "ارسال نظر",
+    "replying": "در حال پاسخ‌گویی",
+    "titlePlaceholder": "عنوان",
+    "messagePlaceholder": "پیام",
+    "post": "ارسال"
+  },
+  "ReviewItem": {
+    "reply": "پاسخ"
+  },
+  "RightSection": {
+    "brandName": "ادیفیس ساسپنشن",
+    "priceIncludesTax": "شامل مالیات بر ارزش افزوده و غیر شامل هزینه ارسال",
+    "description": "توضیحات"
   }
 }

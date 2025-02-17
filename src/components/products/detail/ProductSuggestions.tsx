@@ -14,6 +14,7 @@ const ProductSuggestions = ({ productId }: { productId: number }) => {
 
   return (
     <div className="grid grid-cols-4 gap-4 mt-8">
+      <h3 className="text-2xl font-bold mb-4">Frequently Viewed Together</h3>
       {suggestions.map((product) => (
         <ProductCardTiny key={product.id} product={product} onCompare={null} />
       ))}

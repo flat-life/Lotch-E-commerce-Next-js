@@ -83,7 +83,6 @@ export const ProductDetails = ({
         />
       </div>
       <div className="mt-8 p-6">
-        <h3 className="text-2xl font-bold mb-4">Frequently Viewed Together</h3>
         <div className="flex gap-4 overflow-x-auto pb-4">
           <ProductSuggestions productId={product.id} />
         </div>

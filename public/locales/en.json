@@ -73,5 +73,28 @@
     "minPrice": "Min: ${{price}}",
     "maxPrice": "Max: ${{price}}",
     "features": "Features"
+  },
+  "FeaturesImage": {
+    "waterResistant": "10 bar water resistant",
+    "collaboration": "Collaboration model",
+    "lightAndStrong": "Light and strong",
+    "extraToughBand": "Extra tough band",
+    "sportyDesign": "Sporty design",
+    "limitedModel": "Limited model"
+  },
+  "ReviewForm": {
+    "submitReview": "Submit Review",
+    "replying": "Replying",
+    "titlePlaceholder": "Title",
+    "messagePlaceholder": "Message",
+    "post": "Post"
+  },
+  "ReviewItem": {
+    "reply": "Reply"
+  },
+  "RightSection": {
+    "brandName": "EDIFICE SOSPENSIONE",
+    "priceIncludesTax": "Incl. BTW en excl. verzendkosten",
+    "description": "Description"
   }
 }
