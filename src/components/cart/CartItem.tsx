@@ -1,6 +1,8 @@
+"use client";
 import { CartItem as CI } from "@/lib/cart";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { IoTrashSharp } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 interface CartItemProps {
   item: CI;
@@ -15,6 +17,8 @@ const CartItem = ({
   loading,
   handleDeleteItem,
 }: CartItemProps) => {
+  const t = useTranslations("CartItem");
+
   return (
     <div className="grid grid-cols-4">
       <div>
@@ -24,11 +28,11 @@ const CartItem = ({
         />
       </div>
       <div className="col-span-2">
-        <h1 className=" py-2 font-bold text-xl">{item.product.title}</h1>
+        <h1 className="py-2 font-bold text-xl">{item.product.title}</h1>
         <p className="text-xs font-light line-clamp-3 overflow-hidden">
           {item.product.description}
         </p>
-        <div className=" py-2">
+        <div className="py-2">
           <div className="form-control">
             <label className="label"></label>
             <div className="flex items-center gap-5">
@@ -62,7 +66,8 @@ const CartItem = ({
               <button
                 onClick={() => handleDeleteItem(item.id)}
                 disabled={loading}
-                className="text-slate-500 hover:text-black disabled:text-gray-300 "
+                className="text-slate-500 hover:text-black disabled:text-gray-300"
+                title={t("deleteItem")}
               >
                 <IoTrashSharp className="size-6" />
               </button>
@@ -71,11 +76,12 @@ const CartItem = ({
         </div>
       </div>
       <div>
-        <p className="px-4 py-2">${item.total_price.toFixed(2)}</p>
+        <p className="px-4 py-2">
+          {t("price", { amount: item.total_price.toFixed(2) })}
+        </p>
       </div>
-
-      <p className="px-4 py-2"></p>
     </div>
   );
 };
+
 export default CartItem;

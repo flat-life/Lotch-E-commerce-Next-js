@@ -201,5 +201,25 @@
   "AdminChat": {
     "adminSupport": "Admin Support",
     "recentConversations": "Recent Conversations"
+  },
+  "addToCartButton": {
+    "dddToCart": "Add to cart"
+  },
+  "CartItem": {
+    "deleteItem": "Delete Item",
+    "price": "${amount}"
+  },
+  "cartPage": {
+    "cS": "Continue Shopping",
+    "sC": "Shopping Cart"
+  },
+  "TotalSection": {
+    "total": "Total",
+    "subtotalWithTax": "Subtotal (incl. VAT):",
+    "postageCosts": "Postage costs:",
+    "orderValueWithTax": "Order value incl. VAT",
+    "couponCodePlaceholder": "Coupon code",
+    "applyDiscount": "Apply Discount",
+    "proceedToCheckout": "Proceed to Checkout"
   }
 }

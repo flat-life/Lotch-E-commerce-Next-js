@@ -200,5 +200,25 @@
   "AdminChat": {
     "adminSupport": "پشتیبانی مدیریت",
     "recentConversations": "چت‌های اخیر"
+  },
+  "addToCartButton": {
+    "dddToCart": "اضافه کردن به سبد"
+  },
+  "CartItem": {
+    "deleteItem": "حذف آیتم",
+    "price": "{{amount}} تومان"
+  },
+  "cartPage": {
+    "cS": "ادامه خرید",
+    "sC": "سبد خرید"
+  },
+  "TotalSection": {
+    "total": "جمع کل",
+    "subtotalWithTax": "مبلغ کالاها (شامل مالیات):",
+    "postageCosts": "هزینه ارسال:",
+    "orderValueWithTax": "ارزش سفارش شامل مالیات",
+    "couponCodePlaceholder": "کد تخفیف",
+    "applyDiscount": "اعمال تخفیف",
+    "proceedToCheckout": "ادامه فرآیند خرید"
   }
 }

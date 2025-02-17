@@ -19,6 +19,7 @@ import { IoTrashSharp } from "react-icons/io5";
 import TotalSection from "@/components/cart/TotalSection";
 import CartItem from "@/components/cart/CartItem";
 import Loading from "@/components/base/Loading";
+import { useTranslations } from "next-intl";
 
 export default function CartPage() {
   const router = useRouter();
@@ -132,19 +133,17 @@ export default function CartPage() {
 
   console.log(cart);
   if (!cart) return <Loading />;
-
+  const t = useTranslations("cartPage");
   return (
     <>
       <section className="container  px-5 sm:px-16 lg:px-28 py-8 mt-8 text-black flex ">
         <div className="flex-1">
           <div className="flex items-center mb-3">
             <MdOutlineChevronLeft />
-            <Link href="/products" className="mt-0.5 underline">
-              Continue Shopping
-            </Link>
+            <Link href="/products" className="mt-0.5 underline"></Link>
           </div>
 
-          <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold mb-6">{t("sC")}</h1>
 
           <div className="overflow-x-auto mt-20 md:mt-40">
             {cart.items.map((item) => (
