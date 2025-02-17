@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import authClient from "@/services/authClient";
@@ -10,15 +9,16 @@ import { Address, Order, UserData, CustomerData } from "@/lib/profile";
 import Loading from "@/components/base/Loading";
 import { verifyToken } from "@/lib/base";
 import { AxiosError } from "axios";
+import { useTranslations } from "next-intl";
 
 export default function ProfilePage() {
+  const t = useTranslations("ProfilePage");
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("addresses");
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [customerData, setCustomerData] = useState<CustomerData | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
-
   const [addressesLoading, setAddressesLoading] = useState(true);
   const [ordersLoading, setOrdersLoading] = useState(true);
   const [customerLoading, setCustomerLoading] = useState(true);
@@ -36,7 +36,7 @@ export default function ProfilePage() {
       setCustomerData(response.data);
     } catch (err) {
       const error = err as AxiosError;
-      console.error("Failed to fetch customer data:", error);
+      console.error(t("fetchCustomerError"), error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
       setCustomerLoading(false);
@@ -50,7 +50,7 @@ export default function ProfilePage() {
       setUserData(response.data);
     } catch (err) {
       const error = err as AxiosError;
-      console.error("Failed to fetch user data:", error);
+      console.error(t("fetchUserError"), error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
       setUserLoading(false);
@@ -64,7 +64,7 @@ export default function ProfilePage() {
       setAddresses(response.data);
     } catch (err) {
       const error = err as AxiosError;
-      console.error("Failed to fetch addresses:", error);
+      console.error(t("fetchAddressesError"), error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
       setAddressesLoading(false);
@@ -78,7 +78,7 @@ export default function ProfilePage() {
       setOrders(response.data);
     } catch (err) {
       const error = err as AxiosError;
-      console.error("Failed to fetch orders:", error);
+      console.error(t("fetchOrdersError"), error);
       if (error.response?.status === 401) handleAuthError();
     } finally {
       setOrdersLoading(false);
@@ -100,7 +100,7 @@ export default function ProfilePage() {
           fetchOrders(),
         ]);
       } catch (error) {
-        console.error("Initialization error:", error);
+        console.error(t("initializationError"), error);
       }
     };
     initialize();
@@ -116,7 +116,7 @@ export default function ProfilePage() {
               name="profile-tabs"
               role="tab"
               className="tab text-lg font-medium"
-              aria-label="Addresses"
+              aria-label={t("addressesLabel")}
               checked={activeTab === "addresses"}
               onChange={() => setActiveTab("addresses")}
             />
@@ -142,7 +142,7 @@ export default function ProfilePage() {
               name="profile-tabs"
               role="tab"
               className="tab text-lg font-medium"
-              aria-label="Orders"
+              aria-label={t("ordersLabel")}
               checked={activeTab === "orders"}
               onChange={() => setActiveTab("orders")}
             />
@@ -158,7 +158,7 @@ export default function ProfilePage() {
               name="profile-tabs"
               role="tab"
               className="tab text-lg font-medium"
-              aria-label="Profile"
+              aria-label={t("editLabel")}
               checked={activeTab === "edit"}
               onChange={() => setActiveTab("edit")}
             />

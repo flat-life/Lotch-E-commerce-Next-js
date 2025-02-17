@@ -138,5 +138,15 @@
     "currentPasswordPlaceholder": "رمز عبور فعلی",
     "newPasswordPlaceholder": "رمز عبور جدید",
     "changePasswordButton": "تغییر رمز عبور"
+  },
+  "ProfilePage": {
+    "addressesLabel": "آدرس‌ها",
+    "ordersLabel": "سفارشات",
+    "editLabel": "ویرایش پروفایل",
+    "fetchCustomerError": "خطا در دریافت اطلاعات مشتری",
+    "fetchUserError": "خطا در دریافت اطلاعات کاربر",
+    "fetchAddressesError": "خطا در دریافت آدرس‌ها",
+    "fetchOrdersError": "خطا در دریافت سفارشات",
+    "initializationError": "خطا در اولیه‌سازی"
   }
 }

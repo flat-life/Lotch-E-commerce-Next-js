@@ -139,5 +139,15 @@
     "currentPasswordPlaceholder": "Current Password",
     "newPasswordPlaceholder": "New Password",
     "changePasswordButton": "Change Password"
+  },
+  "ProfilePage": {
+    "addressesLabel": "Addresses",
+    "ordersLabel": "Orders",
+    "editLabel": "Edit Profile",
+    "fetchCustomerError": "Failed to fetch customer data",
+    "fetchUserError": "Failed to fetch user data",
+    "fetchAddressesError": "Failed to fetch addresses",
+    "fetchOrdersError": "Failed to fetch orders",
+    "initializationError": "Initialization error"
   }
 }
