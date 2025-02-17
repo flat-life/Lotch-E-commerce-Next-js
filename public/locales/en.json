@@ -22,7 +22,7 @@
     "searchPlaceholder": "Search Here"
   },
   "Footer": {
-    "copyright": "Copyright © {{year}} - All right reserved",
+    "copyright": "Copyright © {year} - All right reserved",
     "made": "Made",
     "information": "Information",
     "contactUs": "Contact Us",
@@ -70,8 +70,8 @@
   "SidebarFilters": {
     "collections": "Collections",
     "priceRange": "Price Range",
-    "minPrice": "Min: ${{price}}",
-    "maxPrice": "Max: ${{price}}",
+    "minPrice": "Min: ${price}",
+    "maxPrice": "Max: ${price}",
     "features": "Features"
   },
   "FeaturesImage": {
@@ -151,7 +151,7 @@
     "initializationError": "Initialization error"
   },
   "OrderDetailPage": {
-    "fetchError": "Failed to fetch order details: {{message}}",
+    "fetchError": "Failed to fetch order details: {message}",
     "notFound": "Order not found",
     "backToOrders": "Back to Orders"
   },
@@ -221,5 +221,14 @@
     "couponCodePlaceholder": "Coupon code",
     "applyDiscount": "Apply Discount",
     "proceedToCheckout": "Proceed to Checkout"
+  },
+  "BlogBanner": {
+    "altText": "Blog Banner",
+    "brandName": "EDIFICE",
+    "description": "The latest news, limited editions, new releases, and reviews from the world of men’s automotive-inspired EDIFICE watches on CASIOBLOG. Slim, stylish, equipped with sapphire crystal, and highly functional — these watches are the perfect choice for fans of a classic, conservative look."
+  },
+  "Pagination": {
+    "P": "Previous",
+    "N": "Next"
   }
 }

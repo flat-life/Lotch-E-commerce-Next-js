@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import Link from "next/link";
 import type { Blog } from "@/lib/blog";
@@ -17,7 +16,6 @@ interface BlogListProps {
 
 export default function BlogList({ blogs }: BlogListProps) {
   console.log({ blogs });
-  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 

@@ -26,7 +26,7 @@ export default function CartPage() {
   const [cart, setCart] = useState<Cart | null>(null);
   const [discountCode, setDiscountCode] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const t = useTranslations("cartPage");
   const fetchCart = async () => {
     try {
       const cartData = await getOrCreateCart();
@@ -133,7 +133,7 @@ export default function CartPage() {
 
   console.log(cart);
   if (!cart) return <Loading />;
-  const t = useTranslations("cartPage");
+
   return (
     <>
       <section className="container  px-5 sm:px-16 lg:px-28 py-8 mt-8 text-black flex ">

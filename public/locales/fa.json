@@ -21,7 +21,7 @@
     "searchPlaceholder": "جستجو کنید"
   },
   "Footer": {
-    "copyright": "کپی‌رایت © {{year}} - تمام حقوق محفوظ است",
+    "copyright": "کپی‌رایت © {year} - تمام حقوق محفوظ است",
     "made": "ساخته شده",
     "information": "اطلاعات",
     "contactUs": "تماس با ما",
@@ -69,8 +69,8 @@
   "SidebarFilters": {
     "collections": "مجموعه‌ها",
     "priceRange": "بازه قیمت",
-    "minPrice": "کمترین: {{price}} تومان",
-    "maxPrice": "بیشترین: {{price}} تومان",
+    "minPrice": "کمترین: {price} تومان",
+    "maxPrice": "بیشترین: {price} تومان",
     "features": "ویژگی‌ها"
   },
   "FeaturesImage": {
@@ -124,7 +124,7 @@
     "shipping": "ارسال شده",
     "delivered": "تحویل داده شده",
     "failed": "ناموفق",
-    "currency": "{{amount}} تومان"
+    "currency": "{amount} تومان"
   },
   "ProfileTab": {
     "personalInformation": "اطلاعات شخصی",
@@ -150,7 +150,7 @@
     "initializationError": "خطا در اولیه‌سازی"
   },
   "OrderDetailPage": {
-    "fetchError": "خطا در دریافت جزئیات سفارش: {{message}}",
+    "fetchError": "خطا در دریافت جزئیات سفارش: {message}",
     "notFound": "سفارش پیدا نشد",
     "backToOrders": "بازگشت به سفارشات"
   },
@@ -206,7 +206,7 @@
   },
   "CartItem": {
     "deleteItem": "حذف آیتم",
-    "price": "{{amount}} تومان"
+    "price": "{amount} تومان"
   },
   "cartPage": {
     "cS": "ادامه خرید",
@@ -220,5 +220,14 @@
     "couponCodePlaceholder": "کد تخفیف",
     "applyDiscount": "اعمال تخفیف",
     "proceedToCheckout": "ادامه فرآیند خرید"
+  },
+  "BlogBanner": {
+    "altText": "بنر بلاگ",
+    "brandName": "ادیفیس",
+    "description": "آخرین اخبار، نسخه‌های محدود، روان‌شدنی‌های جدید و نقد و بررسی‌های ساعت‌های مردانه ادیفیس مستقیم از دنیای ساعت‌های موتوری در CASIOBLOG. بلند و سبک، مجهز به شیشه زبردر و عملکرد بالا — این ساعت‌ها گزینه مناسبی برای علاقمندان به ظاهر کلاسیک و محفوظ هستند."
+  },
+  "Pagination": {
+    "P": "قبل",
+    "N": "بعد"
   }
 }
