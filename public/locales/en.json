@@ -277,5 +277,24 @@
     "invalidEmailFormat": "Invalid email address",
     "emailPlaceholder": "Email",
     "sendCodeButton": "Send Code"
+  },
+  "SetPasswordForm": {
+    "currentPasswordRequired": "Current password is required",
+    "currentPasswordPlaceholder": "Current password",
+    "newPasswordRequired": "New password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "newPasswordPlaceholder": "New Password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "setPasswordButton": "Set Password"
+  },
+  "SubmitOTPCodeForm": {
+    "otpRequired": "Verification code is required",
+    "otpMinLength": "Verification must be 6 characters",
+    "otpMaxLength": "Verification must be 6 characters",
+    "otpPlaceholder": "Verification Code",
+    "verifyButton": "Verify",
+    "codeSentTo": "Code sent to: {email}"
   }
 }

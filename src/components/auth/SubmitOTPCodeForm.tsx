@@ -1,5 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 import { MdVpnKey } from "react-icons/md";
+import { useTranslations } from "next-intl";
 
 export type OtpFormData = {
   otp: string;
@@ -18,7 +19,8 @@ const SubmitOTPCodeForm = ({
   isLoading,
   storedEmail,
 }: SubmitOTPCodeFormProps) => {
-  //   console.log();
+  const t = useTranslations("SubmitOTPCodeForm");
+
   return (
     <form
       onSubmit={otpForm.handleSubmit(handleVerifyOtp)}
@@ -30,17 +32,17 @@ const SubmitOTPCodeForm = ({
           <input
             type="text"
             {...otpForm.register("otp", {
-              required: "Verification code is required",
+              required: t("otpRequired"),
               minLength: {
                 value: 6,
-                message: "Verification must be 6 characters",
+                message: t("otpMinLength"),
               },
               maxLength: {
                 value: 6,
-                message: "Verification must be 6 characters",
+                message: t("otpMaxLength"),
               },
             })}
-            placeholder="Verification Code"
+            placeholder={t("otpPlaceholder")}
             className=""
           />
         </div>
@@ -62,10 +64,13 @@ const SubmitOTPCodeForm = ({
         {isLoading ? (
           <span className="loading loading-infinity loading-md"></span>
         ) : (
-          "Verify"
+          t("verifyButton")
         )}
       </button>
-      <p className="mt-4 text-center text-sm">Code sent to: {storedEmail}</p>
+
+      <p className="mt-4 text-center text-sm">
+        {storedEmail && t("codeSentTo", { email: storedEmail })}
+      </p>
     </form>
   );
 };

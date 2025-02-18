@@ -276,5 +276,24 @@
     "invalidEmailFormat": "آدرس ایمیل نامعتبر است",
     "emailPlaceholder": "ایمیل",
     "sendCodeButton": "ارسال کد"
+  },
+  "SetPasswordForm": {
+    "currentPasswordRequired": "رمز عبور فعلی الزامی است",
+    "currentPasswordPlaceholder": "رمز عبور فعلی",
+    "newPasswordRequired": "رمز عبور جدید الزامی است",
+    "passwordMinLength": "رمز عبور باید حداقل 8 کاراکتر باشد",
+    "newPasswordPlaceholder": "رمز عبور جدید",
+    "confirmPasswordRequired": "لطفا رمز عبور خود را تأیید کنید",
+    "passwordsDoNotMatch": "رمز عبورها مطابقت ندارند",
+    "confirmPasswordPlaceholder": "تایید رمز عبور",
+    "setPasswordButton": "تنظیم رمز عبور"
+  },
+  "SubmitOTPCodeForm": {
+    "otpRequired": "کد تایید الزامی است",
+    "otpMinLength": "کد تایید باید 6 کاراکتر باشد",
+    "otpMaxLength": "کد تایید باید 6 کاراکتر باشد",
+    "otpPlaceholder": "کد تایید",
+    "verifyButton": "تایید",
+    "codeSentTo": "کد به این آدرس ارسال شده است: {email}"
   }
 }

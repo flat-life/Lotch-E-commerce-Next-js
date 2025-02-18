@@ -5,6 +5,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { MdVpnKey } from "react-icons/md";
+import { useTranslations } from "next-intl";
 
 export type FormData = {
   current_password: string;
@@ -31,6 +32,8 @@ const SetPasswordForm = ({
   getValues,
   isLoading,
 }: SetPasswordFormProps) => {
+  const t = useTranslations("SetPasswordForm");
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="flex flex-col">
@@ -39,9 +42,9 @@ const SetPasswordForm = ({
           <input
             type="password"
             {...register("current_password", {
-              required: "Current password is required",
+              required: t("currentPasswordRequired"),
             })}
-            placeholder="Current password"
+            placeholder={t("currentPasswordPlaceholder")}
             className=""
           />
         </div>
@@ -58,13 +61,13 @@ const SetPasswordForm = ({
           <input
             type="password"
             {...register("new_password", {
-              required: "New password is required",
+              required: t("newPasswordRequired"),
               minLength: {
                 value: 8,
-                message: "Password must be at least 8 characters",
+                message: t("passwordMinLength"),
               },
             })}
-            placeholder="New Password"
+            placeholder={t("newPasswordPlaceholder")}
             className=""
           />
         </div>
@@ -74,17 +77,18 @@ const SetPasswordForm = ({
           )}
         </p>
       </div>
+
       <div className="flex flex-col">
         <div className="input input-bordered flex items-center gap-2 bg-gray-200 rounded-none">
           <MdVpnKey />
           <input
             type="password"
             {...register("confirmPassword", {
-              required: "Please confirm your password",
+              required: t("confirmPasswordRequired"),
               validate: (value) =>
-                value === getValues("new_password") || "Passwords do not match",
+                value === getValues("new_password") || t("passwordsDoNotMatch"),
             })}
-            placeholder="Confirm Password"
+            placeholder={t("confirmPasswordPlaceholder")}
             className=""
           />
         </div>
@@ -104,7 +108,7 @@ disabled:btn-disable w-full rounded-none bg-black hover:bg-gray-600 text-white"
         {isLoading ? (
           <span className="loading loading-infinity loading-md"></span>
         ) : (
-          "Set Password"
+          t("setPasswordButton")
         )}
       </button>
     </form>
