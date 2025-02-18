@@ -254,5 +254,28 @@
     "loginWithCode": "Login With Code",
     "newToSite": "New to Site?",
     "createAccount": "Create an Account"
+  },
+  "RegisterForm": {
+    "phoneRequired": "Username is required",
+    "invalidPhoneFormat": "Invalid phone number format (11 digits)",
+    "phoneNumberPlaceholder": "Phone Number",
+    "emailRequired": "Email is required",
+    "invalidEmailFormat": "Invalid email address",
+    "emailPlaceholder": "Email",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordPlaceholder": "Password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "registerButton": "Register",
+    "alreadyRegistered": "Already registered?",
+    "loginButton": "Login"
+  },
+  "SendOTPCodeForm": {
+    "emailRequired": "Email is required",
+    "invalidEmailFormat": "Invalid email address",
+    "emailPlaceholder": "Email",
+    "sendCodeButton": "Send Code"
   }
 }

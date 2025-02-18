@@ -253,5 +253,28 @@
     "loginWithCode": "ورود با کد",
     "newToSite": "جدید به سایت هستید؟",
     "createAccount": "ساخت حساب کاربری"
+  },
+  "RegisterForm": {
+    "phoneRequired": "نام کاربری الزامی است",
+    "invalidPhoneFormat": "فرمت شماره تلفن نامعتبر است (11 رقم)",
+    "phoneNumberPlaceholder": "شماره تلفن",
+    "emailRequired": "ایمیل الزامی است",
+    "invalidEmailFormat": "آدرس ایمیل نامعتبر است",
+    "emailPlaceholder": "ایمیل",
+    "passwordRequired": "رمز عبور الزامی است",
+    "passwordMinLength": "رمز عبور باید حداقل 8 کاراکتر باشد",
+    "passwordPlaceholder": "رمز عبور",
+    "confirmPasswordRequired": "لطفا رمز عبور خود را تأیید کنید",
+    "passwordsDoNotMatch": "رمز عبورها مطابقت ندارند",
+    "confirmPasswordPlaceholder": "تایید رمز عبور",
+    "registerButton": "ثبت نام",
+    "alreadyRegistered": "قبلا ثبت نام کرده‌اید؟",
+    "loginButton": "ورود"
+  },
+  "SendOTPCodeForm": {
+    "emailRequired": "ایمیل الزامی است",
+    "invalidEmailFormat": "آدرس ایمیل نامعتبر است",
+    "emailPlaceholder": "ایمیل",
+    "sendCodeButton": "ارسال کد"
   }
 }
