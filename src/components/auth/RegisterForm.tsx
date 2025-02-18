@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { IoMdMail } from "react-icons/io";
 import { MdVpnKey } from "react-icons/md";
+import { useTranslations } from "next-intl";
 import {
   SubmitHandler,
   SubmitErrorHandler,
@@ -27,6 +28,7 @@ interface RegisterFormProps {
   isValid: boolean;
   getValues: UseFormGetValues<FormData>;
 }
+
 const RegisterForm = ({
   handleSubmit,
   onSubmit,
@@ -36,6 +38,8 @@ const RegisterForm = ({
   isValid,
   getValues,
 }: RegisterFormProps) => {
+  const t = useTranslations("RegisterForm");
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
@@ -43,13 +47,13 @@ const RegisterForm = ({
           <BiSolidUserCircle />
           <input
             {...register("phone_number", {
-              required: "Username is required",
+              required: t("phoneRequired"),
               pattern: {
                 value: /^\d{11}$/,
-                message: "Invalid phone number format (11 digits)",
+                message: t("invalidPhoneFormat"),
               },
             })}
-            placeholder="Phone Number"
+            placeholder={t("phoneNumberPlaceholder")}
             className=""
           />
         </div>
@@ -66,17 +70,16 @@ const RegisterForm = ({
           <input
             type="email"
             {...register("email", {
-              required: "Email is required",
+              required: t("emailRequired"),
               pattern: {
                 value: /^\S+@\S+$/i,
-                message: "Invalid email address",
+                message: t("invalidEmailFormat"),
               },
             })}
-            placeholder="Email"
+            placeholder={t("emailPlaceholder")}
             className=""
           />
         </div>
-
         <p>
           {errors.email && (
             <p className="text-red-500">{errors.email.message}</p>
@@ -90,13 +93,13 @@ const RegisterForm = ({
           <input
             type="password"
             {...register("password", {
-              required: "Password is required",
+              required: t("passwordRequired"),
               minLength: {
                 value: 8,
-                message: "Password must be at least 8 characters",
+                message: t("passwordMinLength"),
               },
             })}
-            placeholder="Password"
+            placeholder={t("passwordPlaceholder")}
             className=""
           />
         </div>
@@ -107,18 +110,17 @@ const RegisterForm = ({
         </p>
       </div>
 
-      {/* Confirm Password Input */}
       <div className="flex flex-col">
         <div className="input input-bordered flex items-center gap-2 bg-gray-200 rounded-none">
           <MdVpnKey />
           <input
             type="password"
             {...register("confirmPassword", {
-              required: "Please confirm your password",
+              required: t("confirmPasswordRequired"),
               validate: (value) =>
-                value === getValues("password") || "Passwords do not match",
+                value === getValues("password") || t("passwordsDoNotMatch"),
             })}
-            placeholder="Confirm Password"
+            placeholder={t("confirmPasswordPlaceholder")}
             className=""
           />
         </div>
@@ -138,13 +140,14 @@ const RegisterForm = ({
         {isLoading ? (
           <span className="loading loading-infinity loading-md"></span>
         ) : (
-          "Register"
+          t("registerButton")
         )}
       </button>
+
       <div className="flex flex-col my-3">
-        <p className="text-sm">Already registered?</p>
-        <Link className="btn w-full rounded-none bg-gray-300 " href="/login">
-          Login
+        <p className="text-sm">{t("alreadyRegistered")}</p>
+        <Link className="btn w-full rounded-none bg-gray-300" href="/login">
+          {t("loginButton")}
         </Link>
       </div>
     </form>

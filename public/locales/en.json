@@ -242,5 +242,17 @@
   },
   "verify": {
     "verify": "Login with Email"
+  },
+  "LoginForm": {
+    "phoneRequired": "Username is required",
+    "invalidPhoneFormat": "Invalid phone number format (11 digits)",
+    "phonePlaceholder": "Phone Number",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordPlaceholder": "Password",
+    "logIn": "Log In",
+    "loginWithCode": "Login With Code",
+    "newToSite": "New to Site?",
+    "createAccount": "Create an Account"
   }
 }

@@ -241,5 +241,17 @@
   },
   "verify": {
     "verify": "ایمیل خود را وارد کنید"
+  },
+  "LoginForm": {
+    "phoneRequired": "نام کاربری الزامی است",
+    "invalidPhoneFormat": "فرمت شماره تلفن نامعتبر است (11 رقم)",
+    "phonePlaceholder": "شماره تلفن",
+    "passwordRequired": "رمز عبور الزامی است",
+    "passwordMinLength": "رمز عبور باید حداقل 8 کاراکتر باشد",
+    "passwordPlaceholder": "رمز عبور",
+    "logIn": "ورود",
+    "loginWithCode": "ورود با کد",
+    "newToSite": "جدید به سایت هستید؟",
+    "createAccount": "ساخت حساب کاربری"
   }
 }
