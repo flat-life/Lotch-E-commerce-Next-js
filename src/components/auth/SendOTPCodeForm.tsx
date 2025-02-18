@@ -1,9 +1,11 @@
 import { UseFormReturn } from "react-hook-form";
 import { IoMdMail } from "react-icons/io";
+import { useTranslations } from "next-intl";
 
 export type EmailFormData = {
   email: string;
 };
+
 interface SendOTPCodeFormProps {
   emailForm: UseFormReturn<EmailFormData, any, undefined>;
   handleSendCode: (data: EmailFormData) => Promise<void>;
@@ -15,7 +17,8 @@ const SendOTPCodeForm = ({
   handleSendCode,
   isLoading,
 }: SendOTPCodeFormProps) => {
-  //   console.log(emailForm.formState.errors);
+  const t = useTranslations("SendOTPCodeForm");
+
   return (
     <form
       onSubmit={emailForm.handleSubmit(handleSendCode)}
@@ -27,17 +30,16 @@ const SendOTPCodeForm = ({
           <input
             type="email"
             {...emailForm.register("email", {
-              required: "Email is required",
+              required: t("emailRequired"),
               pattern: {
                 value: /^\S+@\S+$/i,
-                message: "Invalid email address",
+                message: t("invalidEmailFormat"),
               },
             })}
-            placeholder="Email"
+            placeholder={t("emailPlaceholder")}
             className=""
           />
         </div>
-
         <p>
           {emailForm.formState.errors.email && (
             <p className="text-red-500">
@@ -56,7 +58,7 @@ const SendOTPCodeForm = ({
         {isLoading ? (
           <span className="loading loading-infinity loading-md"></span>
         ) : (
-          "Send Code"
+          t("sendCodeButton")
         )}
       </button>
     </form>

@@ -19,7 +19,7 @@ export default function CollectionItem({
         } justify-between`}
         onClick={() => onClick(collection.id)}
       >
-        {collection.translations.en?.title || collection.title}
+        {collection.title || collection.title}
         <span className="badge">{collection.products_count}</span>
       </button>
       {collection.children?.map((child) => (

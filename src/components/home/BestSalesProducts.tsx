@@ -5,12 +5,14 @@ import Link from "next/link";
 import authClient from "@/services/authClient";
 import ProductCardTiny from "../products/ProductCardTiny";
 import { Product } from "@/lib/products";
+import { useTranslations } from "next-intl";
 
 interface BestSalesProductsProps {
   products: Product[];
 }
 
 const BestSalesProducts: React.FC<BestSalesProductsProps> = ({ products }) => {
+  const t = useTranslations("Home");
   const addToCart = async (productId: number) => {
     const cartId = localStorage.getItem("cartId");
 
@@ -44,7 +46,7 @@ const BestSalesProducts: React.FC<BestSalesProductsProps> = ({ products }) => {
           <div className="row justify-content-center">
             <div className="col-lg-6 text-center">
               <div className="section-title">
-                <h1>Best Sales Products</h1>
+                <h1>{t("BestSalesProducts")}</h1>
               </div>
             </div>
           </div>
@@ -64,29 +66,3 @@ const BestSalesProducts: React.FC<BestSalesProductsProps> = ({ products }) => {
 };
 
 export default BestSalesProducts;
-
-export const BestSalesProductsSkeleton = () => (
-  <section className="lattest-product-area pb-40 category-list">
-    <div className="single-product-slider">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-6 text-center">
-            <div className="section-title">
-              <h1>Best Sales Products</h1>
-            </div>
-          </div>
-        </div>
-        <div className="row" id="productContainer">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <div key={index} className="flex w-52 flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-);

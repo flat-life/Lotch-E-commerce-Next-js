@@ -11,7 +11,7 @@ export default function LanguageSwitcher() {
 
   const changeLanguage = (newLocale: string) => {
     startTransition(async () => {
-      await apiClient.post("/set_language/", { language_code: newLocale });
+      // await apiClient.post("/set_language/", { language_code: newLocale });
 
       const segments = pathname.split("/");
       segments[1] = newLocale;

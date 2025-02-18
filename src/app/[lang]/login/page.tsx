@@ -8,6 +8,7 @@ import apiClient from "@/services/apiClient";
 import authClient from "@/services/authClient";
 import LoginForm, { FormData } from "@/components/auth/LoginForm";
 import { verifyToken } from "@/lib/base";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function LoginPage() {
     formState: { errors, isValid },
   } = useForm<FormData>();
   // { mode: "onChange" }
-
+  const t = useTranslations("login");
   useEffect(() => {
     verifyToken();
   }, [router]);
@@ -57,7 +58,7 @@ export default function LoginPage() {
 
       <div className="card bg-gray-50 w-full max-w-sm shadow-2xl">
         <div className="p-10">
-          <h3 className=" text-2xl font-bold mb-5">Log in to Enter</h3>
+          <h3 className=" text-2xl font-bold mb-5">{t("Login")}</h3>
           {error && (
             <div className="text-light mb-4 rounded text-sm bg-red-100 p-2 text-red-600">
               {error}

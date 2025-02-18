@@ -1,7 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
@@ -18,9 +18,8 @@ export default function Pagination({
   itemsPerPage,
   onPageChange,
 }: PaginationProps) {
-  const { t } = useTranslation();
   const [totalPages, setTotalPages] = useState(0);
-
+  const t = useTranslations("Pagination");
   useEffect(() => {
     setTotalPages(Math.ceil(totalItems / itemsPerPage));
   }, [totalItems, itemsPerPage]);
@@ -37,7 +36,6 @@ export default function Pagination({
     const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
     startPage = Math.max(1, endPage - maxVisiblePages + 1);
-
     for (let i = startPage; i <= endPage; i++) {
       pages.push(
         <button
@@ -65,7 +63,7 @@ export default function Pagination({
         disabled={currentPage === 1}
       >
         <FaLongArrowAltLeft className="me-1" />
-        {t("Previous")}
+        {t("P")}
       </button>
 
       {renderPageNumbers()}
@@ -75,7 +73,7 @@ export default function Pagination({
         onClick={() => handlePageClick(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        {t("Next")}
+        {t("N")}
         <FaLongArrowAltRight className="ms-1" />
       </button>
     </div>

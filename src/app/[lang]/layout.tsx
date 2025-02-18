@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import MainLayout from "@/components/layout/MainLayout";
 import "@fontsource/roboto";
-import "@/app/[lang]/globals.css";
+import "@/app/globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";

@@ -2,5 +2,299 @@
   "Index": {
     "title": "Welcome to My App",
     "description": "Internationalization example"
+  },
+
+  "Header": {
+    "information": "Information",
+    "corporate": "Corporate",
+    "corporateTop": "Corporate TOP",
+    "aboutCasio": "About CASIO",
+    "news": "News",
+    "investorRelations": "Investor Relations",
+    "sustainability": "Sustainability",
+    "support": "Support",
+    "service": "Service",
+    "souvenirsAndPremiumProducts": "Souvenirs and Premium Products",
+    "apps": "Apps",
+    "watches": "Watches",
+    "blogs": "Blogs",
+    "aboutMe": "About me",
+    "searchPlaceholder": "Search Here"
+  },
+  "Footer": {
+    "copyright": "Copyright © {year} - All right reserved",
+    "made": "Made",
+    "information": "Information",
+    "contactUs": "Contact Us",
+    "termsOfUse": "Terms of Use",
+    "cookiePolicy": "Cookie Policy",
+    "privacyPolicy": "Privacy Policy",
+    "companyCopyright": "© 2025 FLATLIFE DEV., LTD."
+  },
+  "Home": {
+    "LatestProducts": "Latest Products",
+    "BestSalesProducts": "Best Sales Products"
+  },
+  "AppliedFilters": {
+    "appliedFilters": "Applied Filters",
+    "collection": "Collection",
+    "feature": "Feature",
+    "value": "Value",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price",
+    "condition": "Condition",
+    "sorting": "Sorting",
+    "used": "Used",
+    "new": "New"
+  },
+  "ComparisonTable": {
+    "title": "Compare",
+    "headerTitle": "Title",
+    "imageLabel": "Image"
+  },
+  "FilterBar": {
+    "defaultSorting": "Default sorting",
+    "priceLowToHigh": "Price: Low to High",
+    "priceHighToLow": "Price: High to Low",
+    "bestSales": "Best Sales",
+    "used": "Used",
+    "new": "New",
+    "compare": "Compare"
+  },
+  "ProductCardTiny": {
+    "brand": "EDIFICE",
+    "used": "Used",
+    "currencyNote": "(including VAT)",
+    "compare": "Compare"
+  },
+  "SidebarFilters": {
+    "collections": "Collections",
+    "priceRange": "Price Range",
+    "minPrice": "Min: ${price}",
+    "maxPrice": "Max: ${price}",
+    "features": "Features"
+  },
+  "FeaturesImage": {
+    "waterResistant": "10 bar water resistant",
+    "collaboration": "Collaboration model",
+    "lightAndStrong": "Light and strong",
+    "extraToughBand": "Extra tough band",
+    "sportyDesign": "Sporty design",
+    "limitedModel": "Limited model"
+  },
+  "ReviewForm": {
+    "submitReview": "Submit Review",
+    "replying": "Replying",
+    "titlePlaceholder": "Title",
+    "messagePlaceholder": "Message",
+    "post": "Post"
+  },
+  "ReviewItem": {
+    "reply": "Reply"
+  },
+  "RightSection": {
+    "brandName": "EDIFICE SOSPENSIONE",
+    "priceIncludesTax": "Incl. BTW en excl. verzendkosten",
+    "description": "Description"
+  },
+  "AddressesTab": {
+    "zipCode": "Zip Code",
+    "province": "Province",
+    "city": "City",
+    "path": "Path",
+    "default": "Default",
+    "actions": "Actions",
+    "yes": "Yes",
+    "no": "No",
+    "edit": "Edit",
+    "delete": "Delete",
+    "zipCodePlaceholder": "Zip Code",
+    "provincePlaceholder": "Province",
+    "cityPlaceholder": "City",
+    "pathPlaceholder": "Path",
+    "defaultLabel": "Default",
+    "updateAddress": "Update Address",
+    "addAddress": "Add Address"
+  },
+  "OrdersTab": {
+    "date": "Date",
+    "status": "Status",
+    "total": "Total",
+    "notPaid": "Not Paid",
+    "pending": "Pending",
+    "shipping": "Shipping",
+    "delivered": "Delivered",
+    "failed": "Failed",
+    "currency": "${amount}"
+  },
+  "ProfileTab": {
+    "personalInformation": "Personal Information",
+    "firstNamePlaceholder": "First Name",
+    "lastNamePlaceholder": "Last Name",
+    "saveChanges": "Save Changes",
+    "accountInformation": "Account Information",
+    "emailPlaceholder": "Email",
+    "updateEmail": "Update Email",
+    "changePassword": "Change Password",
+    "currentPasswordPlaceholder": "Current Password",
+    "newPasswordPlaceholder": "New Password",
+    "changePasswordButton": "Change Password"
+  },
+  "ProfilePage": {
+    "addressesLabel": "Addresses",
+    "ordersLabel": "Orders",
+    "editLabel": "Edit Profile",
+    "fetchCustomerError": "Failed to fetch customer data",
+    "fetchUserError": "Failed to fetch user data",
+    "fetchAddressesError": "Failed to fetch addresses",
+    "fetchOrdersError": "Failed to fetch orders",
+    "initializationError": "Initialization error"
+  },
+  "OrderDetailPage": {
+    "fetchError": "Failed to fetch order details: {message}",
+    "notFound": "Order not found",
+    "backToOrders": "Back to Orders"
+  },
+  "OrderDetailHeader": {
+    "orderConfirmation": "Order Confirmation",
+    "orderReceived": "Your order has been successfully received!"
+  },
+  "OrderDetailCards": {
+    "orderInformation": "Order Information",
+    "orderNumber": "Order Number:",
+    "date": "Date:",
+    "total": "Total:",
+    "status": "Status:",
+    "statusNotPaid": "Not Paid",
+    "statusPending": "Pending",
+    "statusShipping": "Shipping",
+    "statusDelivered": "Delivered",
+    "statusFailed": "Failed",
+    "statusUnknown": "Unknown",
+    "customerDetails": "Customer Details",
+    "shippingAddress": "Shipping Address",
+    "zipCode": "Zip Code"
+  },
+  "OrderItemTable": {
+    "orderItems": "Order Items",
+    "product": "Product",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total"
+  },
+  "MessageForm": {
+    "placeholder": "Type a message",
+    "send": "Send",
+    "sending": "Sending..."
+  },
+  "Messages": {
+    "you": "You",
+    "admin": "Admin",
+    "delivered": "Delivered"
+  },
+  "Conversations": {
+    "noMessage": "No messages yet"
+  },
+  "UserChat": {
+    "chatWithSupport": "Chat With Support"
+  },
+  "AdminChat": {
+    "adminSupport": "Admin Support",
+    "recentConversations": "Recent Conversations"
+  },
+  "addToCartButton": {
+    "dddToCart": "Add to cart"
+  },
+  "CartItem": {
+    "deleteItem": "Delete Item",
+    "price": "${amount}"
+  },
+  "cartPage": {
+    "cS": "Continue Shopping",
+    "sC": "Shopping Cart"
+  },
+  "TotalSection": {
+    "total": "Total",
+    "subtotalWithTax": "Subtotal (incl. VAT):",
+    "postageCosts": "Postage costs:",
+    "orderValueWithTax": "Order value incl. VAT",
+    "couponCodePlaceholder": "Coupon code",
+    "applyDiscount": "Apply Discount",
+    "proceedToCheckout": "Proceed to Checkout"
+  },
+  "BlogBanner": {
+    "altText": "Blog Banner",
+    "brandName": "EDIFICE",
+    "description": "The latest news, limited editions, new releases, and reviews from the world of men’s automotive-inspired EDIFICE watches on CASIOBLOG. Slim, stylish, equipped with sapphire crystal, and highly functional — these watches are the perfect choice for fans of a classic, conservative look."
+  },
+  "Pagination": {
+    "P": "Previous",
+    "N": "Next"
+  },
+  "login": {
+    "Login": "Login to Enter"
+  },
+  "register": {
+    "Register": "Register"
+  },
+  "setPassword": {
+    "setPassword": "Login with code"
+  },
+  "verify": {
+    "verify": "Login with Email"
+  },
+  "LoginForm": {
+    "phoneRequired": "Username is required",
+    "invalidPhoneFormat": "Invalid phone number format (11 digits)",
+    "phonePlaceholder": "Phone Number",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordPlaceholder": "Password",
+    "logIn": "Log In",
+    "loginWithCode": "Login With Code",
+    "newToSite": "New to Site?",
+    "createAccount": "Create an Account"
+  },
+  "RegisterForm": {
+    "phoneRequired": "Username is required",
+    "invalidPhoneFormat": "Invalid phone number format (11 digits)",
+    "phoneNumberPlaceholder": "Phone Number",
+    "emailRequired": "Email is required",
+    "invalidEmailFormat": "Invalid email address",
+    "emailPlaceholder": "Email",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordPlaceholder": "Password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "registerButton": "Register",
+    "alreadyRegistered": "Already registered?",
+    "loginButton": "Login"
+  },
+  "SendOTPCodeForm": {
+    "emailRequired": "Email is required",
+    "invalidEmailFormat": "Invalid email address",
+    "emailPlaceholder": "Email",
+    "sendCodeButton": "Send Code"
+  },
+  "SetPasswordForm": {
+    "currentPasswordRequired": "Current password is required",
+    "currentPasswordPlaceholder": "Current password",
+    "newPasswordRequired": "New password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "newPasswordPlaceholder": "New Password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "setPasswordButton": "Set Password"
+  },
+  "SubmitOTPCodeForm": {
+    "otpRequired": "Verification code is required",
+    "otpMinLength": "Verification must be 6 characters",
+    "otpMaxLength": "Verification must be 6 characters",
+    "otpPlaceholder": "Verification Code",
+    "verifyButton": "Verify",
+    "codeSentTo": "Code sent to: {email}"
   }
 }

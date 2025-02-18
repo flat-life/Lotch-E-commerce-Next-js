@@ -2,12 +2,14 @@
 import React from "react";
 import ProductCardTiny from "../products/ProductCardTiny";
 import { Product } from "@/lib/products";
+import { useTranslations } from "next-intl";
 
 interface LatestProductsProps {
   products: Product[];
 }
 
 const LatestProducts: React.FC<LatestProductsProps> = ({ products }) => {
+  const t = useTranslations("Home");
   return (
     <section className="lattest-product-area pb-40 category-list">
       <div className="single-product-slider">
@@ -15,7 +17,7 @@ const LatestProducts: React.FC<LatestProductsProps> = ({ products }) => {
           <div className="row justify-content-center">
             <div className="col-lg-6 text-center">
               <div className="section-title">
-                <h1>Latest Products</h1>
+                <h1>{t("LatestProducts")}</h1>
               </div>
             </div>
           </div>

@@ -1,6 +1,5 @@
 "use client";
-
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { IoClose } from "react-icons/io5";
 
 interface AppliedFiltersProps {
@@ -12,27 +11,29 @@ export default function AppliedFilters({
   filters,
   onRemove,
 }: AppliedFiltersProps) {
-  const { t } = useTranslation();
+  const t = useTranslations("AppliedFilters");
 
   const filterLabels: Record<string, string> = {
-    collectionsId: t("Collection"),
-    featureKey: t("Feature"),
-    featureValue: t("Value"),
-    unitPriceGt: t("Min Price"),
-    unitPriceLt: t("Max Price"),
-    secondHand: t("Condition"),
-    ordering: t("Sorting"),
+    collectionsId: t("collection"),
+    featureKey: t("feature"),
+    featureValue: t("value"),
+    unitPriceGt: t("minPrice"),
+    unitPriceLt: t("maxPrice"),
+    secondHand: t("condition"),
+    ordering: t("sorting"),
   };
 
   return (
     <div className="bg-base-200 p-4 rounded-none mb-4">
       <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-sm font-semibold">{t("Applied Filters")}:</span>
+        <span className="text-sm font-semibold">{t("appliedFilters")}</span>
         {Object.entries(filters).map(([key, value]) => {
           if (!value) return null;
 
           let displayValue = value;
-          if (key === "secondHand") displayValue = value ? t("Used") : t("New");
+          if (key === "secondHand") {
+            displayValue = value ? t("used") : t("new");
+          }
 
           return (
             <div

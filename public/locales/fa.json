@@ -2,5 +2,298 @@
   "Index": {
     "title": "به اپلیکیشن من خوش آمدید",
     "description": "نمونه بین المللی سازی"
+  },
+  "Header": {
+    "information": "اطلاعات",
+    "corporate": "شرکتی",
+    "corporateTop": "بالای شرکت",
+    "aboutCasio": "درباره کاسیو",
+    "news": "اخبار",
+    "investorRelations": "روابط سهامداران",
+    "sustainability": "پایداری",
+    "support": "پشتیبانی",
+    "service": "سرویس",
+    "souvenirsAndPremiumProducts": "سوئنیرها و محصولات اولین",
+    "apps": "برنامه‌ها",
+    "watches": "ساعت‌ها",
+    "blogs": "بلاگ‌ها",
+    "aboutMe": "درباره من",
+    "searchPlaceholder": "جستجو کنید"
+  },
+  "Footer": {
+    "copyright": "کپی‌رایت © {year} - تمام حقوق محفوظ است",
+    "made": "ساخته شده",
+    "information": "اطلاعات",
+    "contactUs": "تماس با ما",
+    "termsOfUse": "شرایط استفاده",
+    "cookiePolicy": "سیاست کوکی",
+    "privacyPolicy": "سیاست حریم خصوصی",
+    "companyCopyright": "© 2025 شرکت فلاتلایف"
+  },
+  "Home": {
+    "LatestProducts": "جدید ترین محصولات",
+    "BestSalesProducts": "پرفروش ترین محصولات"
+  },
+  "AppliedFilters": {
+    "appliedFilters": "فیلترهای اعمال شده",
+    "collection": "مجموعه",
+    "feature": "ویژگی",
+    "value": "مقدار",
+    "minPrice": "کمترین قیمت",
+    "maxPrice": "بیشترین قیمت",
+    "condition": "حالت",
+    "sorting": "مرتب‌سازی",
+    "used": "کاربردی",
+    "new": "جدید"
+  },
+  "ComparisonTable": {
+    "title": "مقایسه",
+    "headerTitle": "عنوان",
+    "imageLabel": "تصویر"
+  },
+  "FilterBar": {
+    "defaultSorting": "مرتب‌سازی پیش‌فرض",
+    "priceLowToHigh": "قیمت: کم به زیاد",
+    "priceHighToLow": "قیمت: زیاد به کم",
+    "bestSales": "پرفروش‌ترین",
+    "used": "کاربردی",
+    "new": "جدید",
+    "compare": "مقایسه"
+  },
+  "ProductCardTiny": {
+    "brand": "ادیفیس",
+    "used": "دست دوم",
+    "currencyNote": "(شامل مالیات)",
+    "compare": "مقایسه"
+  },
+  "SidebarFilters": {
+    "collections": "مجموعه‌ها",
+    "priceRange": "بازه قیمت",
+    "minPrice": "کمترین: {price} تومان",
+    "maxPrice": "بیشترین: {price} تومان",
+    "features": "ویژگی‌ها"
+  },
+  "FeaturesImage": {
+    "waterResistant": "مقاوم به آب تا ۱۰ متر",
+    "collaboration": "مدل همکاری",
+    "lightAndStrong": "سبک و قوی",
+    "extraToughBand": "نوار بسیار محکم",
+    "sportyDesign": "طراحی ورزشی",
+    "limitedModel": "مدل محدود"
+  },
+  "ReviewForm": {
+    "submitReview": "ارسال نظر",
+    "replying": "در حال پاسخ‌گویی",
+    "titlePlaceholder": "عنوان",
+    "messagePlaceholder": "پیام",
+    "post": "ارسال"
+  },
+  "ReviewItem": {
+    "reply": "پاسخ"
+  },
+  "RightSection": {
+    "brandName": "ادیفیس ساسپنشن",
+    "priceIncludesTax": "شامل مالیات بر ارزش افزوده و غیر شامل هزینه ارسال",
+    "description": "توضیحات"
+  },
+  "AddressesTab": {
+    "zipCode": "کد پستی",
+    "province": "استان",
+    "city": "شهر",
+    "path": "آدرس دقیق",
+    "default": "پیش‌فرض",
+    "actions": "عملیات",
+    "yes": "بله",
+    "no": "خیر",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "zipCodePlaceholder": "کد پستی",
+    "provincePlaceholder": "استان",
+    "cityPlaceholder": "شهر",
+    "pathPlaceholder": "آدرس دقیق",
+    "defaultLabel": "پیش‌فرض",
+    "updateAddress": "بروزرسانی آدرس",
+    "addAddress": "افزودن آدرس"
+  },
+  "OrdersTab": {
+    "date": "تاریخ",
+    "status": "وضعیت",
+    "total": "جمع کل",
+    "notPaid": "پرداخت نشده",
+    "pending": "در انتظار",
+    "shipping": "ارسال شده",
+    "delivered": "تحویل داده شده",
+    "failed": "ناموفق",
+    "currency": "{amount} تومان"
+  },
+  "ProfileTab": {
+    "personalInformation": "اطلاعات شخصی",
+    "firstNamePlaceholder": "نام",
+    "lastNamePlaceholder": "نام خانوادگی",
+    "saveChanges": "ذخیره تغییرات",
+    "accountInformation": "اطلاعات حساب کاربری",
+    "emailPlaceholder": "ایمیل",
+    "updateEmail": "به‌روزرسانی ایمیل",
+    "changePassword": "تغییر رمز عبور",
+    "currentPasswordPlaceholder": "رمز عبور فعلی",
+    "newPasswordPlaceholder": "رمز عبور جدید",
+    "changePasswordButton": "تغییر رمز عبور"
+  },
+  "ProfilePage": {
+    "addressesLabel": "آدرس‌ها",
+    "ordersLabel": "سفارشات",
+    "editLabel": "ویرایش پروفایل",
+    "fetchCustomerError": "خطا در دریافت اطلاعات مشتری",
+    "fetchUserError": "خطا در دریافت اطلاعات کاربر",
+    "fetchAddressesError": "خطا در دریافت آدرس‌ها",
+    "fetchOrdersError": "خطا در دریافت سفارشات",
+    "initializationError": "خطا در اولیه‌سازی"
+  },
+  "OrderDetailPage": {
+    "fetchError": "خطا در دریافت جزئیات سفارش: {message}",
+    "notFound": "سفارش پیدا نشد",
+    "backToOrders": "بازگشت به سفارشات"
+  },
+  "OrderDetailHeader": {
+    "orderConfirmation": "تایید سفارش",
+    "orderReceived": "سفارش شما با موفقیت دریافت شد!"
+  },
+  "OrderDetailCards": {
+    "orderInformation": "اطلاعات سفارش",
+    "orderNumber": "شماره سفارش:",
+    "date": "تاریخ:",
+    "total": "جمع کل:",
+    "status": "وضعیت:",
+    "statusNotPaid": "پرداخت نشده",
+    "statusPending": "در انتظار",
+    "statusShipping": "ارسال شده",
+    "statusDelivered": "تحویل داده شده",
+    "statusFailed": "ناموفق",
+    "statusUnknown": "ناشناس",
+    "customerDetails": "جزئیات مشتری",
+    "shippingAddress": "آدرس ارسال",
+    "zipCode": "کد پستی"
+  },
+  "OrderItemTable": {
+    "orderItems": "جزئیات سفارش",
+    "product": "محصول",
+    "quantity": "تعداد",
+    "price": "قیمت",
+    "total": "جمع کل"
+  },
+  "MessageForm": {
+    "placeholder": "یک پیام تایپ کنید",
+    "send": "ارسال",
+    "sending": "در حال ارسال..."
+  },
+  "Messages": {
+    "you": "شما",
+    "admin": "مدیر",
+    "delivered": "ارسال شد"
+  },
+  "Conversations": {
+    "noMessage": "پیغامی ندارید!"
+  },
+  "UserChat": {
+    "chatWithSupport": "چت با پشتیبانی"
+  },
+  "AdminChat": {
+    "adminSupport": "پشتیبانی مدیریت",
+    "recentConversations": "چت‌های اخیر"
+  },
+  "addToCartButton": {
+    "dddToCart": "اضافه کردن به سبد"
+  },
+  "CartItem": {
+    "deleteItem": "حذف آیتم",
+    "price": "{amount} تومان"
+  },
+  "cartPage": {
+    "cS": "ادامه خرید",
+    "sC": "سبد خرید"
+  },
+  "TotalSection": {
+    "total": "جمع کل",
+    "subtotalWithTax": "مبلغ کالاها (شامل مالیات):",
+    "postageCosts": "هزینه ارسال:",
+    "orderValueWithTax": "ارزش سفارش شامل مالیات",
+    "couponCodePlaceholder": "کد تخفیف",
+    "applyDiscount": "اعمال تخفیف",
+    "proceedToCheckout": "ادامه فرآیند خرید"
+  },
+  "BlogBanner": {
+    "altText": "بنر بلاگ",
+    "brandName": "ادیفیس",
+    "description": "آخرین اخبار، نسخه‌های محدود، روان‌شدنی‌های جدید و نقد و بررسی‌های ساعت‌های مردانه ادیفیس مستقیم از دنیای ساعت‌های موتوری در CASIOBLOG. بلند و سبک، مجهز به شیشه زبردر و عملکرد بالا — این ساعت‌ها گزینه مناسبی برای علاقمندان به ظاهر کلاسیک و محفوظ هستند."
+  },
+  "Pagination": {
+    "P": "قبل",
+    "N": "بعد"
+  },
+  "login": {
+    "Login": "وارد شوید"
+  },
+  "register": {
+    "Register": "ثبت نام کنید"
+  },
+  "setPassword": {
+    "setPassword": "ورود با کد یکبار مصرف"
+  },
+  "verify": {
+    "verify": "ایمیل خود را وارد کنید"
+  },
+  "LoginForm": {
+    "phoneRequired": "نام کاربری الزامی است",
+    "invalidPhoneFormat": "فرمت شماره تلفن نامعتبر است (11 رقم)",
+    "phonePlaceholder": "شماره تلفن",
+    "passwordRequired": "رمز عبور الزامی است",
+    "passwordMinLength": "رمز عبور باید حداقل 8 کاراکتر باشد",
+    "passwordPlaceholder": "رمز عبور",
+    "logIn": "ورود",
+    "loginWithCode": "ورود با کد",
+    "newToSite": "جدید به سایت هستید؟",
+    "createAccount": "ساخت حساب کاربری"
+  },
+  "RegisterForm": {
+    "phoneRequired": "نام کاربری الزامی است",
+    "invalidPhoneFormat": "فرمت شماره تلفن نامعتبر است (11 رقم)",
+    "phoneNumberPlaceholder": "شماره تلفن",
+    "emailRequired": "ایمیل الزامی است",
+    "invalidEmailFormat": "آدرس ایمیل نامعتبر است",
+    "emailPlaceholder": "ایمیل",
+    "passwordRequired": "رمز عبور الزامی است",
+    "passwordMinLength": "رمز عبور باید حداقل 8 کاراکتر باشد",
+    "passwordPlaceholder": "رمز عبور",
+    "confirmPasswordRequired": "لطفا رمز عبور خود را تأیید کنید",
+    "passwordsDoNotMatch": "رمز عبورها مطابقت ندارند",
+    "confirmPasswordPlaceholder": "تایید رمز عبور",
+    "registerButton": "ثبت نام",
+    "alreadyRegistered": "قبلا ثبت نام کرده‌اید؟",
+    "loginButton": "ورود"
+  },
+  "SendOTPCodeForm": {
+    "emailRequired": "ایمیل الزامی است",
+    "invalidEmailFormat": "آدرس ایمیل نامعتبر است",
+    "emailPlaceholder": "ایمیل",
+    "sendCodeButton": "ارسال کد"
+  },
+  "SetPasswordForm": {
+    "currentPasswordRequired": "رمز عبور فعلی الزامی است",
+    "currentPasswordPlaceholder": "رمز عبور فعلی",
+    "newPasswordRequired": "رمز عبور جدید الزامی است",
+    "passwordMinLength": "رمز عبور باید حداقل 8 کاراکتر باشد",
+    "newPasswordPlaceholder": "رمز عبور جدید",
+    "confirmPasswordRequired": "لطفا رمز عبور خود را تأیید کنید",
+    "passwordsDoNotMatch": "رمز عبورها مطابقت ندارند",
+    "confirmPasswordPlaceholder": "تایید رمز عبور",
+    "setPasswordButton": "تنظیم رمز عبور"
+  },
+  "SubmitOTPCodeForm": {
+    "otpRequired": "کد تایید الزامی است",
+    "otpMinLength": "کد تایید باید 6 کاراکتر باشد",
+    "otpMaxLength": "کد تایید باید 6 کاراکتر باشد",
+    "otpPlaceholder": "کد تایید",
+    "verifyButton": "تایید",
+    "codeSentTo": "کد به این آدرس ارسال شده است: {email}"
   }
 }

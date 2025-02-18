@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { CustomerData, UserData } from "@/lib/profile";
 import { useEffect } from "react";
 import authClient from "@/services/authClient";
+import { useTranslations } from "next-intl";
 
 export const ProfileTab = ({
   customerData,
@@ -15,6 +16,8 @@ export const ProfileTab = ({
   onUpdateCustomer: () => void;
   onUpdateUser: () => void;
 }) => {
+  const t = useTranslations("ProfileTab");
+
   const customerForm = useForm({ defaultValues: customerData || {} });
   const userForm = useForm({ defaultValues: userData || {} });
   const passForm = useForm();
@@ -55,18 +58,18 @@ export const ProfileTab = ({
     <div className="">
       <div className="">
         <form onSubmit={customerForm.handleSubmit(handleCustomerSubmit)}>
-          <h5 className="mb-4">Personal Information</h5>
+          <h5 className="mb-4">{t("personalInformation")}</h5>
           <div className="mb-3">
             <input
               {...customerForm.register("first_name")}
-              placeholder="First Name"
+              placeholder={t("firstNamePlaceholder")}
               className="input"
             />
           </div>
           <div className="mb-3">
             <input
               {...customerForm.register("last_name")}
-              placeholder="Last Name"
+              placeholder={t("lastNamePlaceholder")}
               className="input"
             />
           </div>
@@ -81,40 +84,38 @@ export const ProfileTab = ({
             type="submit"
             className="btn bg-black text-white rounded-none"
           >
-            Save Changes
+            {t("saveChanges")}
           </button>
         </form>
       </div>
-
       <div className="my-10">
         <form
           onSubmit={userForm.handleSubmit(handleUserSubmit)}
           className="my-10"
         >
-          <h5 className="mb-3">Account Information</h5>
+          <h5 className="mb-3">{t("accountInformation")}</h5>
           <div className="mb-3">
             <input
               type="email"
               {...userForm.register("email")}
-              placeholder="Email"
-              className="input  rounded-none"
+              placeholder={t("emailPlaceholder")}
+              className="input rounded-none"
             />
           </div>
           <button
             type="submit"
             className="btn bg-black rounded-none text-white"
           >
-            Update Email
+            {t("updateEmail")}
           </button>
         </form>
-
         <form onSubmit={passForm.handleSubmit(handlePasswordSubmit)}>
-          <h5 className="mb-3">Change Password</h5>
+          <h5 className="mb-3">{t("changePassword")}</h5>
           <div className="mb-3">
             <input
               type="password"
               {...passForm.register("current_password")}
-              placeholder="Current Password"
+              placeholder={t("currentPasswordPlaceholder")}
               className="input"
             />
           </div>
@@ -122,7 +123,7 @@ export const ProfileTab = ({
             <input
               type="password"
               {...passForm.register("new_password")}
-              placeholder="New Password"
+              placeholder={t("newPasswordPlaceholder")}
               className="input"
             />
           </div>
@@ -130,7 +131,7 @@ export const ProfileTab = ({
             type="submit"
             className="btn bg-black rounded-none text-white"
           >
-            Change Password
+            {t("changePasswordButton")}
           </button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Collection, Feature } from "@/lib/products";
-import { useTranslation } from "react-i18next";
 import CollectionItem from "./CollectionItem";
 import FeatureFilter from "./FeatureFilter";
 
@@ -18,7 +18,8 @@ export default function SidebarFilters({
   onFilterChange,
   appliedFilters,
 }: SidebarFiltersProps) {
-  const { t } = useTranslation();
+  const t = useTranslations("SidebarFilters");
+
   const [priceRange, setPriceRange] = useState<[number, number]>([
     appliedFilters.unitPriceGt || 0,
     appliedFilters.unitPriceLt || 1000,
@@ -47,7 +48,6 @@ export default function SidebarFilters({
 
   const handleFeatureClick = (featureId: number, valueId?: number) => {
     const newFilters: Record<string, any> = {};
-
     if (valueId) {
       newFilters.featureKey = featureId;
       newFilters.featureValue = valueId;
@@ -56,7 +56,6 @@ export default function SidebarFilters({
         appliedFilters.featureKey === featureId ? null : featureId;
       newFilters.featureValue = null;
     }
-
     onFilterChange(newFilters);
   };
 
@@ -64,7 +63,7 @@ export default function SidebarFilters({
     <div className="bg-base-100 p-4 rounded-box shadow-sm">
       <div className="space-y-6">
         <div>
-          <h3 className="font-bold text-lg mb-2">{t("Collections")}</h3>
+          <h3 className="font-bold text-lg mb-2">{t("collections")}</h3>
           <ul className="menu menu-compact bg-base-200 rounded-none">
             {collections.map((collection) => (
               <CollectionItem
@@ -76,20 +75,16 @@ export default function SidebarFilters({
             ))}
           </ul>
         </div>
-
         <div className="divider"></div>
-
         <div>
-          <h3 className="font-bold text-lg mb-4">{t("Price Range")}</h3>
+          <h3 className="font-bold text-lg mb-4">{t("priceRange")}</h3>
           <div className="form-control">
             <label className="label">
               <span className="label-text">
-                {t("Min: $")}
-                {priceRange[0]}
+                {t("minPrice", { price: priceRange[0] })}
               </span>
               <span className="label-text">
-                {t("Max: $")}
-                {priceRange[1]}
+                {t("maxPrice", { price: priceRange[1] })}
               </span>
             </label>
             <div className="range">
@@ -116,11 +111,9 @@ export default function SidebarFilters({
             </div>
           </div>
         </div>
-
         <div className="divider"></div>
-
         <div>
-          <h3 className="font-bold text-lg mb-4">{t("Features")}</h3>
+          <h3 className="font-bold text-lg mb-4">{t("features")}</h3>
           <div className="space-y-4">
             {features.map((feature) => (
               <FeatureFilter

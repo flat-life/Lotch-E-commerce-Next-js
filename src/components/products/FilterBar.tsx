@@ -1,7 +1,7 @@
 "use client";
-import { useTranslation } from "react-i18next";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 interface FilterBarProps {
   selectedProducts: string[];
@@ -16,7 +16,7 @@ export default function FilterBar({
   onFilterChange,
   appliedFilters,
 }: FilterBarProps) {
-  const { t } = useTranslation();
+  const t = useTranslations("FilterBar");
 
   const handleSortingChange = (value: string) => {
     onFilterChange({ ordering: value });
@@ -26,7 +26,7 @@ export default function FilterBar({
     const newValue = appliedFilters.secondHand === value ? null : value;
     onFilterChange({ secondHand: newValue });
   };
-  console.log({ appliedFilters });
+
   return (
     <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-base-200 p-4 rounded-none mb-4">
       <div className="flex flex-wrap gap-2">
@@ -36,12 +36,11 @@ export default function FilterBar({
             role="button"
             className="btn btn-sm bg-black text-white border border-base-300 rounded-none"
           >
-            {appliedFilters.ordering === "price_asc" && t("Price: Low to High")}
-            {appliedFilters.ordering === "price_desc" &&
-              t("Price: High to Low")}
-            {appliedFilters.ordering === "best_sales" && t("Best Sales")}
-            {appliedFilters.ordering === "default" && t("Default sorting")}
-            {!appliedFilters.ordering && t("Default sorting")}
+            {appliedFilters.ordering === "price_asc" && t("priceLowToHigh")}
+            {appliedFilters.ordering === "price_desc" && t("priceHighToLow")}
+            {appliedFilters.ordering === "best_sales" && t("bestSales")}
+            {appliedFilters.ordering === "default" && t("defaultSorting")}
+            {!appliedFilters.ordering && t("defaultSorting")}
             <IoChevronDownOutline />
           </div>
           <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-none border border-base-300 w-52">
@@ -52,7 +51,7 @@ export default function FilterBar({
                 }`}
                 onClick={() => handleSortingChange("default")}
               >
-                {t("Default sorting")}
+                {t("defaultSorting")}
               </button>
             </li>
             <li>
@@ -64,7 +63,7 @@ export default function FilterBar({
                 }`}
                 onClick={() => handleSortingChange("price_asc")}
               >
-                {t("Price: Low to High")}
+                {t("priceLowToHigh")}
               </button>
             </li>
             <li>
@@ -76,7 +75,7 @@ export default function FilterBar({
                 }`}
                 onClick={() => handleSortingChange("price_desc")}
               >
-                {t("Price: High to Low")}
+                {t("priceHighToLow")}
               </button>
             </li>
             <li>
@@ -88,12 +87,11 @@ export default function FilterBar({
                 }`}
                 onClick={() => handleSortingChange("best_sales")}
               >
-                {t("Best Sales")}
+                {t("bestSales")}
               </button>
             </li>
           </ul>
         </div>
-
         <div className="join rounded-none ">
           <button
             className={`join-item btn btn-sm border-black border-1 ${
@@ -101,7 +99,7 @@ export default function FilterBar({
             }`}
             onClick={() => handleSecondHandChange(true)}
           >
-            {t("Used")}
+            {t("used")}
           </button>
           <button
             className={`join-item btn btn-sm border-black border-1 ${
@@ -111,18 +109,17 @@ export default function FilterBar({
             }`}
             onClick={() => handleSecondHandChange(false)}
           >
-            {t("New")}
+            {t("new")}
           </button>
         </div>
       </div>
-
       {selectedProducts.length > 0 && (
         <button
           className="btn bg-black text-white hover:bg-gray-700 rounded-none btn-sm gap-2"
           onClick={onCompare}
         >
           <HiOutlineMenuAlt3 className="size-5" />
-          {t("Compare")} ({selectedProducts.length})
+          {t("compare")} ({selectedProducts.length})
         </button>
       )}
     </div>

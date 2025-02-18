@@ -8,11 +8,13 @@ import apiClient from "@/services/apiClient";
 
 import RegisterForm, { FormData } from "@/components/auth/RegisterForm";
 import { verifyToken } from "@/lib/base";
+import { useTranslations } from "next-intl";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations("register");
   const {
     register,
     handleSubmit,
@@ -66,7 +68,7 @@ export default function RegisterPage() {
 
       <div className="card bg-gray-50 w-full max-w-sm shadow-2xl">
         <div className="p-10">
-          <h3 className="text-2xl font-bold mb-5">Register</h3>
+          <h3 className="text-2xl font-bold mb-5">{t("Register")}</h3>
           {error && (
             <div className="text-light mb-4 text-sm rounded bg-red-100 p-2 text-red-600">
               {error}

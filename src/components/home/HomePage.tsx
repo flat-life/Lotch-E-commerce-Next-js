@@ -3,11 +3,9 @@ import BannerArea from "@/components/home/BannerArea";
 import LatestProducts, {
   LatestProductsSkeleton,
 } from "@/components/home/LatestProducts";
-import BestSalesProducts, {
-  BestSalesProductsSkeleton,
-} from "@/components/home/BestSalesProducts";
 import { Product } from "@/lib/products";
 import apiClient from "@/services/apiClient";
+import BestSalesProducts from "./BestSalesProducts";
 
 const fetchLatestProducts = async (): Promise<Product[]> => {
   const response = await apiClient.get("/products/?ordering=-updated_at");

@@ -1,6 +1,6 @@
 "use client";
-
 import { ProductReview } from "@/lib/products";
+import { useTranslations } from "next-intl";
 
 interface ReviewItemProps {
   review: ProductReview;
@@ -9,11 +9,13 @@ interface ReviewItemProps {
 }
 
 export const ReviewItem = ({ review, onReply, level = 0 }: ReviewItemProps) => {
-  console.log({ level });
+  const t = useTranslations("ReviewItem");
+
   const marginLeft = level * 32;
+
   return (
     <div
-      className={` bg-base-100 border p-4 mb-4 transition-all duration-200 hover:shadow-md ml-${marginLeft}`}
+      className={`bg-base-100 border p-4 mb-4 transition-all duration-200 hover:shadow-md ml-${marginLeft}`}
     >
       <div className="flex items-start gap-3">
         <div className="flex-1">
@@ -28,7 +30,6 @@ export const ReviewItem = ({ review, onReply, level = 0 }: ReviewItemProps) => {
                 </p>
               </div>
             </div>
-
             <div className="flex items-center gap-10">
               <div className="rating rating-xs mb-2">
                 {[1, 2, 3, 4, 5].map((value) => (
@@ -44,15 +45,13 @@ export const ReviewItem = ({ review, onReply, level = 0 }: ReviewItemProps) => {
                 ))}
               </div>
               <button
-                className="btn rounded-none btn-md font-light text-xs text-black
-                 btn-outline hover:bg-black"
+                className="btn rounded-none btn-md font-light text-xs text-black btn-outline hover:bg-black"
                 onClick={() => onReply(review.id)}
               >
-                Reply
+                {t("reply")}
               </button>
             </div>
           </div>
-
           {review.title && (
             <h4 className="text-sm font-semibold mt-2 text-gray-800">
               {review.title}
@@ -63,7 +62,6 @@ export const ReviewItem = ({ review, onReply, level = 0 }: ReviewItemProps) => {
           </p>
         </div>
       </div>
-
       {review.replies?.map((reply) => (
         <ReviewItem
           key={reply.id}
